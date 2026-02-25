@@ -2,31 +2,33 @@
 
 <div class="movie-container">
     <div class="d-flex flex-row align-items-center w-50">
-    <label class="me-2" for="title">Titre : </label>
-    <input type="text" id="title" name="title" [(ngModel)]="movie.title"/>
+        <label class="me-2" for="title">Titre : </label>
+        <input type="text" id="title" name="title" [(ngModel)]="movie.title" />
     </div>
 
     <div class="d-flex flex-row align-items-center w-50">
-    <label class="me-2" for="director">Réalisateur : </label>
-    <input type="text" id="director" name="director" [(ngModel)]="movie.director"/>
+        <label class="me-2" for="director">Réalisateur : </label>
+        <input type="text" id="director" name="director" [(ngModel)]="movie.director" />
     </div>
 
 
     <div class="d-flex flex-row align-items-center w-50">
         <label class="me-2" for="releaseDate">Date de sortie :</label>
-        <input type="date" id="releaseDate" name="releaseDate" 
-            [value]="movie.releaseDate | date:'yyyy-MM-dd'" 
-            (change)="movie.releaseDate = $any($event.target).value"/>
+        <input type="date" id="releaseDate" name="releaseDate" [value]="movie.releaseDate | date:'yyyy-MM-dd'"
+            (change)="movie.releaseDate = $any($event.target).value" />
     </div>
 
     <div class="d-flex flex-row align-items-center w-50">
-    <label class="me-2" for="synopsis">Synopsis : </label>
-    <textarea id="synopsis" name="synopsis" [(ngModel)]="movie.synopsis" rows="5" class="w-100"></textarea>
+        <label class="me-2" for="synopsis">Synopsis : </label>
+        <textarea id="synopsis" name="synopsis" [(ngModel)]="movie.synopsis" rows="5" class="w-100"></textarea>
     </div>
 
     <div class="bouton">
-        <button class="btn btn-outline-dark" (click)="updateMovie()">Modifier</button>
-        <button class="btn btn-dark" routerLink="/movies">Annuler</button>
-    </div>
-</div>
+        <button class="btn btn-outline-dark" routerLink="/movies">Annuler</button>
+        <button class="btn btn-dark" (click)="updateMovie()">Modifier</button>
 
+    </div>
+   
+
+
+</div>
