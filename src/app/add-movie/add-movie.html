@@ -3,12 +3,32 @@
 <div class="movie-container">
     <div class="d-flex flex-row align-items-center w-50">
     <label class="me-2" for="title">Titre : </label>
-    <input type="text" id="title" name="title" [(ngModel)]="movie.title"/>
+    <input 
+    type="text" 
+    id="title" 
+    name="title" 
+    [(ngModel)]="movie.title" 
+    required 
+    pattern="^[A-Z].*"
+    #titleInput="ngModel"
+    [class.is-invalid]="titleInput.invalid && titleInput.touched"
+    class="form-control"
+    />
     </div>
 
     <div class="d-flex flex-row align-items-center w-50">
     <label class="me-2" for="director">Réalisateur : </label>
-    <input type="text" id="director" name="director" [(ngModel)]="movie.director"/>
+    <input 
+        type="text" 
+        id="director" 
+        name="director" 
+        [(ngModel)]="movie.director"
+        required
+        pattern="^\s*[^\s]+\s+[^\s]+\s*$"
+        #directorInput="ngModel"
+        [class.is-invalid]="directorInput.invalid && directorInput.touched"
+        class="form-control"
+    />
     </div>
 
     <div class="d-flex flex-row align-items-center w-50">
@@ -18,7 +38,17 @@
 
     <div class="d-flex flex-row align-items-center w-50">
     <label class="me-2" for="synopsis">Synopsis : </label>
-    <textarea id="synopsis" name="synopsis" [(ngModel)]="movie.synopsis" rows="5" class="w-100"></textarea>
+    <textarea 
+        id="synopsis" 
+        name="synopsis" 
+        [(ngModel)]="movie.synopsis" 
+        rows="5" 
+        class="w-100"
+        required
+        minlength="30"
+        #synopsisInput="ngModel"
+        [class.is-invalid]="synopsisInput.invalid && synopsisInput.touched"
+    ></textarea>
     </div>
 
     <div class="bouton">

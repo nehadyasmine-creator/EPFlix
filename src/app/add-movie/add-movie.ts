@@ -33,14 +33,54 @@ export class AddMovie {
   isToastVisible: boolean = false;
   
   addMovie(): void {
-    this.moviesApi.addMovie(this.movie).subscribe(
-        () => {
-          this.toastService.show('Le film a été ajouté avec succès !', { 
-            classname: 'bg-success text-white' 
-          });
-          this.router.navigate(['/movies']);
-        }
-    );
+  // 1. Vérification du Titre (Majuscule)
+  const startsWithUpper = /^[A-Z]/.test(this.movie.title);
+  
+  // 2. Vérification du Réalisateur (Deux mots)
+  const twoWordsRegex = /^\s*[^\s]+\s+[^\s]+\s*$/;
+  const isDirectorValid = twoWordsRegex.test(this.movie.director);
+
+
+  if (!this.movie.title || !startsWithUpper) {
+    this.toastService.show('Le titre doit commencer par une majuscule.', { 
+      classname: 'bg-danger text-white' 
+    });
+    return; 
   }
+
+  if (!this.movie.director || !isDirectorValid) {
+    this.toastService.show('Le réalisateur doit comporter exactement deux mots (Prénom Nom).', { 
+      classname: 'bg-danger text-white' 
+    });
+    return;
+  }
+
+  if (!this.movie.synopsis || this.movie.synopsis.length < 30) {
+    this.toastService.show('Le synopsis doit faire au moins 30 caractères.', { 
+      classname: 'bg-danger text-white' 
+    });
+    return;
+  }
+
+  const today = new Date();
+  const releaseDate = new Date(this.movie.releaseDate);
+
+  if (releaseDate > today) {
+    this.toastService.show("La date de sortie ne peut pas être dans le futur.", { 
+      classname: 'bg-danger text-white' 
+    });
+    return;
+  }
+
+  // Si tout est OK, on procède à l'ajout
+  this.moviesApi.addMovie(this.movie).subscribe(
+    () => {
+      this.toastService.show('Le film a été ajouté avec succès !', { 
+        classname: 'bg-success text-white' 
+      });
+      this.router.navigate(['/movies']);
+    }
+  );
+}
 
 }
