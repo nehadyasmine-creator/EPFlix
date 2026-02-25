@@ -1,0 +1,29 @@
+<h1>Ajouter un film</h1>
+
+<div class="movie-container">
+    <div class="d-flex flex-row align-items-center w-50">
+    <label class="me-2" for="title">Titre : </label>
+    <input type="text" id="title" name="title" [(ngModel)]="movie.title"/>
+    </div>
+
+    <div class="d-flex flex-row align-items-center w-50">
+    <label class="me-2" for="director">Réalisateur : </label>
+    <input type="text" id="director" name="director" [(ngModel)]="movie.director"/>
+    </div>
+
+    <div class="d-flex flex-row align-items-center w-50">
+    <label class="me-2" for="releaseDate">Date de sortie : </label>
+    <input type="date" id="releaseDate" name="releaseDate" [(ngModel)]="movie.releaseDate"/>
+    </div>
+
+    <div class="d-flex flex-row align-items-center w-50">
+    <label class="me-2" for="synopsis">Synopsis : </label>
+    <textarea id="synopsis" name="synopsis" [(ngModel)]="movie.synopsis" rows="5" class="w-100"></textarea>
+    </div>
+
+    <div class="bouton">
+        <button class="btn btn-outline-dark" (click)="addMovie()">Ajouter</button>
+        <button class="btn btn-dark" routerLink="/movies">Annuler</button>
+    </div>
+</div>
+

@@ -1,0 +1,36 @@
+<div class="movie-header">
+  <h1>Gestion des Films</h1>
+  <a class="btn btn-outline-dark" role="button" routerLink="/add-movie">Nouveau Film</a>
+</div>
+
+<div class="movie-list-container">
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Titre</th>
+      <th scope="col">Date</th>
+      <th scope="col">Réalisateur</th>
+      <th scope="col">Note</th>
+      <th scope="col">Synopsis</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (movie of movies() ; track movie.id) {
+      <tr>
+        <th scope="row">{{ movie.id }}</th>
+        <td>{{ movie.title }}</td>
+        <td>{{ movie.releaseDate | date }}</td>
+        <td>{{ movie.director }}</td>
+        <td>{{ movie.rate }}</td>
+        <td>{{ movie.synopsis }}</td>
+        <td>
+          <button type="button" class="btn deleteButton" (click)="deleteMovie(movie.id!)"><i class="bi bi-trash"></i></button>
+          <button type="button" class="btn editButton" (click)="updateMovie(movie.id!)"><i class="bi bi-pencil"></i></button>
+        </td>
+      </tr>
+    }
+  </tbody>
+  </table>
+</div>

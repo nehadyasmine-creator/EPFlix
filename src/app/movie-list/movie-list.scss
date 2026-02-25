@@ -1,0 +1,41 @@
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+:host {
+	display: block;
+}
+
+.movie-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.5rem;
+  margin: 1rem 0;
+  position: relative;
+}
+
+.movie-header h1 {
+  margin: 0;
+  text-align: center;
+}
+
+.movie-header .btn {
+  flex-shrink: 0;
+  position: absolute;
+  right: 1.5rem;
+}
+
+.movie-list-container {
+	padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+	.movie-list-container {
+		padding: 0 3rem;
+	}
+	
+	.movie-header {
+		padding: 0 3rem;
+	}
+}
+
+
