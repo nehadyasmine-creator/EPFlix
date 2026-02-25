@@ -1,7 +1,8 @@
 import { TitleCasePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';    
 import { RouterLink } from '@angular/router';
+import { AuthService } from '../services/auth-service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +10,20 @@ import { RouterLink } from '@angular/router';
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
 })
-export class Navbar {
-  @Input({ required: true }) title! : string
+export class Navbar implements OnInit {
+  isLoggedIn: boolean = false;
+
+  constructor(private authService: AuthService) {
+    this.isLoggedIn = this.authService.isLoggedIn();
+  }
+
+  ngOnInit() {
+    this.authService.isLoggedIn$.subscribe((loggedIn: boolean) => {
+      this.isLoggedIn = loggedIn;
+    });
+  }
+
+  logout() {
+    this.authService.logout();
+  }
 }
