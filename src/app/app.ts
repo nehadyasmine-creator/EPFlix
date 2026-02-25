@@ -4,13 +4,16 @@ import { Navbar } from './navbar/navbar';
 import { Home } from './home/home';
 import { MovieList } from './movie-list/movie-list';
 import { Footer } from './footer/footer';
+import { ToastService } from './services/toast';
+import { ToastsContainer } from './toasts-container/toasts-container';
 
 @Component({
   selector: 'app-root',
-  imports: [Navbar, Footer, Home, MovieList, RouterOutlet],
+  imports: [Navbar, Home, MovieList, RouterOutlet, ToastsContainer, Footer],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
+
 export class App {
   protected readonly title = signal('EPFlix');
 }
