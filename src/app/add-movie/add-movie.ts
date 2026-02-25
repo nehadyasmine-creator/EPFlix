@@ -6,10 +6,12 @@ import { Observable } from 'rxjs';
 import { MoviesApi } from '../services/movies-api';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-add-movie',
-  imports: [FormsModule],
+  imports: [FormsModule, RouterLink],
   templateUrl: './add-movie.html',
   styleUrl: './add-movie.scss',
 })
