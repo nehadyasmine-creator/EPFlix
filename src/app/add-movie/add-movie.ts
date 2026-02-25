@@ -7,6 +7,7 @@ import { MoviesApi } from '../services/movies-api';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
+import { ToastService } from '../services/toast';
 
 
 @Component({
@@ -20,6 +21,7 @@ export class AddMovie {
   movies$: Observable<Movie[]> = this.moviesApi.getMovies()
 
   private readonly router = inject(Router)
+  private toastService = inject(ToastService);
   
   movie: Movie = {
     title: '',
@@ -28,10 +30,16 @@ export class AddMovie {
     synopsis: '',
     rate: 0
   }
+  isToastVisible: boolean = false;
   
   addMovie(): void {
     this.moviesApi.addMovie(this.movie).subscribe(
-        () => this.router.navigate(['/movies'])
+        () => {
+          this.toastService.show('Le film a été ajouté avec succès !', { 
+            classname: 'bg-success text-white' 
+          });
+          this.router.navigate(['/movies']);
+        }
     );
   }
 
