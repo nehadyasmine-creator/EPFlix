@@ -8,7 +8,8 @@ import { JsonPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ToastService } from '../services/toast';
 import { inject } from '@angular/core';
-
+import { Review } from '../models/reviews';
+import { ReviewService } from '../services/review-service';
 
 @Component({
   selector: 'app-navbar',
@@ -24,6 +25,10 @@ export class Navbar implements OnInit {
   password: string = '';
   loading: boolean = false;
   loginError: string | null = null;
+  private reviewService = inject(ReviewService);
+  
+  userReviews: Review[] = [];
+  showReviewsTab: boolean = false;
 
   private toastService = inject(ToastService);
 
@@ -40,6 +45,32 @@ export class Navbar implements OnInit {
     this.authService.currentUser$.subscribe(user => {
       this.currentUser = user;
     });
+
+    if (this.currentUser) {
+      this.loadUserReviews();
+    }
+  }
+
+  loadUserReviews() {
+    if (!this.currentUser) return;
+    
+    this.reviewService.getReviewsByUser(this.currentUser.id).subscribe({
+      next: (reviews) => {
+        this.userReviews = reviews;
+      },
+      error: (err) => {
+        console.error('Erreur lors du chargement des reviews:', err);
+      }
+    });
+  }
+
+  openReviewsTab() {
+    this.showReviewsTab = true;
+    this.loadUserReviews();
+  }
+
+  closeReviewsTab() {
+    this.showReviewsTab = false;
   }
 
   logout() {

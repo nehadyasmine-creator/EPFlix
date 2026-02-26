@@ -1,0 +1,112 @@
+<div class="container mt-5">
+  <div class="reviews-container">
+    <div class="header-top">
+      <h1>Mes Commentaires</h1>
+      <a class="btn btn-outline-dark" role="button" routerLink="/add-review">Ajouter un commentaire</a>
+    </div>
+
+    <div *ngIf="!currentUser" class="alert alert-warning">
+      <p>Veuillez vous <a routerLink="/login">connecter</a> pour voir vos commentaires.</p>
+    </div>
+
+    <div *ngIf="currentUser" class="reviews-content">
+      <!-- Stats -->
+      <div class="stats-box">
+        <div class="stat">
+          <span class="stat-label">Commentaires</span>
+          <span class="stat-value">{{ userReviews.length }}</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Note moyenne</span>
+          <span class="stat-value">⭐ {{ getAverageRating() }}/5</span>
+        </div>
+      </div>
+
+      <!-- Chargement -->
+      <div *ngIf="loading" class="loading">
+        <p>Chargement des commentaires...</p>
+      </div>
+
+      <!-- Pas de commentaires -->
+      <div *ngIf="!loading && userReviews.length === 0" class="empty-state">
+        <i class="bi bi-chat-left-quote"></i>
+        <h3>Aucun commentaire</h3>
+        <p>Vous n'avez pas encore écrit de commentaires</p>
+        <a routerLink="/movies" class="btn-movies">Découvrir les films</a>
+      </div>
+
+      <!-- Liste des commentaires -->
+      <div *ngIf="!loading && userReviews.length > 0" class="reviews-grid">
+        <div *ngFor="let review of userReviews" class="review-card">
+          <!-- Image à gauche -->
+          <div class="review-image">
+            <img [src]="'http://localhost:8080/movies/' + review.movie.id + '/image'" alt="">
+          </div>
+
+          <!-- Infos à droite -->
+          <div class="review-info">
+            <!-- Titre et réalisateur -->
+            <div class="movie-header">
+              <h3>{{ review.movie.title }}</h3>
+              <p class="director">{{ review.movie.director }}</p>
+            </div>
+
+            <!-- Note avec édition -->
+            <div class="rating-section">
+              <div *ngIf="editingReviewId !== review.id" class="rating-display">
+                <span class="stars">{{ '⭐'.repeat(review.rate) }}</span>
+                <span class="rating-value">{{ review.rate }}/5</span>
+              </div>
+
+              <div *ngIf="editingReviewId === review.id" class="rating-edit">
+                <div class="star-selector">
+                  <button *ngFor="let i of [1,2,3,4,5]" 
+                    (click)="editRate = i"
+                    [class.active]="editRate === i"
+                    class="star-btn">
+                    ⭐
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Commentaire avec édition -->
+            <div class="comment-section">
+              <div *ngIf="editingReviewId !== review.id" class="comment-display">
+                <p>{{ review.text }}</p>
+              </div>
+
+              <div *ngIf="editingReviewId === review.id" class="comment-edit">
+                <textarea 
+                  [(ngModel)]="editText"
+                  class="form-control"
+                  placeholder="Modifiez votre commentaire..."></textarea>
+              </div>
+
+              <!-- Boutons d'édition/sauvegarde -->
+              <div *ngIf="editingReviewId === review.id" class="edit-actions-full">
+                <button class="btn btn-success" (click)="saveEdit(review)" [disabled]="updateLoading">
+                  {{ updateLoading ? 'Sauvegarde...' : 'Enregistrer' }}
+                </button>
+                <button class="btn btn-outline-secondary" (click)="cancelEdit()">Annuler</button>
+              </div>
+            </div>
+
+            <!-- Footer: Date et suppression -->
+            <div class="review-footer">
+              <span class="review-date">{{ review.reviewDate | date:'dd MMMM yyyy' }}</span>
+              <div class="footer-actions">
+                <button class="edit-btn" (click)="startEdit(review)" title="Modifier">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-outline-danger" (click)="deleteReview(review.id)" title="Supprimer">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

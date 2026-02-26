@@ -4,6 +4,7 @@
     <img src="logo.png" alt="Logo" height="80">
   </a>
   <a class="nav-item nav-link ms-3" routerLink="/movies">Gestion de films</a>
+  <a class="nav-item nav-link ms-3" routerLink="/reviews">Commentaires</a>
   <div class="profile-menu">
     <button type="button" class="btn search-btn"><i class="bi bi-search"></i></button>
 
@@ -12,7 +13,7 @@
       <div class="profile-dropdown">
         <p>Bienvenue, {{ currentUser.firstName }}!</p>
         <a routerLink="/profil">Mon profil</a>
-        <a routerLink="/settings">Paramètres</a>
+        <a routerLink="/myreviews">Mes commentaires</a>
         <a (click)="logout()">Déconnexion</a>
       </div>
     </div>
