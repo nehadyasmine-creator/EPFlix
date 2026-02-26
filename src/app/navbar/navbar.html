@@ -8,33 +8,33 @@
     <button type="button" class="btn search-btn"><i class="bi bi-search"></i></button>
 
     <div *ngIf="isLoggedIn && currentUser" class="profil">
-    <i class="bi bi-person-circle"></i>
-    <div class="profile-dropdown">
-      <p>Bienvenue, {{ currentUser.firstName }}!</p>
-      <a routerLink="/profile">Mon profil</a>
-      <a routerLink="/settings">Paramètres</a>
-      <a (click)="logout()">Déconnexion</a>
+      <i class="bi bi-person-circle"></i>
+      <div class="profile-dropdown">
+        <p>Bienvenue, {{ currentUser.firstName }}!</p>
+        <a routerLink="/profil">Mon profil</a>
+        <a routerLink="/settings">Paramètres</a>
+        <a (click)="logout()">Déconnexion</a>
+      </div>
     </div>
-  </div>
 
-  <div *ngIf="!isLoggedIn" class="profil">
-    <i class="bi bi-person-circle"></i>
-    <div class="profile-dropdown">
-      <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="login-dropdown-form">
-        <div class="form-group px-3">
-          <input name="email" [(ngModel)]="email" required type="email" placeholder="Email" class="form-control">
+    <div *ngIf="!isLoggedIn" class="profil">
+      <i class="bi bi-person-circle"></i>
+      <div class="profile-dropdown">
+        <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="login-dropdown-form">
+          <div class="form-group px-3">
+            <input name="email" [(ngModel)]="email" required type="email" placeholder="Email" class="form-control">
+          </div>
+          <div class="form-group px-3 mt-2">
+            <input name="password" [(ngModel)]="password" required type="password" placeholder="Mot de passe" class="form-control">
+          </div>
+          <div class="px-3 mt-3">
+            <button class="btn btn-primary w-100" type="submit" [disabled]="loading">{{ loading ? 'Connexion...' : 'Se connecter' }}</button>
+          </div>
+        </form>
+        <div class="register-container">
+          <a routerLink="/register" class="register-link">S'inscrire</a>
         </div>
-        <div class="form-group px-3 mt-2">
-          <input name="password" [(ngModel)]="password" required type="password" placeholder="Mot de passe" class="form-control">
-        </div>
-        <div *ngIf="loginError" class="px-3 mt-2 text-danger">{{ loginError }}</div>
-        <div class="px-3 mt-3">
-          <button class="btn btn-primary w-100" type="submit" [disabled]="loading">{{ loading ? 'Connexion...' : 'Se connecter' }}</button>
-        </div>
-      </form>
-      <div class="register-container">
-        <a routerLink="/register" class="register-link">S'inscrire</a>
       </div>
     </div>
   </div>
-</div>
+</nav>

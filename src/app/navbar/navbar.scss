@@ -106,3 +106,13 @@
 }
 
 
+
+.profile-menu:hover .profile-dropdown {
+  display: block;
+}
+
+.profile-menu.open:hover .profile-dropdown,
+.profile-menu.open .profile-dropdown {
+  display: block;
+}
+
