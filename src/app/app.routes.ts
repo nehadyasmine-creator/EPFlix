@@ -5,6 +5,7 @@ import { AddMovie } from './add-movie/add-movie';
 import { UpdateMovie } from './update-movie/update-movie';
 import { Register } from './register/register';
 import { Profil } from './profil/profil';
+import { MyReviews } from './myreviews/myreviews';
 
 export const routes: Routes = [
     { path: '', component: Home},
@@ -12,6 +13,7 @@ export const routes: Routes = [
     { path: 'add-movie', component: AddMovie},
     { path: 'update-movie/:id', component: UpdateMovie },
     { path: 'register', component: Register },
-    { path: 'profil', component: Profil }
+    { path: 'profil', component: Profil },
+    { path: 'myreviews', component: MyReviews },
 ];
 
