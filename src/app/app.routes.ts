@@ -3,11 +3,13 @@ import { Home } from './home/home';
 import { MovieList } from './movie-list/movie-list';
 import { AddMovie } from './add-movie/add-movie';
 import { UpdateMovie } from './update-movie/update-movie';
+import { Register } from './register/register';
 
 export const routes: Routes = [
     { path: '', component: Home},
     { path: 'movies', component: MovieList},
     { path: 'add-movie', component: AddMovie},
-    { path: 'update-movie/:id', component: UpdateMovie }
+    { path: 'update-movie/:id', component: UpdateMovie },
+    { path: 'register', component: Register }
 ];
 

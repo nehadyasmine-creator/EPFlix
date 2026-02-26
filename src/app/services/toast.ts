@@ -13,7 +13,6 @@ export class ToastService {
     toast.isClosing = true;
   }, 2800);
 
-  // 2. On supprime réellement après 3s
   setTimeout(() => {
     this.remove(toast);
   }, 3000);
