@@ -44,6 +44,10 @@ export class Navbar implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.email = '';
+    this.password = '';
+    this.loginError = null;
+    this.toastService.show('Déconnecté !', { classname: 'bg-success text-white' });
   }
 
   onLogin() {

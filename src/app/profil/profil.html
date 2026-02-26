@@ -1,0 +1,175 @@
+<div class="container mt-5">
+  <div class="profile-container">
+    <h1>Mon Profil</h1>
+
+    <div *ngIf="!currentUser" class="alert alert-warning">
+      <p>Aucun utilisateur connecté.</p>
+    </div>
+
+    <div *ngIf="currentUser" class="profile-card">
+      <div class="profile-header">
+        <i class="bi bi-person-circle"></i>
+        <h2>{{ currentUser.firstName }} {{ currentUser.lastName }}</h2>
+      </div>
+
+      <div class="info-row">
+        <div class="info-label">Prénom :</div>
+        <div class="info-content">
+          <div *ngIf="editingField !== 'firstName'" class="info-display">
+            <span>{{ currentUser.firstName }}</span>
+            <button class="edit-btn" (click)="startEdit('firstName', currentUser.firstName)" title="Modifier">
+              <i class="bi bi-pencil"></i>
+            </button>
+          </div>
+          <div *ngIf="editingField === 'firstName'" class="info-edit">
+            <input 
+              type="text" 
+              [(ngModel)]="tempValue" 
+              class="form-control"
+              placeholder="Prénom">
+            <div class="edit-actions">
+              <button class="btn-save" (click)="saveField('firstName')" [disabled]="loading">
+                {{ loading ? '...' : '✓' }}
+              </button>
+              <button class="btn-cancel" (click)="cancelEdit()">✕</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-label">Nom :</div>
+        <div class="info-content">
+          <div *ngIf="editingField !== 'lastName'" class="info-display">
+            <span>{{ currentUser.lastName }}</span>
+            <button class="edit-btn" (click)="startEdit('lastName', currentUser.lastName)" title="Modifier">
+              <i class="bi bi-pencil"></i>
+            </button>
+          </div>
+          <div *ngIf="editingField === 'lastName'" class="info-edit">
+            <input 
+              type="text" 
+              [(ngModel)]="tempValue" 
+              class="form-control"
+              placeholder="Nom">
+            <div class="edit-actions">
+              <button class="btn-save" (click)="saveField('lastName')" [disabled]="loading">
+                {{ loading ? '...' : '✓' }}
+              </button>
+              <button class="btn-cancel" (click)="cancelEdit()">✕</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-label">Email :</div>
+        <div class="info-content">
+          <div *ngIf="editingField !== 'email'" class="info-display">
+            <span>{{ currentUser.email }}</span>
+            <button class="edit-btn" (click)="startEdit('email', currentUser.email)" title="Modifier">
+              <i class="bi bi-pencil"></i>
+            </button>
+          </div>
+          <div *ngIf="editingField === 'email'" class="info-edit">
+            <input 
+              type="email" 
+              [(ngModel)]="tempValue" 
+              class="form-control"
+              placeholder="Email">
+            <div class="edit-actions">
+              <button class="btn-save" (click)="saveField('email')" [disabled]="loading">
+                {{ loading ? '...' : '✓' }}
+              </button>
+              <button class="btn-cancel" (click)="cancelEdit()">✕</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-label">Âge :</div>
+        <div class="info-content">
+          <div *ngIf="editingField !== 'age'" class="info-display">
+            <span>{{ currentUser.age }}</span>
+            <button class="edit-btn" (click)="startEdit('age', currentUser.age)" title="Modifier">
+              <i class="bi bi-pencil"></i>
+            </button>
+          </div>
+          <div *ngIf="editingField === 'age'" class="info-edit">
+            <input 
+              type="number" 
+              [(ngModel)]="tempValue" 
+              class="form-control"
+              placeholder="Âge">
+            <div class="edit-actions">
+              <button class="btn-save" (click)="saveField('age')" [disabled]="loading">
+                {{ loading ? '...' : '✓' }}
+              </button>
+              <button class="btn-cancel" (click)="cancelEdit()">✕</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-row">
+        <div class="info-label">Points :</div>
+        <div class="info-content">
+          <div class="info-display">
+            <span class="points-badge">{{ currentUser.points }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="password-section">
+        <button class="btn-change-password" (click)="openPasswordForm()" *ngIf="!showPasswordForm">
+          <i class="bi bi-key"></i> Changer le mot de passe
+        </button>
+
+        <div class="password-form" *ngIf="showPasswordForm">
+          <h3>Changer le mot de passe</h3>
+          
+          <div class="form-group">
+            <label>Ancien mot de passe :</label>
+            <input 
+              type="password" 
+              [(ngModel)]="oldPassword" 
+              class="form-control"
+              placeholder="Entrez votre ancien mot de passe">
+          </div>
+
+          <div class="form-group">
+            <label>Nouveau mot de passe :</label>
+            <input 
+              type="password" 
+              [(ngModel)]="newPassword" 
+              class="form-control"
+              placeholder="Entrez votre nouveau mot de passe">
+          </div>
+
+          <div class="form-group">
+            <label>Confirmer le nouveau mot de passe :</label>
+            <input 
+              type="password" 
+              [(ngModel)]="confirmPassword" 
+              class="form-control"
+              placeholder="Confirmez votre nouveau mot de passe"
+              [class.password-match]="newPassword && confirmPassword && newPassword === confirmPassword">
+          </div>
+
+          <div class="password-match-indicator" *ngIf="newPassword && confirmPassword">
+            <span *ngIf="newPassword === confirmPassword" class="match">✓ Les mots de passe correspondent</span>
+            <span *ngIf="newPassword !== confirmPassword" class="no-match">✕ Les mots de passe ne correspondent pas</span>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn-save" (click)="changePassword()" [disabled]="passwordLoading">
+              {{ passwordLoading ? 'Mise à jour...' : 'Confirmer' }}
+            </button>
+            <button class="btn-cancel" (click)="closePasswordForm()">Annuler</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

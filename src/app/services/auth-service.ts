@@ -90,4 +90,16 @@ export class AuthService {
   deleteUser(id: number): Observable<void> {
     return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
+
+  changePassword(oldPassword: string, newPassword: string): Observable<User> {
+    return this.httpClient.post<User>(`${this.url}/change-password`, { 
+        oldPassword, 
+        newPassword 
+    }).pipe(
+        tap((user: User) => {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
+        })
+    );
+  }
 }
