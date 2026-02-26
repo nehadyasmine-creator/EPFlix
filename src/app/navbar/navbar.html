@@ -1,22 +1,40 @@
+
 <nav class="navbar navbar-light navbar-expand bg-light ps-5">
   <a class="navbar-brand" routerLink="/">
     <img src="logo.png" alt="Logo" height="80">
   </a>
   <a class="nav-item nav-link ms-3" routerLink="/movies">Gestion de films</a>
-
+  <button type="button" class="btn profil ms-auto"><i class="bi bi-search"></i></button>
   <div class="profile-menu">
-    <div class="profil">
-      <i class="bi bi-person-circle"></i>
-      <div class="profile-dropdown">
-        <p>Bienvenue, Utilisateur !</p>
-        <a href="#">Mon profil</a>
-        <a href="#">Paramètres</a>
-        <a href="#">Déconnexion</a>
-      </div>
+  <!-- Si connecté -->
+  <div *ngIf="isLoggedIn && currentUser" class="profil">
+    <i class="bi bi-person-circle"></i>
+    <div class="profile-dropdown">
+      <p>Bienvenue, {{ currentUser.firstName }}!</p>
+      <a routerLink="/profile">Mon profil</a>
+      <a routerLink="/settings">Paramètres</a>
+      <a (click)="logout()">Déconnexion</a>
     </div>
   </div>
-   <button type="button" class="btn profil ms-auto"><i class="bi bi-search"></i></button>
-  <button type="button" class="btn profil ms-2"><i class="bi bi-person-circle"></i></button>
 
-
-</nav>
+  <!-- Si pas connecté -->
+  <div *ngIf="!isLoggedIn" class="profil">
+    <i class="bi bi-person-circle"></i>
+    <div class="profile-dropdown">
+      <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="login-dropdown-form">
+        <div class="form-group px-3">
+          <input name="email" [(ngModel)]="email" required type="email" placeholder="Email" class="form-control">
+        </div>
+        <div class="form-group px-3 mt-2">
+          <input name="password" [(ngModel)]="password" required type="password" placeholder="Mot de passe" class="form-control">
+        </div>
+        <div *ngIf="loginError" class="px-3 mt-2 text-danger">{{ loginError }}</div>
+        <div class="px-3 mt-3">
+          <button class="btn btn-primary w-100" type="submit" [disabled]="loading">{{ loading ? 'Connexion...' : 'Se connecter' }}</button>
+        </div>
+      </form>
+      <hr>
+      <div class="px-3"><a routerLink="/register">S'inscrire</a></div>
+    </div>
+  </div>
+</div>
