@@ -1,0 +1,40 @@
+<h1>Création d'un compte</h1>
+
+<div class="movie-container">
+    <div class="d-flex flex-row align-items-center w-50">
+        <label class="me-2" for="firstName">Prénom : </label>
+        <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName" />
+    </div>
+
+    <div class="d-flex flex-row align-items-center w-50">
+        <label class="me-2" for="lastName">Nom : </label>
+        <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName" />
+    </div>
+
+    <div class="d-flex flex-row align-items-center w-50">
+        <label class="me-2" for="age">Age : </label>
+        <input type="number" id="age" name="age" [(ngModel)]="user.age" />
+    </div>
+
+    <div class="d-flex flex-row align-items-center w-50">
+        <label class="me-2" for="email">Email : </label>
+        <input type="email" id="email" name="email" [(ngModel)]="user.email" />
+    </div>
+
+    <div class="d-flex flex-row align-items-center w-50 password-row">
+        <label class="me-2" for="password">Mot de passe : </label>
+        <input [type]="showPassword ? 'text' : 'password'" id="password" name="password" [(ngModel)]="user.password" />
+        <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'" (click)="togglePassword()" title="{{ showPassword ? 'Masquer' : 'Afficher' }}"></i>
+    </div>
+    <div class="d-flex flex-row align-items-center w-50 password-row">
+        <label class="me-2" for="confirm">Confirmer : </label>
+        <input [type]="showConfirm ? 'text' : 'password'" id="confirm" name="confirm" [(ngModel)]="confirmPassword" />
+        <i class="bi" [ngClass]="showConfirm ? 'bi-eye-slash' : 'bi-eye'" (click)="toggleConfirm()" title="{{ showConfirm ? 'Masquer' : 'Afficher' }}"></i>
+    </div>
+
+    <div class="bouton">
+        <button class="btn btn-outline-dark" routerLink="/">Annuler</button>
+        <button class="btn btn-dark" (click)="register()">Créer le compte</button>
+
+    </div>
+</div>

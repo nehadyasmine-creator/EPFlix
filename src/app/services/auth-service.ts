@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { User } from '../models/users';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -38,13 +38,14 @@ export class AuthService {
     );
   }
 
-  // Recherche d'utilisateur par email (utilisé pour fallback email-only)
   findByEmail(email: string): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.url}?email=${encodeURIComponent(email)}`);
+    return this.httpClient.get<User[]>(`${this.url}`).pipe(
+      map(users => (users || []).filter(u => (u.email || '').toLowerCase() === (email || '').toLowerCase()))
+    );
   }
 
   register(user: User): Observable<User> {
-    return this.httpClient.post<User>(`${this.url}/register`, user).pipe(
+    return this.httpClient.post<User>(this.url, user).pipe(
       tap((newUser: User) => {
         localStorage.setItem('authToken', 'token_' + Date.now());
         localStorage.setItem('currentUser', JSON.stringify(newUser));
