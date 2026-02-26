@@ -7,10 +7,11 @@ import { Review } from '../models/reviews';
 import { ToastService } from '../services/toast';
 import { User } from '../models/users';
 import { Observable } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-myreviews',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './myreviews.html',
   styleUrl: './myreviews.scss',
 })
@@ -159,10 +160,6 @@ export class MyReviews implements OnInit {
   }
 
   deleteReview(reviewId: number) {
-    if (!confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')) {
-      return;
-    }
-
     this.reviewService.deleteReview(reviewId).subscribe({
       next: () => {
         this.userReviews = this.userReviews.filter(r => r.id !== reviewId);

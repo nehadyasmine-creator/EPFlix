@@ -1,6 +1,9 @@
 <div class="container mt-5">
   <div class="reviews-container">
-    <h1>Mes Commentaires</h1>
+    <div class="header-top">
+      <h1>Mes Commentaires</h1>
+      <a class="btn btn-outline-dark" role="button" routerLink="/add-review">Ajouter un commentaire</a>
+    </div>
 
     <div *ngIf="!currentUser" class="alert alert-warning">
       <p>Veuillez vous <a routerLink="/login">connecter</a> pour voir vos commentaires.</p>
@@ -82,10 +85,10 @@
 
               <!-- Boutons d'édition/sauvegarde -->
               <div *ngIf="editingReviewId === review.id" class="edit-actions-full">
-                <button class="btn-save" (click)="saveEdit(review)" [disabled]="updateLoading">
+                <button class="btn btn-success" (click)="saveEdit(review)" [disabled]="updateLoading">
                   {{ updateLoading ? 'Sauvegarde...' : 'Enregistrer' }}
                 </button>
-                <button class="btn-cancel-inline" (click)="cancelEdit()">Annuler</button>
+                <button class="btn btn-outline-secondary" (click)="cancelEdit()">Annuler</button>
               </div>
             </div>
 
@@ -96,7 +99,7 @@
                 <button class="edit-btn" (click)="startEdit(review)" title="Modifier">
                   <i class="bi bi-pencil"></i>
                 </button>
-                <button class="btn-delete" (click)="deleteReview(review.id)" title="Supprimer">
+                <button class="btn btn-outline-danger" (click)="deleteReview(review.id)" title="Supprimer">
                   <i class="bi bi-trash"></i>
                 </button>
               </div>
