@@ -72,7 +72,6 @@ export class AddMovie {
     return;
   }
 
-  // Si tout est OK, on procède à l'ajout
   this.moviesApi.addMovie(this.movie).subscribe(
     () => {
       this.toastService.show('Le film a été ajouté avec succès !', { 
