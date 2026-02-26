@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; // Ajout de OnInit
 import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from '../models/movies';
 import { MoviesApi } from '../services/movies-api';
@@ -7,14 +7,15 @@ import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ToastService } from '../services/toast';
+
 @Component({
   selector: 'app-update-movie',
+  standalone: true, // Assurez-vous que c'est bien un composant standalone si vous utilisez "imports"
   imports: [FormsModule, DatePipe, RouterLink],
   templateUrl: './update-movie.html',
   styleUrl: './update-movie.scss',
 })
-
-export class UpdateMovie {
+export class UpdateMovie implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private moviesApi = inject(MoviesApi);
@@ -25,18 +26,59 @@ export class UpdateMovie {
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
-    this.moviesApi.getMovie(Number(id)).subscribe(movie => this.movie = movie);
+    if (id) {
+      this.moviesApi.getMovie(Number(id)).subscribe((movie) => (this.movie = movie));
+    }
   }
 
   updateMovie(): void {
-    this.moviesApi.updateMovie(this.movie).subscribe(() => {
-      this.toastService.show('Le film a été mis à jour avec succès !', { 
-      classname: 'bg-success text-white' 
-    });
-      this.router.navigate(['/movies']);
+    // --- DÉBUT DES VÉRIFICATIONS (Identiques à add-movie.ts) ---
+    
+    // 1. Vérification du Titre (Majuscule)
+    const startsWithUpper = /^[A-Z]/.test(this.movie.title);
 
+    // 2. Vérification du Réalisateur (Deux mots)
+    const twoWordsRegex = /^\s*[^\s]+\s+[^\s]+\s*$/;
+    const isDirectorValid = twoWordsRegex.test(this.movie.director);
+
+    if (!this.movie.title || !startsWithUpper) {
+      this.toastService.show('Le titre doit commencer par une majuscule.', {
+        classname: 'bg-danger text-white',
+      });
+      return;
+    }
+
+    if (!this.movie.director || !isDirectorValid) {
+      this.toastService.show('Le réalisateur doit comporter exactement deux mots (Prénom Nom).', {
+        classname: 'bg-danger text-white',
+      });
+      return;
+    }
+
+    if (!this.movie.synopsis || this.movie.synopsis.length < 30) {
+      this.toastService.show('Le synopsis doit faire au moins 30 caractères.', {
+        classname: 'bg-danger text-white',
+      });
+      return;
+    }
+
+    const today = new Date();
+    const releaseDate = new Date(this.movie.releaseDate);
+
+    if (releaseDate > today) {
+      this.toastService.show('La date de sortie ne peut pas être dans le futur.', {
+        classname: 'bg-danger text-white',
+      });
+      return;
+    }
+
+    // --- FIN DES VÉRIFICATIONS ---
+
+    this.moviesApi.updateMovie(this.movie).subscribe(() => {
+      this.toastService.show('Le film a été mis à jour avec succès !', {
+        classname: 'bg-success text-white',
+      });
+      this.router.navigate(['/movies']);
     });
   }
-
-
 }
