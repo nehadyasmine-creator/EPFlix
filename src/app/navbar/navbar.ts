@@ -1,7 +1,7 @@
 import { TitleCasePipe, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Input } from '@angular/core';   
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { AuthService } from '../services/auth-service';
 import { User } from '../models/users';
 import { JsonPipe } from '@angular/common';
@@ -30,6 +30,10 @@ export class Navbar implements OnInit {
   userReviews: Review[] = [];
   showReviewsTab: boolean = false;
 
+  // search box
+  searchValue: string = '';
+  private router = inject(Router);
+
   private toastService = inject(ToastService);
 
   constructor(private authService: AuthService) {}
@@ -49,6 +53,7 @@ export class Navbar implements OnInit {
     if (this.currentUser) {
       this.loadUserReviews();
     }
+
   }
 
   loadUserReviews() {
@@ -133,5 +138,14 @@ export class Navbar implements OnInit {
         this.toastService.show('Erreur lors de la vérification de l\'email.', {classname: 'bg-danger text-white'});
       }
     });
+  }
+
+  onSearch() {
+    const term = this.searchValue.trim();
+    if (term) {
+      this.router.navigate(['/movies'], { queryParams: { search: term } });
+    } else {
+      this.router.navigate(['/movies']);
+    }
   }
 }

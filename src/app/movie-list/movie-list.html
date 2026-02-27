@@ -18,7 +18,7 @@
     </tr>
   </thead>
   <tbody>
-    @for (movie of movies() ; track movie.id) {
+    @for (movie of filteredMovies() ; track movie.id) {
       <tr>
         
         <th scope="row"><img [src]="'http://localhost:8080/movies/' + movie.id + '/image'"

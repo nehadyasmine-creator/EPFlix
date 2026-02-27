@@ -1,10 +1,10 @@
-import { Component, inject, DestroyRef, signal } from '@angular/core';
+import { Component, inject, DestroyRef, signal, computed } from '@angular/core';
 import { Movie } from '../models/movies';
 import { DatePipe } from '@angular/common';
 import { MoviesApi } from '../services/movies-api';
 import { RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -19,10 +19,21 @@ export class MovieList {
   private destroyRef = inject(DestroyRef);
   
   movies = signal<Movie[]>([]);
-  
+  searchTerm = signal('');
+  filteredMovies = computed(() => {
+    const term = this.searchTerm().toLowerCase();
+    if (!term) {
+      return this.movies();
+    }
+    return this.movies().filter(m => m.title.toLowerCase().includes(term));
+  });
 
   ngOnInit(): void {
       this.moviesApi.getMovies().subscribe(movies => this.movies.set(movies));
+      // listen to query param changes
+      this.route.queryParams.subscribe(params => {
+        this.searchTerm.set(params['search'] || '');
+      });
   }
 
   deleteMovie(id: number): void {
@@ -32,6 +43,7 @@ export class MovieList {
 }
 
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
 
   updateMovie(id: number): void {
       this.router.navigate(['/update-movie', id]);
