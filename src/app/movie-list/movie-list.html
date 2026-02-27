@@ -4,38 +4,53 @@
 </div>
 
 <div class="movie-list-container">
+
+  @if (filteredMovies() && filteredMovies().length>0){
+
   <table class="table table-striped">
-  <thead>
-    <tr>
-      
-      <th scope="col">Affiche</th>
-      <th scope="col">Titre</th>
-      <th scope="col" style="width: 10%;">Date</th>
-      <th scope="col">Réalisateur</th>
-      <th scope="col">Note</th>
-      <th scope="col">Synopsis</th>
-      <th scope="col" style="width: 10%;">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for (movie of filteredMovies() ; track movie.id) {
+    <thead>
       <tr>
-        
+
+        <th scope="col">Affiche</th>
+        <th scope="col">Titre</th>
+        <th scope="col" style="width: 10%;">Date</th>
+        <th scope="col">Réalisateur</th>
+        <th scope="col">Note</th>
+        <th scope="col">Synopsis</th>
+        <th scope="col" style="width: 10%;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (movie of filteredMovies() ; track movie.id) {
+
+      <tr>
+
         <th scope="row"><img [src]="'http://localhost:8080/movies/' + movie.id + '/image'"
-                        style="width: 100%; max-width: 150px; height: auto;" class="card-img-top" alt="">
-                </th>
+            style="width: 100%; max-width: 150px; height: auto;" class="card-img-top" alt="">
+        </th>
         <td>{{ movie.title }}</td>
         <td>{{ movie.releaseDate | date: "dd/MM/yyyy "}}</td>
         <td>{{ movie.director }}</td>
         <td>{{ movie.rate }}</td>
         <td>{{ movie.synopsis }}</td>
         <td>
-          
-          <button type="button" class="btn btn-info editButton me-2" (click)="updateMovie(movie.id!)"><i class="bi bi-pencil-square"></i></button>
-          <button type="button" class="btn btn-danger deleteButton" (click)="deleteMovie(movie.id!)"><i class="bi bi-trash-fill"></i></button>
+
+          <button type="button" class="btn btn-info editButton me-2" (click)="updateMovie(movie.id!)"><i
+              class="bi bi-pencil-square"></i></button>
+          <button type="button" class="btn btn-danger deleteButton" (click)="deleteMovie(movie.id!)"><i
+              class="bi bi-trash-fill"></i></button>
         </td>
       </tr>
-    }
-  </tbody>
+      }
+
+    </tbody>
+
   </table>
+  }
+  @else {
+    
+  <p class="aucunResultat">
+    Votre recherche n'a retourné aucun résultat.
+  </p>
+  }
 </div>

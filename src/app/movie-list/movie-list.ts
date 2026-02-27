@@ -20,12 +20,13 @@ export class MovieList {
   
   movies = signal<Movie[]>([]);
   searchTerm = signal('');
+
   filteredMovies = computed(() => {
     const term = this.searchTerm().toLowerCase();
     if (!term) {
       return this.movies();
     }
-    return this.movies().filter(m => m.title.toLowerCase().includes(term));
+    return this.movies().filter(m => m.title.toLowerCase().includes(term) || m.director.toLowerCase().includes(term));
   });
 
   ngOnInit(): void {
@@ -35,6 +36,8 @@ export class MovieList {
         this.searchTerm.set(params['search'] || '');
       });
   }
+
+  
 
   deleteMovie(id: number): void {
     this.moviesApi.deleteMovie(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => 
