@@ -1,12 +1,35 @@
 .profile-menu {
+  padding-right: 12px;
+  position: relative;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.search-menu{
   margin-left: auto;
   padding-right: 12px;
   position: relative;
   display: flex;
-  gap: 8px;
   align-items: center;
 }
-
+.search-input {
+  padding: 8px 12px;
+  padding-right: 32px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  height:50px;
+  width:300px;
+}
+.search-icon {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.6rem;
+  color:#333;
+  cursor: pointer;
+}
 .profil {
     padding: 0.25rem 0.5rem;
 }
@@ -72,16 +95,6 @@
   border: 1px solid #ddd;
   border-radius: 4px;
 }
-
-.search-btn {
-  padding: 0.35rem 0.45rem;
-  border-radius: 6px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.search-btn i { font-size: 1.8rem; }
 
 .login-dropdown-form .form-group { margin-bottom: 5px; }
 

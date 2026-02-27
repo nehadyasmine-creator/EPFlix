@@ -1,2 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
 @import url(bootstrap);
+/* Assure que le body prend toute la hauteur de l'écran */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Transforme le body en conteneur flex vertical */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Force le contenu principal à prendre tout l'espace disponible */
+.content-wrapper { /* Il faut englober vos pages dans une div avec cette classe */
+  flex: 1 0 auto;
+}
+
+/* Le footer ne grandira pas et restera en bas */
+.footer-dark {
+  flex-shrink: 0;
+}
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
