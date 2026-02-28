@@ -1,12 +1,13 @@
 <div class="card shadow m-4" style="max-width: 750px; height: 400px;">
-  <div class="row g-0 align-items-center">
+  <div class="row g-0 align-items-center" [routerLink]="['/movies', getMovieUrl(movie.title)]">
     
     <div class="col-md-4 h-100">
       @if(movie.image) {
         <img [src]="'http://localhost:8080/movies/' + movie.id + '/image'" 
              class="img-fluid rounded-start" 
              alt="{{movie.title}}"
-             style="object-fit: cover; height: 400px">
+             style="object-fit: cover; height: 400px"
+              />
       }
     </div>
 

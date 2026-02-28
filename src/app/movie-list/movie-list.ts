@@ -51,4 +51,8 @@ export class MovieList {
   updateMovie(id: number): void {
       this.router.navigate(['/update-movie', id]);
   }
+
+  getMovieUrl(title: string): string {
+    return title.toLowerCase().replace(/\s+/g, '-');
+  }
 }
