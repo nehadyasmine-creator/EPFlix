@@ -1,0 +1,102 @@
+<div class="container mt-5">
+  <div class="movie-detail-container">
+    <!-- Retour -->
+    <a routerLink="/movies" class="btn btn-outline-dark mb-3">
+      <i class="bi bi-arrow-left"></i> Retour aux films
+    </a>
+
+    <!-- Chargement -->
+    <div *ngIf="loading" class="loading">
+      <p>Chargement du film...</p>
+    </div>
+
+    <!-- Film non trouvé -->
+    <div *ngIf="!loading && !movie" class="alert alert-danger">
+      <p>Film non trouvé.</p>
+    </div>
+
+    <!-- Titre et bouton en haut -->
+    <div *ngIf="!loading && movie" class="header-top">
+      <h1>{{ movie.title }}</h1>
+      <a class="btn btn-outline-dark" role="button" routerLink="/add-review">Ajouter un commentaire</a>
+    </div>
+
+    <!-- Détail du film -->
+    <div *ngIf="!loading && movie" class="movie-content">
+      <div class="movie-header">
+        <!-- Image -->
+        <div class="movie-image">
+          <img [src]="'http://localhost:8080/movies/' + movie.id + '/image'" [alt]="movie.title">
+        </div>
+
+        <!-- Infos -->
+        <div class="movie-info">
+          <div class="movie-meta">
+            <div class="meta-item">
+              <span class="meta-label">Réalisateur :</span>
+              <span class="meta-value">{{ movie.director }}</span>
+            </div>
+            
+            <div class="meta-item">
+              <span class="meta-label">Date de sortie :</span>
+              <span class="meta-value">{{ movie.releaseDate | date:'dd MMMM yyyy' }}</span>
+            </div>
+            
+            <div class="meta-item">
+              <span class="meta-label">Note du film :</span>
+              <span class="meta-value">⭐ {{ movie.rate }}/5</span>
+            </div>
+          </div>
+
+          <div class="movie-synopsis">
+            <h3>Synopsis</h3>
+            <p>{{ movie.synopsis }}</p>
+          </div>
+
+          <div class="movie-stats">
+            <div class="stat">
+              <span class="stat-label">Commentaires</span>
+              <span class="stat-value">{{ reviews.length }}</span>
+            </div>
+            <div class="stat">
+              <span class="stat-label">Note moyenne</span>
+              <span class="stat-value">⭐ {{ getAverageRating() }}/5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Commentaires -->
+      <div class="movie-reviews">
+        <h2>Commentaires ({{ reviews.length }})</h2>
+
+        <div *ngIf="loadingReviews" class="loading">
+          <p>Chargement des commentaires...</p>
+        </div>
+
+        <div *ngIf="!loadingReviews && reviews.length === 0" class="no-reviews">
+          <p>Aucun commentaire pour ce film.</p>
+        </div>
+
+        <div *ngIf="!loadingReviews && reviews.length > 0" class="reviews-list">
+          <div *ngFor="let review of reviews" class="review-item">
+            <div class="review-header">
+              <div class="reviewer-info">
+                <h4>{{ review.user.firstName }} {{ review.user.lastName }}</h4>
+                <span class="review-date">{{ review.reviewDate | date:'dd MMMM yyyy' }}</span>
+              </div>
+              <div class="review-rating">
+                <span class="stars">{{ '⭐'.repeat(review.rate) }}</span>
+                <span class="rating-value">{{ review.rate }}/5</span>
+              </div>
+            </div>
+            
+            <div class="review-text">
+              <p>{{ review.text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

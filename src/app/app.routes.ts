@@ -7,6 +7,7 @@ import { Register } from './register/register';
 import { Profil } from './profil/profil';
 import { MyReviews } from './myreviews/myreviews';
 import { AddReview } from './add-review/add-review';
+import { MovieDetailComponent } from './movie-details/movie-details';
 
 export const routes: Routes = [
     { path: '', component: Home},
@@ -17,5 +18,6 @@ export const routes: Routes = [
     { path: 'profil', component: Profil },
     { path: 'myreviews', component: MyReviews },
     { path: 'add-review', component: AddReview },
+    { path: 'movies/:name', component: MovieDetailComponent },
 ];
 

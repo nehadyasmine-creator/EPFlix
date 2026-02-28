@@ -67,7 +67,10 @@
 
         <!-- Boutons -->
         <div class="form-actions">
-          <button type="button" class="btn-submit" (click)="submitReview()" [disabled]="submitting">
+          <button class="btn-submit" 
+            (click)="submitting || submitReview()" 
+            [disabled]="submitting"
+            type="button">
             {{ submitting ? 'Publication...' : 'Publier le commentaire' }}
           </button>
           <button type="button" class="btn-cancel" routerLink="/myreviews">Annuler</button>
