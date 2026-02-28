@@ -23,10 +23,10 @@
     <tbody>
       @for (movie of filteredMovies() ; track movie.id) {
 
-      <tr>
+      <tr [routerLink]="['/movies', getMovieUrl(movie.title)]">
 
         <th scope="row"><img [src]="'http://localhost:8080/movies/' + movie.id + '/image'"
-            style="width: 100%; max-width: 150px; height: auto;" class="card-img-top" alt="">
+            style="width: 100%; max-width: 150px; height: auto;" class="card-img-top" alt="" >
         </th>
         <td>{{ movie.title }}</td>
         <td>{{ movie.releaseDate | date: "dd/MM/yyyy "}}</td>
