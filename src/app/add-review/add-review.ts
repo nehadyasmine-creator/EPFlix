@@ -1,7 +1,8 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AuthService } from '../services/auth-service';
 import { MoviesApi } from '../services/movies-api';
 import { ReviewService } from '../services/review-service';
@@ -22,6 +23,7 @@ export class AddReview implements OnInit {
   private reviewService = inject(ReviewService);
   private router = inject(Router);
   private toastService = inject(ToastService);
+  private destroyRef = inject(DestroyRef);
 
   currentUser: User | null = null;
   movies: Movie[] = [];
@@ -31,13 +33,16 @@ export class AddReview implements OnInit {
   rating: number = 0;
   reviewText: string = '';
   submitting: boolean = false;
+  
+  private initializationCheck = new Set<string>();
 
   ngOnInit() {
-    // Charger l'utilisateur une seule fois
-    if (this.currentUser) {
-      this.loadMovies();
+    // Utiliser une clé unique pour vérifier si c'est déjà initialisé
+    const initKey = 'add-review-init';
+    if (this.initializationCheck.has(initKey)) {
       return;
     }
+    this.initializationCheck.add(initKey);
 
     const storedUser = localStorage.getItem('currentUser');
     if (storedUser) {
@@ -50,17 +55,24 @@ export class AddReview implements OnInit {
   }
 
   loadMovies() {
+    // Vérifier si les films sont déjà chargés
+    if (this.movies.length > 0) {
+      return;
+    }
+
     this.loadingMovies = true;
-    this.moviesApi.getMovies().subscribe({
-      next: (movies) => {
-        this.movies = movies;
-        this.loadingMovies = false;
-      },
-      error: (err) => {
-        this.loadingMovies = false;
-        this.toastService.show('Erreur lors du chargement des films.', { classname: 'bg-danger text-white' });
-      }
-    });
+    this.moviesApi.getMovies()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (movies) => {
+          this.movies = movies;
+          this.loadingMovies = false;
+        },
+        error: (err) => {
+          this.loadingMovies = false;
+          this.toastService.show('Erreur lors du chargement des films.', { classname: 'bg-danger text-white' });
+        }
+      });
   }
 
   selectMovie(movie: Movie) {
@@ -74,6 +86,11 @@ export class AddReview implements OnInit {
   }
 
   submitReview() {
+    // Protection triple contre les doublons
+    if (this.submitting) {
+      return;
+    }
+
     // Validation
     if (!this.selectedMovie) {
       this.toastService.show('Veuillez sélectionner un film.', { classname: 'bg-danger text-white' });
@@ -95,6 +112,7 @@ export class AddReview implements OnInit {
       return;
     }
 
+    // Mettre submitting à true AVANT l'appel API
     this.submitting = true;
 
     const newReview: Review = {
@@ -105,8 +123,8 @@ export class AddReview implements OnInit {
         title: this.selectedMovie.title,
         director: this.selectedMovie.director,
         rate: this.selectedMovie.rate || 0,
-        releaseDate: typeof this.selectedMovie.releaseDate === 'string' 
-          ? this.selectedMovie.releaseDate 
+        releaseDate: typeof this.selectedMovie.releaseDate === 'string'
+          ? this.selectedMovie.releaseDate
           : new Date(this.selectedMovie.releaseDate).toISOString(),
         synopsis: this.selectedMovie.synopsis,
         image: this.selectedMovie.image || ''
@@ -116,17 +134,23 @@ export class AddReview implements OnInit {
       reviewDate: new Date().toISOString()
     };
 
-    this.reviewService.addReview(newReview).subscribe({
-      next: (review) => {
-        this.submitting = false;
-        this.toastService.show('Commentaire publié avec succès !', { classname: 'bg-success text-white' });
-        this.router.navigate(['/myreviews']);
-      },
-      error: (err) => {
-        this.submitting = false;
-        console.error('Erreur:', err);
-        this.toastService.show('Erreur lors de la publication du commentaire.', { classname: 'bg-danger text-white' });
-      }
-    });
+    // Un seul appel API
+    this.reviewService.addReview(newReview)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (review) => {
+          this.submitting = false;
+          this.toastService.show('Commentaire publié avec succès !', { classname: 'bg-success text-white' });
+          // Utiliser setTimeout pour s'assurer que la navigation se fait après le rendu
+          setTimeout(() => {
+            this.router.navigate(['/myreviews']);
+          }, 100);
+        },
+        error: (err) => {
+          this.submitting = false;
+          console.error('Erreur:', err);
+          this.toastService.show('Erreur lors de la publication du commentaire.', { classname: 'bg-danger text-white' });
+        }
+      });
   }
 }
