@@ -129,3 +129,19 @@
   display: block;
 }
 
+.adminMode{
+  display:flex;
+  align-items: center;
+  padding: 2px 0;
+  margin-top:0px;
+  background-color: red;
+  color:white;
+}
+.adminModeText{
+  margin-left:5%;
+  color:white;
+}
+.adminModeButton{
+  color:white;
+}
+

@@ -1,0 +1,49 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* La page fait au moins 100% de la hauteur */
+}
+
+.admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1.5rem;
+    margin: 1rem 0;
+    position: relative;
+}
+.admin-header.disconnected {
+    margin-top:15%;
+}
+
+.admin-body.is-connected {
+    display: flex; //pour que les enfants (actions et contenu) se mettent cote a cote
+    flex-direction: row;
+
+}
+
+.admin-body:not(.is-connected) {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 400px;
+}
+
+.table-hover tbody tr:hover  {
+  background-color:hsl(360 100% 95.6%);
+  
+  cursor: pointer;
+}
+
+.actions {
+    margin-left: 10%;
+    flex: 0 0 300px;
+}
+
+.contenu {
+    flex: 1;
+    margin-left:2%;
+}

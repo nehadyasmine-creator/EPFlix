@@ -1,18 +1,25 @@
+@if (isAdmin()){
+    <div class="adminMode">
+      <a class="adminModeText">Attention : Vous êtes actuellement connecté en mode Administrateur.</a>
+      <button type="button" class="btn btn-link adminModeButton"  (click)="adminLogOut()">Se déconnecter</button>
+    </div>
+    
+  }
 <nav class="navbar navbar-light navbar-expand bg-light ps-5">
+
+  
+
   <a class="navbar-brand" routerLink="/">
     <img src="logo.png" alt="Logo" height="80">
   </a>
-  <a class="nav-item nav-link ms-3" routerLink="/movies">Gestion de films</a>
-  <a class="nav-item nav-link ms-3" routerLink="/reviews">Commentaires</a>
+  <a class="nav-item nav-link ms-3" routerLink="/movies">Liste des films</a>
+  <a class="nav-item nav-link ms-3" routerLink="/admin">Espace administrateur</a>
 
   
   <div class="search-menu">
     <input type="search" class="search-input" placeholder="Rechercher par titre ou réalisateur" [(ngModel)]="searchValue" (keyup.enter)="onSearch()" />
     <i class="bi bi-search search-icon" (click)="onSearch()"></i>
   </div>
-
-
-
 
   <div class="profile-menu">
 

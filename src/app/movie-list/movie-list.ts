@@ -55,4 +55,8 @@ export class MovieList {
   getMovieUrl(title: string): string {
     return title.toLowerCase().replace(/\s+/g, '-');
   }
+
+  isAdmin() {
+  return sessionStorage.getItem('admin_access') === 'true';
+}
 }

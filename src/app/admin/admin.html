@@ -1,0 +1,64 @@
+@if (!isLoggedInAdmin){
+<div class="admin-header" [class.disconnected]="!isLoggedInAdmin">Veuillez renseigner le code d'accès Administrateur : (EPFlix2026)
+
+</div>
+<div class="admin-body" >
+
+    <form (ngSubmit)="onLogin()" class="login-dropdown-form">
+        <div class="form-group px-3">
+            <input name="CodeAcces" [(ngModel)]="saisieCode" required type="text" placeholder="Code d'accès..."
+                class="form-control">
+        </div>
+
+        <div class="px-3 mt-3">
+            <button class="btn btn-primary w-100" type="submit" [disabled]="loading">{{ loading ? 'Connexion...' : 'Se connecter' }}</button>
+
+<!--- ATTENTION si vous faites clic droit FORMATER ca met a la ligne le ": Se connecter" ce qui crée une erreur, faut le remettre sur sa bonne ligne a chaque fois  --->
+
+        </div>
+    </form>
+</div>
+
+}
+
+@if (isLoggedInAdmin){
+<div class="admin-header">
+    <h1>Bienvenue sur votre espace Administrateur !</h1>
+</div>
+
+
+<div class="admin-body" [class.is-connected]="isLoggedInAdmin">
+    <div class="actions">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Afficher mes graphiques</td>
+                </tr>
+                <tr [routerLink]="['/movies']">
+                    <td>Modifier la liste des films</td>
+                </tr>
+                <tr>
+                    <td>Modifier le carrousel de la page d'accueil</td>
+                </tr>
+                <tr>
+                    <td>Ajouter manuellement un nouvel utilisateur</td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="contenu">
+        CONTENU
+    </div>
+
+
+
+</div>
+}
