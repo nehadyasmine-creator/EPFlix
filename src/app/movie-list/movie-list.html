@@ -1,6 +1,12 @@
-<div class="movie-header">
-  <h1>Gestion des Films</h1>
-  <a class="btn btn-outline-dark" role="button" routerLink="/add-movie">Nouveau Film</a>
+<div class="movie-header" [class.admin-mode]="isAdmin()">
+  @if (isAdmin()){
+  <a class="btn btn-outline-dark " role="button" routerLink="/admin">< Retour à l'espace administrateur</a>
+  }
+  <h1>Liste des films</h1>
+  @if (isAdmin()) {
+  <a class="btn btn-primary" role="button" routerLink="/add-movie">+ Ajouter un nouveau film</a>
+  }
+  
 </div>
 
 <div class="d-flex justify-content-end align-items-center mb-3 p-3 bg-light rounded shadow-sm gap-4">
@@ -73,7 +79,9 @@
           Note @if(sortKey()==='rate'){ <i [class]="sortDirection()==='asc'?'bi bi-caret-up-fill':'bi bi-caret-down-fill'"></i> }
         </th>
         <th scope="col">Synopsis</th>
+        @if (isAdmin()){
         <th scope="col" style="width: 10%;">Actions</th>
+        }
       </tr>
     </thead>
     <tbody>
@@ -89,13 +97,15 @@
         <td>{{ movie.director }}</td>
         <td>{{ movie.rate }}</td>
         <td>{{ movie.synopsis }}</td>
+        @if (isAdmin()){
         <td>
-
+          
           <button type="button" class="btn btn-info editButton me-2" (click)="updateMovie(movie.id!)"><i
               class="bi bi-pencil-square"></i></button>
           <button type="button" class="btn btn-danger deleteButton" (click)="deleteMovie(movie.id!)"><i
               class="bi bi-trash-fill"></i></button>
         </td>
+      }
       </tr>
       }
 

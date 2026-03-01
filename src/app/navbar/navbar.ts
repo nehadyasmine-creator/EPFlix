@@ -1,6 +1,6 @@
 import { TitleCasePipe, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Input } from '@angular/core';   
+import { Input } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { AuthService } from '../services/auth-service';
 import { User } from '../models/users';
@@ -26,7 +26,7 @@ export class Navbar implements OnInit {
   loading: boolean = false;
   loginError: string | null = null;
   private reviewService = inject(ReviewService);
-  
+
   userReviews: Review[] = [];
   showReviewsTab: boolean = false;
 
@@ -36,12 +36,14 @@ export class Navbar implements OnInit {
 
   private toastService = inject(ToastService);
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
+
+  isAdminMode: boolean=false;
 
   ngOnInit() {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.currentUser = this.authService.getCurrentUser();
-    
+
     this.authService.isLoggedIn$.subscribe(loggedIn => {
       this.isLoggedIn = loggedIn;
     });
@@ -54,11 +56,17 @@ export class Navbar implements OnInit {
       this.loadUserReviews();
     }
 
+    this.updateAdminStatus();
+
+  }
+
+  updateAdminStatus(){
+    this.isAdminMode = sessionStorage.getItem('admin_access') === 'true';
   }
 
   loadUserReviews() {
     if (!this.currentUser) return;
-    
+
     this.reviewService.getReviewsByUser(this.currentUser.id).subscribe({
       next: (reviews) => {
         this.userReviews = reviews;
@@ -89,7 +97,7 @@ export class Navbar implements OnInit {
   onLogin() {
     this.loginError = null;
     if (!this.email) {
-      this.toastService.show('Veuillez entrer votre email.', {classname: 'bg-danger text-white'});
+      this.toastService.show('Veuillez entrer votre email.', { classname: 'bg-danger text-white' });
       return;
     }
 
@@ -100,14 +108,14 @@ export class Navbar implements OnInit {
         const user = users && users.length ? users[0] : null;
         if (!user) {
           this.loading = false;
-          this.toastService.show('Aucun compte trouvé pour cet email.', {classname: 'bg-danger text-white'});
+          this.toastService.show('Aucun compte trouvé pour cet email.', { classname: 'bg-danger text-white' });
           return;
         }
 
         if (user.password) {
           if (!this.password) {
             this.loading = false;
-            this.toastService.show('Cet utilisateur nécessite un mot de passe.', {classname: 'bg-danger text-white'});
+            this.toastService.show('Cet utilisateur nécessite un mot de passe.', { classname: 'bg-danger text-white' });
             return;
           }
 
@@ -116,11 +124,11 @@ export class Navbar implements OnInit {
               this.loading = false;
               this.email = '';
               this.password = '';
-              this.toastService.show('Connexion réussie', {classname: 'bg-success text-white'});
+              this.toastService.show('Connexion réussie', { classname: 'bg-success text-white' });
             },
             error: (err) => {
               this.loading = false;
-              this.toastService.show('Échec de la connexion : mot de passe incorrect.', {classname: 'bg-danger text-white'});
+              this.toastService.show('Échec de la connexion : mot de passe incorrect.', { classname: 'bg-danger text-white' });
             }
           });
         } else {
@@ -130,12 +138,12 @@ export class Navbar implements OnInit {
           this.authService['currentUserSubject'].next(user);
           this.loading = false;
           this.email = '';
-          this.toastService.show('Connexion réussie', {classname: 'bg-success text-white'});
+          this.toastService.show('Connexion réussie', { classname: 'bg-success text-white' });
         }
       },
       error: (err) => {
         this.loading = false;
-        this.toastService.show('Erreur lors de la vérification de l\'email.', {classname: 'bg-danger text-white'});
+        this.toastService.show('Erreur lors de la vérification de l\'email.', { classname: 'bg-danger text-white' });
       }
     });
   }
@@ -148,4 +156,17 @@ export class Navbar implements OnInit {
       this.router.navigate(['/movies']);
     }
   }
+
+  isAdmin() {
+    return sessionStorage.getItem('admin_access') === 'true';
+  }
+  adminLogOut(){
+  sessionStorage.removeItem('admin_access');
+    this.updateAdminStatus(); // Force la mise à jour de la variable
+    this.toastService.show('Déconnecté du mode Admin', { classname: 'bg-info text-white' });
+
+    setTimeout(() => {
+    window.location.reload(); 
+  }, 1700); //pour laisser le temps au message toast de s'afficher et d'etre lu
+}
 }
