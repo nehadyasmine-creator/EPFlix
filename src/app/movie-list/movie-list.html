@@ -7,7 +7,7 @@
 
   @if (filteredMovies() && filteredMovies().length>0){
 
-  <table class="table table-striped">
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
 
@@ -23,7 +23,7 @@
     <tbody>
       @for (movie of filteredMovies() ; track movie.id) {
 
-      <tr [routerLink]="['/movies', getMovieUrl(movie.title)]">
+      <tr [routerLink]="['/movies', getMovieUrl(movie.title)]" >
 
         <th scope="row"><img [src]="'http://localhost:8080/movies/' + movie.id + '/image'"
             style="width: 100%; max-width: 150px; height: auto;" class="card-img-top" alt="" >
