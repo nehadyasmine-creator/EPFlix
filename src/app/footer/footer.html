@@ -10,52 +10,79 @@
 </head>
 
 <body>
-    <div class="footer-dark">
-        <footer>
+    <footer class="footer-epflix">
+        <div class="footer-content">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 item">
+                    <!-- Découvrir -->
+                    <div class="col-lg-3 col-md-6 footer-col">
                         <h3>Découvrir</h3>
-                        <ul>
+                        <ul class="footer-links">
                             <li><a routerLink="/">Accueil</a></li>
                             <li><a routerLink="/movies">Gestion de films</a></li>
                             <li><a routerLink="/admin">Mode Admin</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-3 item">
+
+                    <!-- Mon Compte -->
+                    <div class="col-lg-3 col-md-6 footer-col">
                         <h3>Mon Compte</h3>
-                        <ul>
+                        <ul class="footer-links">
                             <li><a href="#">Connexion</a></li>
                             <li><a routerLink="/register">S'inscrire</a></li>
                             <li><a routerLink="/myreviews">Mes commentaires</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-3 item">
-                        <h3>Informatique</h3>
-                        <ul>
+
+                    <!-- Support -->
+                    <div class="col-lg-3 col-md-6 footer-col">
+                        <h3>Support</h3>
+                        <ul class="footer-links">
                             <li><a routerLink="/faq">F.A.Q.</a></li>
                             <li><a routerLink="/contact">Contactez-nous</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-3 item text">
+
+                    <!-- À propos -->
+                    <div class="col-lg-3 col-md-6 footer-col footer-about">
                         <h3>À propos</h3>
-                        <p>EPFlix est votre guide complet du cinéma et de la télévision. Découvrez les films et séries du moment, consultez les avis et critiques, et restez informé des sorties à venir.</p>
+                        <p>EPFlix est votre guide complet du cinéma. Découvrez les films du moment, consultez les avis et restez informé des sorties à venir.</p>
                     </div>
                 </div>
+
+                <!-- Réseaux sociaux -->
                 <div class="row">
-                    <div class="col-12 item social" style="margin-top: 20px;">
-                        <a href="https://www.facebook.com"><i class="bi bi-facebook"></i></a>
-                        <a href="https://x.com"><i class="bi bi-twitter"></i></a>
-                        <a href="https://www.instagram.com/"><i class="bi bi-instagram"></i></a>
-                        <a href="https://www.linkedin.com"><i class="bi bi-linkedin"></i></a>
+                    <div class="col-12 footer-social">
+                        <h4>Suivez-nous</h4>
+                        <div class="social-links">
+                            <a href="https://www.facebook.com" title="Facebook" class="social-link">
+                                <i class="bi bi-facebook"></i>
+                            </a>
+                            <a href="https://x.com" title="Twitter" class="social-link">
+                                <i class="bi bi-twitter"></i>
+                            </a>
+                            <a href="https://www.instagram.com/" title="Instagram" class="social-link">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                            <a href="https://www.linkedin.com" title="LinkedIn" class="social-link">
+                                <i class="bi bi-linkedin"></i>
+                            </a>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="footer-bottom">
+            <div class="container">
                 <p class="copyright">
-                    © 2026 EPFlix. Tous droits réservés.
+                    © 2026 EPFlix. Tous droits réservés. | <a href="#privacy">Politique de confidentialité</a>
                 </p>
             </div>
-        </footer>
-    </div>
+        </div>
+    </footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
