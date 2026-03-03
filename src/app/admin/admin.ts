@@ -25,6 +25,7 @@ export class Admin implements OnInit {
 
   isLoggedInAdmin: boolean = false;
 
+
   ngOnInit() {
     const savedStatus = sessionStorage.getItem('admin_access');
     if (savedStatus === 'true') {
@@ -36,6 +37,10 @@ export class Admin implements OnInit {
     this.loginError = null;
     if (this.saisieCode === this.secretCode) {
       this.toastService.show('Connexion Administrateur réussie !', { classname: 'bg-info text-white' });
+    //  setTimeout(
+       // this.loading = true,
+        //1500
+    //  )
       this.loading = true;
       sessionStorage.setItem('admin_access', 'true');
       this.isLoggedInAdmin = true;
@@ -55,5 +60,15 @@ export class Admin implements OnInit {
   
   this.router.navigate(['/admin']); 
 }
+
+  ligneChoisie : string ='';
+
+  setContenu(key:string){
+      this.ligneChoisie = key;
+    }
+  
+
+  
+
 
 }

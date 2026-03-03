@@ -1,3 +1,11 @@
+
+@if (isLoading()) {
+    <div class="d-flex justify-content-center p-5">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+} @else {
+
+
 <div class="swiper-section">
   <h2>Films populaires</h2>
   <section class="hero-swiper-section">
@@ -41,3 +49,4 @@
     }
   </swiper-container>
 </div>
+}

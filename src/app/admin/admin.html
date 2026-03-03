@@ -1,12 +1,12 @@
 @if (!isLoggedInAdmin){
-<div class="admin-header" [class.disconnected]="!isLoggedInAdmin">Veuillez renseigner le code d'accès Administrateur : (EPFlix2026)
+<div class="admin-header" [class.disconnected]="!isLoggedInAdmin">Veuillez renseigner le code d'accès Administrateur : 
 
 </div>
 <div class="admin-body" >
 
     <form (ngSubmit)="onLogin()" class="login-dropdown-form">
         <div class="form-group px-3">
-            <input name="CodeAcces" [(ngModel)]="saisieCode" required type="text" placeholder="Code d'accès..."
+            <input name="CodeAcces" [(ngModel)]="saisieCode" required type="password" placeholder="Code d'accès..."
                 class="form-control">
         </div>
 
@@ -36,17 +36,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr (click)="setContenu('graphiques')">
                     <td>Afficher mes graphiques</td>
                 </tr>
                 <tr [routerLink]="['/movies']">
                     <td>Modifier la liste des films</td>
                 </tr>
-                <tr>
+                <tr (click)="setContenu('carrousel')">
                     <td>Modifier le carrousel de la page d'accueil</td>
                 </tr>
-                <tr>
-                    <td>Ajouter manuellement un nouvel utilisateur</td>
+                <tr (click)="setContenu('userlist')">
+                    <td>Modifier la liste des utilisateurs</td>
                 </tr>
 
             </tbody>
@@ -55,7 +55,28 @@
     </div>
 
     <div class="contenu">
-        CONTENU
+        <table class="table table-bordered" >
+            <tbody>
+                @if (ligneChoisie === ""){
+                <tr>
+                    <td><br><br><br>Veuillez cliquer sur une action<br><br><br><br></td>
+                </tr>}
+                @if (ligneChoisie === "graphiques"){
+                <tr>
+                    <td>contenu graph</td>
+                </tr>}
+                @if (ligneChoisie === 'carrousel'){
+                <tr>
+                    <td>contenu carr</td>
+                </tr>}
+                @if (ligneChoisie === "userlist"){
+                <tr>
+                    <td>contenu new user</td>
+                </tr>}                
+                
+
+            </tbody>
+        </table>
     </div>
 
 
