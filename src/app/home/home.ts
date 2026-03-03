@@ -1,4 +1,4 @@
-import { Component, inject, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, inject, CUSTOM_ELEMENTS_SCHEMA , signal} from '@angular/core';
 import { MoviesApi } from '../services/movies-api';
 import { Movie } from '../models/movies';
 import { Observable, Subscription } from 'rxjs';
@@ -8,6 +8,7 @@ import { MovieCardCarousel } from './movie-card-carousel/movie-card-carousel';
 import { register } from 'swiper/element/bundle';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth-service';
+
 
 register();
 @Component({
@@ -23,8 +24,13 @@ export class Home {
   movies$: Observable<Movie[]> = this.moviesApi.getMovies()
   isLoggedIn = false;
   private authSubscriptions = new Subscription();
+  isLoading =signal<boolean>(true);
 
   ngOnInit() {
+    setTimeout(() => {
+      this.isLoading.set(false);
+    }, 150); 
+    
     this.syncAuthState();
     this.authSubscriptions.add(this.authService.isLoggedIn$.subscribe(() => this.syncAuthState()));
     this.authSubscriptions.add(this.authService.currentUser$.subscribe(() => this.syncAuthState()));
@@ -38,4 +44,3 @@ export class Home {
     this.isLoggedIn = this.authService.isLoggedIn() && !!this.authService.getCurrentUser();
   }
 }
-
