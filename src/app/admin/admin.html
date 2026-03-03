@@ -1,8 +1,8 @@
 @if (!isLoggedInAdmin){
-<div class="admin-header" [class.disconnected]="!isLoggedInAdmin">Veuillez renseigner le code d'accès Administrateur : 
+<div class="admin-header" [class.disconnected]="!isLoggedInAdmin">Veuillez renseigner le code d'accès Administrateur :
 
 </div>
-<div class="admin-body" >
+<div class="admin-body">
 
     <form (ngSubmit)="onLogin()" class="login-dropdown-form">
         <div class="form-group px-3">
@@ -11,9 +11,9 @@
         </div>
 
         <div class="px-3 mt-3">
-            <button class="btn btn-primary w-100" type="submit" [disabled]="loading">{{ loading ? 'Connexion...' : 'Se connecter' }}</button>
+            <button class="btn btn-primary w-100" type="submit" [disabled]="loading">{{ loading ? "Connexion..." : "Se connecter" }}</button>
 
-<!--- ATTENTION si vous faites clic droit FORMATER ca met a la ligne le ": Se connecter" ce qui crée une erreur, faut le remettre sur sa bonne ligne a chaque fois  --->
+            <!--- ATTENTION si vous faites clic droit FORMATER ca met a la ligne le ": Se connecter" ce qui crée une erreur, faut le remettre sur sa bonne ligne a chaque fois  --->
 
         </div>
     </form>
@@ -45,7 +45,7 @@
                 <tr (click)="setContenu('carrousel')">
                     <td>Modifier le carrousel de la page d'accueil</td>
                 </tr>
-                <tr (click)="setContenu('userlist')">
+                <tr (click)="setContenu('userlist'); loadAllUsers()" [class.active]="ligneChoisie === 'users'">
                     <td>Modifier la liste des utilisateurs</td>
                 </tr>
 
@@ -55,7 +55,7 @@
     </div>
 
     <div class="contenu">
-        <table class="table table-bordered" >
+        <table class="table table-bordered">
             <tbody>
                 @if (ligneChoisie === ""){
                 <tr>
@@ -69,11 +69,49 @@
                 <tr>
                     <td>contenu carr</td>
                 </tr>}
-                @if (ligneChoisie === "userlist"){
+                @if (ligneChoisie === "userlist") {
                 <tr>
-                    <td>contenu new user</td>
-                </tr>}                
+                    <td colspan="6">
+                        <div class="scroll-container">
+                            <table class="table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Prénom</th>
+                                        <th scope="col">Nom</th>
+                                        <th scope="col">Age</th>
+                                        <th scope="col">E-mail</th>
+                                        <th scope="col">Points</th>
+                                        <th scope="col">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (user of users(); track user.id) {
+                                    <tr>
+                                        <td>{{ user.id }}</td>
+                                        <td>{{ user.firstName }}</td>
+                                        <td>{{ user.lastName }}</td>
+                                        <td>{{ user.age }}</td>
+                                        <td>{{ user.email }}</td>
+                                        <td>{{ user.points }}</td>
+                                        <td>
+                                            
+                                            <button type="button" class="btn btn-danger deleteButton"
+                                                (click)="clickMethod(user.id, user.firstName, user.lastName)"><i class="bi bi-trash-fill"></i></button>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+
+
+
                 
+                }
+
 
             </tbody>
         </table>
