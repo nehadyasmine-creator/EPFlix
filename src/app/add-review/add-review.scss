@@ -2,44 +2,51 @@
   max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
+  min-height: calc(100vh - 80px);
 }
 
 .add-review-container h1 {
   text-align: center;
-  margin-bottom: 40px;
-  color: #333;
+  margin: 0 0 40px 0;
+  color: white;
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 2.2rem;
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  padding: 2rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
 }
 
 .add-review-content {
   display: grid;
-  gap: 40px;
+  gap: 30px;
 }
 
 .section {
   background: white;
-  border: 1px solid #ddd;
+  border: 1px solid #e0e0e0;
   border-radius: 12px;
   padding: 30px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .section h2 {
-  margin: 0 0 20px 0;
+  margin: 0 0 25px 0;
   color: #333;
   font-size: 1.5rem;
   font-weight: 600;
   padding-bottom: 15px;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 3px solid #dc3545;
 }
 
 .loading {
   text-align: center;
   padding: 40px;
   color: #666;
+  font-size: 1.1rem;
 }
 
+/* ===== MOVIES SCROLL ===== */
 .movies-scroll {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -51,7 +58,7 @@
 
 .movie-item {
   background: #f9f9f9;
-  border: 2px solid #ddd;
+  border: 2px solid #e0e0e0;
   border-radius: 10px;
   padding: 12px;
   cursor: pointer;
@@ -61,15 +68,16 @@
 }
 
 .movie-item:hover {
-  border-color: #007bff;
-  background: #e7f3ff;
-  transform: translateY(-2px);
+  border-color: #dc3545;
+  background: #fff5f5;
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.15);
 }
 
 .movie-item.selected {
-  border-color: #ff8000;
-  background: #fff9f0;
-  box-shadow: 0 0 0 3px rgba(255, 128, 0, 0.2);
+  border: 3px solid #dc3545;
+  background: #fff5f5;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
 }
 
 .movie-item img {
@@ -78,6 +86,11 @@
   object-fit: cover;
   border-radius: 8px;
   background: #e0e0e0;
+  transition: transform 0.3s ease;
+}
+
+.movie-item:hover img {
+  transform: scale(1.05);
 }
 
 .movie-info {
@@ -104,6 +117,7 @@
   white-space: nowrap;
 }
 
+/* ===== REVIEW FORM ===== */
 .review-form {
   display: grid;
   gap: 25px;
@@ -113,10 +127,16 @@
   display: grid;
   grid-template-columns: 120px 1fr;
   gap: 20px;
-  padding: 20px;
-  background: #f9f9f9;
+  padding: 25px;
+  background: linear-gradient(135deg, #f8f9fa, #e8e9ea);
   border-radius: 10px;
-  border: 1px solid #e0e0e0;
+  border: 2px solid #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.selected-movie:hover {
+  border-color: #dc3545;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.1);
 }
 
 .selected-movie img {
@@ -124,6 +144,7 @@
   height: 180px;
   object-fit: cover;
   border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .selected-info {
@@ -156,6 +177,7 @@
   -webkit-box-orient: vertical;
 }
 
+/* ===== FORM GROUPS ===== */
 .form-group {
   display: grid;
   gap: 12px;
@@ -164,9 +186,13 @@
 .form-group label {
   font-weight: 600;
   color: #333;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #dc3545;
 }
 
+/* ===== RATING SELECTOR ===== */
 .rating-selector {
   display: flex;
   gap: 10px;
@@ -174,50 +200,61 @@
 }
 
 .star-btn {
-  background: none;
-  border: 2px solid #ddd;
+  background: white;
+  border: 2px solid #e0e0e0;
   padding: 10px 12px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 1.5rem;
   transition: all 0.3s ease;
+  min-width: 50px;
+  text-align: center;
 }
 
 .star-btn:hover {
-  border-color: #ff8000;
-  background: #fff9f0;
+  border-color: #dc3545;
+  background: #fff5f5;
   transform: scale(1.1);
 }
 
 .star-btn.active {
-  border-color: #ff8000;
-  background: #ff8000;
+  border-color: #dc3545;
+  background: linear-gradient(135deg, #dc3545, #c82333);
   color: white;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
 }
 
 .rating-display {
   display: inline-block;
-  font-weight: 600;
-  color: #ff8000;
+  font-weight: 700;
+  color: #dc3545;
   font-size: 1.1rem;
+  padding: 8px 12px;
+  background: #fff5f5;
+  border-radius: 6px;
 }
 
+/* ===== TEXTAREA ===== */
 .form-control {
   width: 100%;
   padding: 15px;
-  border: 1px solid #ddd;
+  border: 2px solid #e0e0e0;
   border-radius: 8px;
   font-size: 1rem;
   font-family: inherit;
   resize: vertical;
   min-height: 150px;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .form-control:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.form-control::placeholder {
+  color: #999;
 }
 
 .char-count {
@@ -228,14 +265,18 @@
   margin-top: -8px;
 }
 
+/* ===== FORM ACTIONS ===== */
 .form-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 15px;
   margin-top: 20px;
+  padding-top: 25px;
+  border-top: 1px solid #e0e0e0;
 }
 
-.btn-submit, .btn-cancel {
+.btn-submit,
+.btn-cancel {
   padding: 14px 20px;
   border: none;
   border-radius: 8px;
@@ -243,33 +284,42 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .btn-submit {
-  background: #28a745;
+  background: linear-gradient(135deg, #dc3545, #c82333);
   color: white;
 }
 
 .btn-submit:hover:not(:disabled) {
-  background: #218838;
   transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(220, 53, 69, 0.3);
 }
 
 .btn-submit:disabled {
   background: #ccc;
   cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .btn-cancel {
-  background: #6c757d;
-  color: white;
+  background: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
 }
 
 .btn-cancel:hover {
-  background: #5a6268;
+  background: #e0e0e0;
+  border-color: #999;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* ===== EMPTY STATE ===== */
 .empty-selection {
   text-align: center;
   padding: 60px 20px;
@@ -285,20 +335,52 @@
 
 .empty-selection p {
   font-size: 1.1rem;
+  font-weight: 500;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .add-review-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .section {
+    padding: 25px;
+  }
+
+  .movies-scroll {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    max-height: 350px;
+  }
 }
 
 @media (max-width: 768px) {
+  .add-review-container {
+    padding: 15px;
+  }
+
   .add-review-container h1 {
     font-size: 1.5rem;
+    padding: 1.5rem 1rem;
+    margin-bottom: 30px;
   }
 
   .section {
     padding: 20px;
   }
 
+  .section h2 {
+    font-size: 1.3rem;
+  }
+
   .movies-scroll {
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     max-height: 300px;
+    gap: 12px;
+  }
+
+  .movie-item {
+    padding: 10px;
   }
 
   .selected-movie {
@@ -311,35 +393,13 @@
     height: 150px;
   }
 
+  .selected-info h3 {
+    font-size: 1.2rem;
+  }
+
   .form-actions {
     grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 600px) {
-  .add-review-container {
-    padding: 15px;
-  }
-
-  .section {
-    padding: 15px;
-  }
-
-  .movies-scroll {
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    max-height: 250px;
-  }
-
-  .movie-item {
-    padding: 10px;
-  }
-
-  .selected-movie {
-    grid-template-columns: 80px 1fr;
-  }
-
-  .selected-info h3 {
-    font-size: 1.1rem;
+    gap: 12px;
   }
 
   .rating-selector {
@@ -349,10 +409,77 @@
   .star-btn {
     padding: 8px 10px;
     font-size: 1.3rem;
+    min-width: 45px;
+  }
+}
+
+@media (max-width: 600px) {
+  .add-review-container {
+    padding: 10px;
+  }
+
+  .add-review-container h1 {
+    font-size: 1.3rem;
+    padding: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .section {
+    padding: 15px;
+  }
+
+  .movies-scroll {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    max-height: 250px;
+    gap: 10px;
+  }
+
+  .movie-item {
+    padding: 8px;
+  }
+
+  .movie-info h4 {
+    font-size: 0.85rem;
+  }
+
+  .selected-movie {
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .selected-movie img {
+    height: 120px;
+  }
+
+  .selected-info h3 {
+    font-size: 1.1rem;
+  }
+
+  .rating-selector {
+    gap: 6px;
+  }
+
+  .star-btn {
+    padding: 8px;
+    font-size: 1.2rem;
+    min-width: 40px;
   }
 
   .form-control {
     min-height: 120px;
     padding: 12px;
+    font-size: 16px;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+  }
+
+  .btn-submit,
+  .btn-cancel {
+    padding: 12px 16px;
+    font-size: 0.9rem;
   }
 }
+

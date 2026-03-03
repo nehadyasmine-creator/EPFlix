@@ -1,5 +1,5 @@
 import { TitleCasePipe, CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Input } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { AuthService } from '../services/auth-service';
@@ -26,6 +26,8 @@ export class Navbar implements OnInit {
   loading: boolean = false;
   loginError: string | null = null;
   private reviewService = inject(ReviewService);
+  showProfileDropdown: boolean = false;
+  dropdownTimeout: any;
 
   userReviews: Review[] = [];
   showReviewsTab: boolean = false;
@@ -39,6 +41,7 @@ export class Navbar implements OnInit {
   constructor(private authService: AuthService) { }
 
   isAdminMode: boolean=false;
+  isDarkMode = signal(false);
 
   ngOnInit() {
     this.isLoggedIn = this.authService.isLoggedIn();
@@ -58,6 +61,26 @@ export class Navbar implements OnInit {
 
     this.updateAdminStatus();
 
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode === 'true') {
+      this.isDarkMode.set(true);
+      this.applyDarkMode(true);
+    }
+  }
+
+  toggleDarkMode() {
+    const newMode = !this.isDarkMode();
+    this.isDarkMode.set(newMode);
+    localStorage.setItem('darkMode', String(newMode));
+    this.applyDarkMode(newMode);
+  }
+
+  private applyDarkMode(enabled: boolean) {
+    if (enabled) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
   }
 
   updateAdminStatus(){
@@ -169,4 +192,25 @@ export class Navbar implements OnInit {
     window.location.reload(); 
   }, 1700); //pour laisser le temps au message toast de s'afficher et d'etre lu
 }
+
+toggleDropdown() {
+    this.showProfileDropdown = !this.showProfileDropdown;
+  }
+
+  openDropdown() {
+    clearTimeout(this.dropdownTimeout);
+    this.showProfileDropdown = true;
+  }
+
+  closeDropdown() {
+    this.dropdownTimeout = setTimeout(() => {
+      this.showProfileDropdown = false;
+    }, 200); // délai de 200ms avant fermeture
+  }
+
+  ngOnDestroy() {
+    if (this.dropdownTimeout) {
+      clearTimeout(this.dropdownTimeout);
+    }
+  }
 }

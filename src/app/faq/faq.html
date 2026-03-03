@@ -1,0 +1,120 @@
+<section class="faq-section">
+  <div class="faq-container">
+    <div class="faq-header">
+      <h2>Questions Fréquemment Posées</h2>
+      <p class="section-subtitle">Trouvez les réponses à vos questions</p>
+    </div>
+
+    <div class="faq-grid">
+      <!-- FAQ Item 1 -->
+      <div class="faq-item" [class.active]="activeFaq === 0" (click)="toggleFaq(0)">
+        <div class="faq-question">
+          <h3>Comment créer un compte ?</h3>
+          <i class="bi" [ngClass]="activeFaq === 0 ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+        </div>
+        <div class="faq-answer" *ngIf="activeFaq === 0">
+          <p>Cliquez sur le bouton "S'inscrire" en haut à droite, remplissez le formulaire avec vos informations (email, prénom, nom, âge), puis validez. Vous pourrez ensuite vous connecter avec vos identifiants.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 2 -->
+      <div class="faq-item" [class.active]="activeFaq === 1" (click)="toggleFaq(1)">
+        <div class="faq-question">
+          <h3>Comment ajouter un commentaire sur un film ?</h3>
+          <i class="bi" [ngClass]="activeFaq === 1 ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+        </div>
+        <div class="faq-answer" *ngIf="activeFaq === 1">
+          <p>Connectez-vous à votre compte, accédez à la page d'un film, puis cliquez sur "Ajouter un commentaire". Sélectionnez le film, donnez une note de 1 à 5 étoiles, écrivez votre avis et validez. Votre commentaire s'affichera immédiatement.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 3 -->
+      <div class="faq-item" [class.active]="activeFaq === 2" (click)="toggleFaq(2)">
+        <div class="faq-question">
+          <h3>Puis-je modifier ou supprimer mon commentaire ?</h3>
+          <i class="bi" [ngClass]="activeFaq === 2 ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+        </div>
+        <div class="faq-answer" *ngIf="activeFaq === 2">
+          <p>Oui ! Allez dans "Mes commentaires", trouvez le commentaire que vous souhaitez modifier, cliquez sur le bouton crayon pour éditer ou sur la corbeille pour supprimer. Les modifications sont appliquées immédiatement.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 4 -->
+      <div class="faq-item" [class.active]="activeFaq === 3" (click)="toggleFaq(3)">
+        <div class="faq-question">
+          <h3>Comment voir tous les commentaires d'un film ?</h3>
+          <i class="bi" [ngClass]="activeFaq === 3 ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+        </div>
+        <div class="faq-answer" *ngIf="activeFaq === 3">
+          <p>Cliquez sur le film que vous souhaitez consulter. La page du film affichera tous les commentaires laissés par les utilisateurs, avec la note, l'avis détaillé et le nom de la personne qui a commenté.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 5 -->
+      <div class="faq-item" [class.active]="activeFaq === 4" (click)="toggleFaq(4)">
+        <div class="faq-question">
+          <h3>Quel est le système de points ?</h3>
+          <i class="bi" [ngClass]="activeFaq === 4 ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+        </div>
+        <div class="faq-answer" *ngIf="activeFaq === 4">
+          <p>Chaque utilisateur accumule des points en écrivant des commentaires. Ces points reflètent votre contribution à la communauté et apparaissent sur votre profil. Plus vous commentez, plus vous gagnez de points !</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 6 -->
+      <div class="faq-item" [class.active]="activeFaq === 5" (click)="toggleFaq(5)">
+        <div class="faq-question">
+          <h3>Puis-je voir l'évolution de mes commentaires ?</h3>
+          <i class="bi" [ngClass]="activeFaq === 5 ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+        </div>
+        <div class="faq-answer" *ngIf="activeFaq === 5">
+          <p>Oui ! Sur la page "Mes commentaires", vous trouverez un graphique montrant l'évolution du nombre de commentaires que vous avez publiés au fil du temps, ainsi que votre note moyenne.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 7 -->
+      <div class="faq-item" [class.active]="activeFaq === 6" (click)="toggleFaq(6)">
+        <div class="faq-question">
+          <h3>Comment changer mes informations de profil ?</h3>
+          <i class="bi" [ngClass]="activeFaq === 6 ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+        </div>
+        <div class="faq-answer" *ngIf="activeFaq === 6">
+          <p>Accédez à votre profil en cliquant sur l'icône utilisateur. Vous pouvez éditer directement vos informations (prénom, nom, email, âge) en cliquant sur le bouton crayon à côté de chaque champ.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 8 -->
+      <div class="faq-item" [class.active]="activeFaq === 7" (click)="toggleFaq(7)">
+        <div class="faq-question">
+          <h3>Comment changer mon mot de passe ?</h3>
+          <i class="bi" [ngClass]="activeFaq === 7 ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+        </div>
+        <div class="faq-answer" *ngIf="activeFaq === 7">
+          <p>Allez dans votre profil, trouvez la section "Changement de mot de passe", entrez votre nouveau mot de passe et confirmez-le. Le mot de passe doit contenir au moins 6 caractères.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 9 -->
+      <div class="faq-item" [class.active]="activeFaq === 8" (click)="toggleFaq(8)">
+        <div class="faq-question">
+          <h3>Les films sont-ils régulièrement mis à jour ?</h3>
+          <i class="bi" [ngClass]="activeFaq === 8 ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+        </div>
+        <div class="faq-answer" *ngIf="activeFaq === 8">
+          <p>Oui ! Notre catalogue est régulièrement enrichi avec les derniers films sortis. Consultez la section "Films populaires" sur la page d'accueil pour découvrir les nouveautés.</p>
+        </div>
+      </div>
+
+      <!-- FAQ Item 10 -->
+      <div class="faq-item" [class.active]="activeFaq === 9" (click)="toggleFaq(9)">
+        <div class="faq-question">
+          <h3>Puis-je rechercher un film spécifique ?</h3>
+          <i class="bi" [ngClass]="activeFaq === 9 ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+        </div>
+        <div class="faq-answer" *ngIf="activeFaq === 9">
+          <p>Absolument ! Utilisez la barre de recherche en haut de la page pour chercher par titre ou réalisateur. Les résultats s'afficheront immédiatement pour vous aider à trouver le film que vous cherchez.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

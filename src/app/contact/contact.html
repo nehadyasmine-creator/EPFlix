@@ -1,0 +1,93 @@
+<div class="container mt-5">
+  <div class="contact-container">
+    <a routerLink="/" class="btn-back">
+      <i class="bi bi-arrow-left"></i> 
+      <span>Retour</span>
+    </a>
+
+    <div class="contact-content">
+      <div class="contact-info">
+        <h1>Contactez-nous</h1>
+        <p class="subtitle">Nous serions heureux de vous aider.</p>
+
+        <div class="info-cards">
+          <div class="info-card">
+            <div class="info-icon"><i class="bi bi-envelope"></i></div>
+            <div class="info-text">
+              <h3>Email</h3>
+              <p>contact@epflix.com</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon"><i class="bi bi-telephone"></i></div>
+            <div class="info-text">
+              <h3>Téléphone</h3>
+              <p>+33 1 23 45 67 89</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon"><i class="bi bi-geo-alt"></i></div>
+            <div class="info-text">
+              <h3>Adresse</h3>
+              <p>123 Rue du Cinéma<br>75000 Paris</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-icon"><i class="bi bi-clock"></i></div>
+            <div class="info-text">
+              <h3>Horaires</h3>
+              <p>Lun - Ven : 9h - 18h</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrapper">
+        <div class="contact-form">
+          <h2>Envoyez-nous un message</h2>
+
+          <div *ngIf="submitted" class="success-message">
+            <i class="bi bi-check-circle"></i>
+            <h3>Merci !</h3>
+            <p>Votre message a été envoyé avec succès.</p>
+          </div>
+
+          <form *ngIf="!submitted" (ngSubmit)="submitContact()">
+            <div class="form-group">
+              <label for="name">Nom complet *</label>
+              <input type="text" id="name" class="form-control" [(ngModel)]="form.name" name="name" placeholder="Votre nom" required>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" class="form-control" [(ngModel)]="form.email" name="email" placeholder="votre.email@example.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="subject">Sujet *</label>
+              <input type="text" id="subject" class="form-control" [(ngModel)]="form.subject" name="subject" placeholder="Sujet" required>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" class="form-control" [(ngModel)]="form.message" name="message" rows="6" placeholder="Votre message..." required></textarea>
+              <span class="char-count">{{ form.message.length }}/1000</span>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn-submit" [disabled]="submitting">
+                {{ submitting ? 'Envoi...' : 'Envoyer' }}
+              </button>
+              <button type="button" class="btn-reset" (click)="resetForm()">Réinitialiser</button>
+            </div>
+
+            <p class="form-note">* Champs obligatoires</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

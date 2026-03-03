@@ -4,19 +4,49 @@
   padding: 20px;
 }
 
+/* ===== RETURN BUTTON ===== */
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 30px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+.btn-back:hover {
+  color: #dc3545;
+  background: #fff5f5;
+  transform: translateX(-5px);
+}
+
+.btn-back i {
+  font-size: 1.2rem;
+}
+
+/* ===== HEADER TOP ===== */
+/* ===== HEADER TOP ===== */
 .header-top {
   display: flex;
-  justify-content: center;
   align-items: center;
-  margin-bottom: 30px;
+  justify-content: space-between;
+  margin-bottom: 40px;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .header-top h1 {
   margin: 0;
   color: #333;
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 2.2rem;
+  flex: 1;
+  min-width: 200px;
   text-align: center;
 }
 
@@ -25,8 +55,24 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  background: white;
+  color: #333;
+  border: 2px solid #333;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
 }
 
+.header-top .btn:hover {
+  background: #333;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== MOVIE CONTENT ===== */
 .movie-content {
   display: grid;
   gap: 40px;
@@ -37,10 +83,10 @@
   grid-template-columns: 250px 1fr;
   gap: 40px;
   background: white;
-  border: 1px solid #ddd;
+  border: 1px solid #e0e0e0;
   border-radius: 12px;
   padding: 30px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .movie-image {
@@ -52,7 +98,12 @@
   width: 100%;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.movie-image img:hover {
+  transform: scale(1.02);
 }
 
 .movie-info {
@@ -60,31 +111,38 @@
   gap: 20px;
 }
 
+/* ===== MOVIE META ===== */
 .movie-meta {
   display: grid;
   gap: 15px;
   padding: 20px;
-  background: #f9f9f9;
+  background: linear-gradient(135deg, #f8f9fa, #e8e9ea);
   border-radius: 8px;
-  border-left: 4px solid #007bff;
+  border-left: 4px solid #dc3545;
 }
 
 .meta-item {
   display: grid;
   grid-template-columns: 150px 1fr;
   gap: 15px;
+  align-items: center;
 }
 
 .meta-label {
-  font-weight: 600;
-  color: #333;
+  font-weight: 700;
+  color: #dc3545;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
 }
 
 .meta-value {
-  color: #666;
+  color: #333;
   font-size: 1rem;
+  font-weight: 500;
 }
 
+/* ===== MOVIE SYNOPSIS ===== */
 .movie-synopsis {
   display: grid;
   gap: 12px;
@@ -95,38 +153,48 @@
   color: #333;
   font-size: 1.3rem;
   font-weight: 600;
+  color: #dc3545;
 }
 
 .movie-synopsis p {
   margin: 0;
   color: #666;
-  line-height: 1.6;
+  line-height: 1.8;
   text-align: justify;
 }
 
+/* ===== MOVIE STATS ===== */
 .movie-stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 15px;
   padding-top: 20px;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid #e0e0e0;
 }
 
 .stat {
-  background: linear-gradient(135deg, #007bff, #0056b3);
+  background: linear-gradient(135deg, #dc3545, #c82333);
   color: white;
-  padding: 15px;
+  padding: 20px 15px;
   border-radius: 8px;
   text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.15);
+}
+
+.stat:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(220, 53, 69, 0.25);
 }
 
 .stat-label {
   display: block;
-  font-size: 0.9rem;
-  opacity: 0.9;
+  font-size: 0.85rem;
+  opacity: 0.95;
   margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
 .stat-value {
@@ -135,12 +203,13 @@
   font-weight: 700;
 }
 
+/* ===== MOVIE REVIEWS ===== */
 .movie-reviews {
   background: white;
-  border: 1px solid #ddd;
+  border: 1px solid #e0e0e0;
   border-radius: 12px;
   padding: 30px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .movie-reviews h2 {
@@ -149,7 +218,7 @@
   font-size: 1.8rem;
   font-weight: 600;
   padding-bottom: 15px;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 3px solid #dc3545;
 }
 
 .no-reviews {
@@ -166,15 +235,16 @@
 
 .review-item {
   background: #f9f9f9;
-  border: 1px solid #e0e0e0;
+  border: 2px solid #e0e0e0;
   border-radius: 8px;
   padding: 20px;
   transition: all 0.3s ease;
 }
 
 .review-item:hover {
-  border-color: #007bff;
-  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+  border-color: #dc3545;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.12);
+  background: #fff5f5;
 }
 
 .review-header {
@@ -184,6 +254,7 @@
   margin-bottom: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid #e0e0e0;
+  gap: 20px;
 }
 
 .reviewer-info h4 {
@@ -200,25 +271,31 @@
 
 .review-rating {
   text-align: right;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
 }
 
 .stars {
   display: block;
   font-size: 1.2rem;
   letter-spacing: 2px;
-  margin-bottom: 5px;
 }
 
 .rating-value {
   display: block;
-  font-weight: 600;
-  color: #ff8000;
+  font-weight: 700;
+  color: #dc3545;
   font-size: 0.95rem;
+  background: #fff5f5;
+  padding: 4px 10px;
+  border-radius: 4px;
 }
 
 .review-text {
   color: #666;
-  line-height: 1.6;
+  line-height: 1.8;
 }
 
 .review-text p {
@@ -232,21 +309,52 @@
   font-size: 1.1rem;
 }
 
+/* ===== ALERT ===== */
+.alert {
+  background: #f8d7da;
+  color: #721c24;
+  border: 2px solid #dc3545;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.alert p {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .movie-header {
+    grid-template-columns: 200px 1fr;
+    gap: 30px;
+    padding: 25px;
+  }
+
+  .meta-item {
+    grid-template-columns: 120px 1fr;
+    gap: 12px;
+  }
+}
+
 @media (max-width: 768px) {
+  .movie-detail-container {
+    padding: 15px;
+  }
   .header-top {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+  }
+
+  .header-top h1 {
+    font-size: 1.5rem;
+    text-align: center;
   }
 
   .header-top .btn {
     width: 100%;
     justify-content: center;
-  }
-
-  .movie-header {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 20px;
   }
 
   .movie-image img {
@@ -258,6 +366,10 @@
     gap: 8px;
   }
 
+  .movie-stats {
+    grid-template-columns: 1fr;
+  }
+
   .review-header {
     flex-direction: column;
     gap: 10px;
@@ -265,16 +377,26 @@
 
   .review-rating {
     text-align: left;
+    align-items: flex-start;
+  }
+
+  .movie-reviews {
+    padding: 20px;
+  }
+
+  .movie-reviews h2 {
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 600px) {
-  .movie-detail-container {
-    padding: 15px;
+  .header-top h1 {
+    font-size: 1.3rem;
   }
 
-  .header-top h1 {
-    font-size: 1.5rem;
+  .header-top .btn {
+    padding: 8px 14px;
+    font-size: 0.9rem;
   }
 
   .movie-header {
@@ -285,7 +407,29 @@
     padding: 15px;
   }
 
-  .movie-stats {
-    grid-template-columns: 1fr;
+  .movie-reviews h2 {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+
+  .meta-label {
+    font-size: 0.75rem;
+  }
+
+  .meta-value {
+    font-size: 0.9rem;
+  }
+
+  .review-item {
+    padding: 15px;
+  }
+
+  .reviewer-info h4 {
+    font-size: 1rem;
+  }
+
+  .stars {
+    font-size: 1rem;
+    letter-spacing: 1px;
   }
 }

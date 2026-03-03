@@ -7,6 +7,7 @@ import { User } from '../models/users';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink, Router } from '@angular/router';
 import { Chart, registerables } from 'chart.js';
+import { ContactService, Contact } from '../services/contact-service';
 
 
 Chart.register(...registerables);
@@ -35,14 +36,17 @@ export class Admin implements OnInit {
   private destroyRef = inject(DestroyRef);
 
   private authService = inject(AuthService);
+  private contactService = inject(ContactService);
 
   users = signal<User[]>([]);
   isLoadingUsers = signal<boolean>(false);
+  contacts = signal<Contact[]>([]);
 
   ngOnInit() {
     const savedStatus = sessionStorage.getItem('admin_access');
     if (savedStatus === 'true') {
       this.isLoggedInAdmin = true;
+      this.setContenu('remontees');
     }
   }
 
@@ -57,6 +61,7 @@ export class Admin implements OnInit {
       this.loading = true;
       sessionStorage.setItem('admin_access', 'true');
       this.isLoggedInAdmin = true;
+      this.setContenu('remontees');
     } else {
       this.toastService.show("Code d'accès erroné.", { classname: 'bg-danger text-white' });
       this.loginError = "erreur de connexion";
@@ -71,15 +76,49 @@ export class Admin implements OnInit {
     this.router.navigate(['/admin']);
   }
   setContenu(key: string) {
-  this.ligneChoisie = key;
-  if (key === 'graphiques') {
-    setTimeout(() => {
-      this.renderGraphiqueVisiteurs();
-      this.renderGraphiqueNotes();
-      this.renderGraphiqueGenres(); 
-    }, 0);
+    const normalizedKey = this.normalizeTabKey(key);
+    this.ligneChoisie = normalizedKey;
+    if (normalizedKey === 'remontees') {
+      this.loadContacts();
+    }
+    if (normalizedKey === 'graphiques') {
+      setTimeout(() => {
+        this.renderGraphiqueVisiteurs();
+        this.renderGraphiqueNotes();
+        this.renderGraphiqueGenres(); 
+      }, 0);
+    }
   }
-}
+
+  private normalizeTabKey(key: string): string {
+    if (key === 'remontées' || key === 'remontees') {
+      return 'remontees';
+    }
+    return key;
+  }
+
+  isRemonteesTab(): boolean {
+    return this.ligneChoisie === 'remontees';
+  }
+
+  formatContactDate(value: string): string {
+    if (!value) {
+      return '-';
+    }
+
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) {
+      return value;
+    }
+
+    return date.toLocaleString('fr-FR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
 
 
   private renderGraphiqueVisiteurs() {
@@ -136,7 +175,6 @@ clickMethod(id: number, firstname:string, lastname:string) {
   if(confirm("Etes-vous sûr de vouloir supprimer le compte utilisateur de "+firstname+" "+lastname+" ?")) {
     this.deleteUser(id);
   }
-}
 
   private renderGraphiqueNotes() {
     const ctx = document.getElementById('canvasNotes') as HTMLCanvasElement;
@@ -179,43 +217,82 @@ clickMethod(id: number, firstname:string, lastname:string) {
   }
 
   private renderGraphiqueGenres() {
-  const ctx = document.getElementById('canvasGenres') as HTMLCanvasElement;
-  if (!ctx) return;
+    const ctx = document.getElementById('canvasGenres') as HTMLCanvasElement;
+    if (!ctx) return;
 
-  if (this.chartGenres) this.chartGenres.destroy();
+    if (this.chartGenres) this.chartGenres.destroy();
 
-  const dataGenres = {
-    labels: ['Action', 'Comédie', 'Drame', 'Horreur', 'Sci-Fi'],
-    datasets: [{
-      label: 'Nombre de films',
-      data: [45, 25, 60, 15, 30], 
-      backgroundColor: [
-        '#f27a63', 
-        '#4e73df', 
-        '#1cc88a', 
-        '#36b9cc', 
-        '#f6c23e'  
-      ],
-      hoverOffset: 10
-    }]
-  };
+    const dataGenres = {
+      labels: ['Action', 'Comédie', 'Drame', 'Horreur', 'Sci-Fi'],
+      datasets: [{
+        label: 'Nombre de films',
+        data: [45, 25, 60, 15, 30], 
+        backgroundColor: [
+          '#f27a63', 
+          '#4e73df', 
+          '#1cc88a', 
+          '#36b9cc', 
+          '#f6c23e'  
+        ],
+        hoverOffset: 10
+      }]
+    };
 
-  this.chartGenres = new Chart(ctx, {
-    type: 'doughnut', 
-    data: dataGenres,
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          position: 'right',
-        },
-        title: {
-          display: true,
-          text: 'Répartition par Genre'
+    this.chartGenres = new Chart(ctx, {
+      type: 'doughnut', 
+      data: dataGenres,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'right',
+          },
+          title: {
+            display: true,
+            text: 'Répartition par Genre'
+          }
         }
       }
-    }
-  });
-}
+    });
+  }
+
+  loadContacts() {
+    this.contactService.getContacts().subscribe({
+      next: (data) => {
+        const sorted = (data || []).sort((a, b) => {
+          const tA = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+          const tB = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+          return tB - tA;
+        });
+        this.contacts.set(sorted);
+      },
+      error: () => {
+        this.toastService.show('Erreur de chargement des remontées', { classname: 'bg-danger text-white' });
+      }
+    });
+  }
+
+  markContactAsRead(contact: Contact) {
+    this.contactService.markAsRead(contact.id).subscribe({
+      next: () => {
+        this.contacts.update(list => list.map(c => c.id === contact.id ? { ...c, read: true } : c));
+      },
+      error: () => {
+        this.toastService.show('Impossible de marquer comme lu', { classname: 'bg-danger text-white' });
+      }
+    });
+  }
+
+  removeContact(contact: Contact) {
+    this.contactService.deleteContact(contact.id).subscribe({
+      next: () => {
+        this.contacts.update(list => list.filter(c => c.id !== contact.id));
+        this.toastService.show('Message supprimé', { classname: 'bg-success text-white' });
+      },
+      error: () => {
+        this.toastService.show('Impossible de supprimer le message', { classname: 'bg-danger text-white' });
+      }
+    });
+  }
 }

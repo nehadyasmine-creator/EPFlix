@@ -7,7 +7,7 @@ import { provideHttpClient } from '@angular/common/http';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideZoneChangeDetection({ eventCoalescing: false }), // Changez true en false
+    provideZoneChangeDetection({ eventCoalescing: false }), 
     provideRouter(routes),
     provideHttpClient()
   ]

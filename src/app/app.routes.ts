@@ -9,10 +9,11 @@ import { MyReviews } from './myreviews/myreviews';
 import { AddReview } from './add-review/add-review';
 import { MovieDetailComponent } from './movie-details/movie-details';
 import { Admin } from './admin/admin';
+import { Faq } from './faq/faq';
+import { Contact } from './contact/contact';
 
 export const routes: Routes = [
     { path: '', component: Home},
-    
     { path: 'movies', component: MovieList},
     { path: 'add-movie', component: AddMovie},
     { path: 'update-movie/:id', component: UpdateMovie },
@@ -21,6 +22,8 @@ export const routes: Routes = [
     { path: 'myreviews', component: MyReviews },
     { path: 'add-review', component: AddReview },
     { path: 'movies/:name', component: MovieDetailComponent },
-    { path: 'admin', component: Admin}
+    { path: 'admin', component: Admin},
+    { path: 'faq', component: Faq },
+    { path: 'contact', component: Contact },
 ];
 

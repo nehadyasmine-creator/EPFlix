@@ -1,56 +1,131 @@
-@if (isAdmin()){
-    <div class="adminMode">
-      <a class="adminModeText">Attention : Vous êtes actuellement connecté en mode Administrateur.</a>
-      <button type="button" class="btn btn-link adminModeButton"  (click)="adminLogOut()">Se déconnecter</button>
+<!-- Admin Mode Banner -->
+<div *ngIf="isAdmin()" class="admin-banner">
+  <div class="admin-banner-content">
+    <div class="admin-banner-text">
+      <i class="bi bi-shield-lock"></i>
+      <span>Mode Administrateur actif</span>
     </div>
-    
-  }
-<nav class="navbar navbar-light navbar-expand bg-light ps-5">
-
-  
-
-  <a class="navbar-brand" routerLink="/">
-    <img src="logo.png" alt="Logo" height="80">
-  </a>
-  <a class="nav-item nav-link ms-3" routerLink="/movies">Liste des films</a>
-  <a class="nav-item nav-link ms-3" routerLink="/admin">Espace administrateur</a>
-
-  
-  <div class="search-menu">
-    <input type="search" class="search-input" placeholder="Rechercher par titre ou réalisateur" [(ngModel)]="searchValue" (keyup.enter)="onSearch()" />
-    <i class="bi bi-search search-icon" (click)="onSearch()"></i>
+    <button class="admin-banner-btn" (click)="adminLogOut()">
+      <i class="bi bi-box-arrow-right"></i>
+      Quitter
+    </button>
   </div>
+</div>
 
-  <div class="profile-menu">
+<!-- Main Navbar -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <!-- Logo -->
+    <a class="navbar-logo" routerLink="/">
+      <span class="logo-text">EPFlix</span>
+    </a>
 
-    <div *ngIf="isLoggedIn && currentUser" class="profil">
-      <i class="bi bi-person-circle"></i>
-      <div class="profile-dropdown">
-        <p>Bienvenue, {{ currentUser.firstName }}!</p>
-        <a routerLink="/profil">Mon profil</a>
-        <a routerLink="/myreviews">Mes commentaires</a>
-        <a (click)="logout()">Déconnexion</a>
-      </div>
+    <!-- Nav Links -->
+    <div class="navbar-menu">
+      <a class="navbar-link" routerLink="/movies">
+        <i class="bi bi-film"></i>
+        <span>Films</span>
+      </a>
+      <a class="navbar-link" routerLink="/admin">
+        <i class="bi bi-gear"></i>
+        <span>Admin</span>
+      </a>
+      <a class="navbar-link" routerLink="/contact">
+        <i class="bi bi-envelope"></i>
+        <span>Contact</span>
+      </a>
     </div>
 
-    <div *ngIf="!isLoggedIn" class="profil">
-      <i class="bi bi-person-circle"></i>
-      <div class="profile-dropdown">
-        <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="login-dropdown-form">
-          <div class="form-group px-3">
-            <input name="email" [(ngModel)]="email" required type="email" placeholder="Email" class="form-control">
+    <!-- Search -->
+    <div class="search-box">
+      <input 
+        type="search" 
+        class="search-input" 
+        placeholder="Rechercher..." 
+        [(ngModel)]="searchValue" 
+        (keyup.enter)="onSearch()" />
+      <button class="search-btn" (click)="onSearch()">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+
+    <!-- Profile -->
+     <div class="profile-menu"
+      (mouseenter)="openDropdown()"
+      (mouseleave)="closeDropdown()">
+      <!-- Bouton Dark Mode -->
+      <button 
+        type="button"
+        class="dark-mode-btn"
+        (click)="toggleDarkMode()"
+        [title]="isDarkMode() ? 'Mode clair' : 'Mode sombre'">
+        <i class="bi" [ngClass]="isDarkMode() ? 'bi-sun-fill' : 'bi-moon-fill'"></i>
+      </button>
+
+      <div class="profile-icon" (click)="toggleDropdown()">
+        <i class="bi bi-person-circle"></i>
+      </div>
+      
+      <!-- Dropdown Menu -->
+      <div class="profile-dropdown" [class.show]="showProfileDropdown">
+        <!-- Connected User -->
+        <div *ngIf="isLoggedIn && currentUser">
+          <div class="dropdown-header">
+            <p>{{ currentUser.firstName }} {{ currentUser.lastName }}</p>
+            <span class="user-email">{{ currentUser.email }}</span>
           </div>
-          <div class="form-group px-3 mt-2">
-            <input name="password" [(ngModel)]="password" required type="password" placeholder="Mot de passe"
-              class="form-control">
+
+          <div class="dropdown-links">
+            <a routerLink="/profil" class="dropdown-link" (click)="showProfileDropdown = false">
+              <i class="bi bi-person"></i> Mon profil
+            </a>
+            <a routerLink="/myreviews" class="dropdown-link" (click)="showProfileDropdown = false">
+              <i class="bi bi-chat-dots"></i> Mes commentaires
+            </a>
+            <a routerLink="/add-review" class="dropdown-link" (click)="showProfileDropdown = false">
+              <i class="bi bi-plus-circle"></i> Ajouter un commentaire
+            </a>
+            <hr class="dropdown-divider">
+            <a (click)="logout()" class="dropdown-link logout">
+              <i class="bi bi-box-arrow-left"></i> Déconnexion
+            </a>
           </div>
-          <div class="px-3 mt-3">
-            <button class="btn btn-primary w-100" type="submit" [disabled]="loading">{{ loading ? 'Connexion...' : 'Se
-              connecter' }}</button>
+        </div>
+
+        <!-- Not Connected -->
+        <div *ngIf="!isLoggedIn">
+          <form (ngSubmit)="onLogin()" class="login-form">
+            <div class="form-group">
+              <label>Email</label>
+              <input 
+                type="email" 
+                class="form-control" 
+                [(ngModel)]="email" 
+                name="email" 
+                placeholder="votre@email.com" 
+                required>
+            </div>
+
+            <div class="form-group">
+              <label>Mot de passe</label>
+              <input 
+                type="password" 
+                class="form-control" 
+                [(ngModel)]="password" 
+                name="password" 
+                placeholder="Votre mot de passe" 
+                required>
+            </div>
+
+            <button type="submit" class="btn-login" [disabled]="loading">
+              {{ loading ? 'Connexion...' : 'Se connecter' }}
+            </button>
+          </form>
+
+          <div class="login-footer">
+            <p>Pas encore de compte ?</p>
+            <a routerLink="/register" class="btn-register" (click)="showProfileDropdown = false">S'inscrire</a>
           </div>
-        </form>
-        <div class="register-container">
-          <a routerLink="/register" class="register-link">S'inscrire</a>
         </div>
       </div>
     </div>
