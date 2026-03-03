@@ -4,7 +4,6 @@ import { Navbar } from './navbar/navbar';
 import { Home } from './home/home';
 import { MovieList } from './movie-list/movie-list';
 import { Footer } from './footer/footer';
-import { ToastService } from './services/toast';
 import { ToastsContainer } from './toasts-container/toasts-container';
 
 @Component({

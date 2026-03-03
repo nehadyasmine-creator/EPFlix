@@ -1,58 +1,235 @@
 :host {
-	display: block;
+  display: block;
 }
 
-h1 {
+/* ===== HEADER ===== */
+.update-movie-container {
+  min-height: calc(100vh - 80px);
+  background: #f8f9fa;
+  padding: 2rem 1.5rem;
+}
+
+.update-movie-header {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+  padding: 2rem 1.5rem;
   text-align: center;
-  margin: 1rem 0;
+  margin-bottom: 2rem;
+  border-radius: 0;
 }
 
-.movie-container input, .movie-container textarea {
-  flex: 1;
-  min-width: 500px;
+.update-movie-header h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.movie-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 1.5rem;
-}
-
-.movie-container > div:not(.bouton) {
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto 1rem auto;
-  justify-content: flex-start;
-}
-
-.movie-container label {
+.subtitle {
+  margin: 0;
   font-size: 1.1rem;
-  font-weight: 500;
-  min-width: 140px;
+  opacity: 0.95;
+  font-weight: 300;
 }
 
-@media (min-width: 768px) {
-  .movie-container {
-    padding: 0 3rem;
-  }
-  
-  .movie-container label {
-    font-size: 1.2rem;
-  }
+/* ===== FORM WRAPPER ===== */
+.form-wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
 }
 
-.bouton {
+.movie-form {
+  display: grid;
+  gap: 20px;
+}
+
+/* ===== FORM GROUPS ===== */
+.form-group {
+  display: grid;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 700;
+  color: #333;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #dc3545;
+}
+
+.form-control {
+  padding: 12px 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.form-control::placeholder {
+  color: #999;
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 150px;
+  font-family: inherit;
+}
+
+.form-group.full-width {
+  grid-column: 1 / -1;
+}
+
+/* ===== ACTION BUTTONS ===== */
+.form-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 30px;
+  padding-top: 25px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.btn-cancel,
+.btn-submit {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
   display: flex;
-  gap: 0.75rem;
+  align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 500px;
-  margin: 0.75rem auto 0 auto;
+  gap: 8px;
+  text-decoration: none;
 }
 
-.bouton button {
-  padding: 0.5rem 1.25rem;
-  font-size: 0.95rem;
-  width: auto;
+.btn-cancel {
+  background: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
 }
+
+.btn-cancel:hover {
+  background: #e0e0e0;
+  border-color: #999;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(220, 53, 69, 0.3);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+}
+
+.btn-cancel i,
+.btn-submit i {
+  font-size: 1.1rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (min-width: 768px) {
+  .update-movie-container {
+    padding: 2rem 3rem;
+  }
+
+  .update-movie-header {
+    padding: 2rem 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .update-movie-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .form-wrapper {
+    padding: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .update-movie-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .form-wrapper {
+    padding: 30px 20px;
+  }
+
+  .form-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+  }
+
+  .form-control {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .update-movie-container {
+    padding: 1rem;
+    min-height: auto;
+  }
+
+  .update-movie-header {
+    padding: 1.5rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .update-movie-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.95rem;
+  }
+
+  .form-wrapper {
+    padding: 20px;
+    margin: 0;
+  }
+
+  .movie-form {
+    gap: 15px;
+  }
+
+  .btn-cancel,
+  .btn-submit {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  .btn-cancel i,
+  .btn-submit i {
+    font-size: 1rem;
+  }
+}
+

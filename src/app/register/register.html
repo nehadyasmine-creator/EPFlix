@@ -1,40 +1,123 @@
-<h1>Création d'un compte</h1>
+<div class="register-container">
+  <div class="register-header">
+    <h1>Créer un compte</h1>
+    <p class="subtitle">Rejoignez la communauté EPFlix</p>
+  </div>
 
-<div class="movie-container">
-    <div class="d-flex flex-row align-items-center w-50">
-        <label class="me-2" for="firstName">Prénom : </label>
-        <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName" />
-    </div>
+  <div class="form-wrapper">
+    <form class="register-form">
+      <div class="form-group">
+        <label for="firstName">Prénom *</label>
+        <input 
+          type="text" 
+          id="firstName" 
+          name="firstName" 
+          [(ngModel)]="user.firstName"
+          class="form-control"
+          placeholder="Votre prénom"
+          required
+        />
+      </div>
 
-    <div class="d-flex flex-row align-items-center w-50">
-        <label class="me-2" for="lastName">Nom : </label>
-        <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName" />
-    </div>
+      <div class="form-group">
+        <label for="lastName">Nom *</label>
+        <input 
+          type="text" 
+          id="lastName" 
+          name="lastName" 
+          [(ngModel)]="user.lastName"
+          class="form-control"
+          placeholder="Votre nom"
+          required
+        />
+      </div>
 
-    <div class="d-flex flex-row align-items-center w-50">
-        <label class="me-2" for="age">Age : </label>
-        <input type="number" id="age" name="age" [(ngModel)]="user.age" />
-    </div>
+      <div class="form-group">
+        <label for="age">Âge *</label>
+        <input 
+          type="number" 
+          id="age" 
+          name="age" 
+          [(ngModel)]="user.age"
+          class="form-control"
+          placeholder="Votre âge"
+          required
+        />
+      </div>
 
-    <div class="d-flex flex-row align-items-center w-50">
-        <label class="me-2" for="email">Email : </label>
-        <input type="email" id="email" name="email" [(ngModel)]="user.email" />
-    </div>
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          [(ngModel)]="user.email"
+          class="form-control"
+          placeholder="votre@email.com"
+          required
+        />
+      </div>
 
-    <div class="d-flex flex-row align-items-center w-50 password-row">
-        <label class="me-2" for="password">Mot de passe : </label>
-        <input [type]="showPassword ? 'text' : 'password'" id="password" name="password" [(ngModel)]="user.password" />
-        <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'" (click)="togglePassword()" title="{{ showPassword ? 'Masquer' : 'Afficher' }}"></i>
-    </div>
-    <div class="d-flex flex-row align-items-center w-50 password-row">
-        <label class="me-2" for="confirm">Confirmer : </label>
-        <input [type]="showConfirm ? 'text' : 'password'" id="confirm" name="confirm" [(ngModel)]="confirmPassword" />
-        <i class="bi" [ngClass]="showConfirm ? 'bi-eye-slash' : 'bi-eye'" (click)="toggleConfirm()" title="{{ showConfirm ? 'Masquer' : 'Afficher' }}"></i>
-    </div>
+      <div class="form-group password-group">
+        <label for="password">Mot de passe *</label>
+        <div class="password-input-wrapper">
+          <input 
+            [type]="showPassword ? 'text' : 'password'" 
+            id="password" 
+            name="password" 
+            [(ngModel)]="user.password"
+            class="form-control"
+            placeholder="Entrez votre mot de passe"
+            required
+          />
+          <button 
+            type="button"
+            class="toggle-password" 
+            (click)="togglePassword()" 
+            [title]="showPassword ? 'Masquer' : 'Afficher'">
+            <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+          </button>
+        </div>
+      </div>
 
-    <div class="bouton">
-        <button class="btn btn-outline-dark" routerLink="/">Annuler</button>
-        <button class="btn btn-dark" (click)="register()">Créer le compte</button>
+      <div class="form-group password-group">
+        <label for="confirm">Confirmer le mot de passe *</label>
+        <div class="password-input-wrapper">
+          <input 
+            [type]="showConfirm ? 'text' : 'password'" 
+            id="confirm" 
+            name="confirm" 
+            [(ngModel)]="confirmPassword"
+            class="form-control"
+            placeholder="Confirmez votre mot de passe"
+            required
+          />
+          <button 
+            type="button"
+            class="toggle-password" 
+            (click)="toggleConfirm()" 
+            [title]="showConfirm ? 'Masquer' : 'Afficher'">
+            <i class="bi" [ngClass]="showConfirm ? 'bi-eye-slash' : 'bi-eye'"></i>
+          </button>
+        </div>
+      </div>
 
-    </div>
+      <div class="form-actions">
+        <button 
+          type="button" 
+          class="btn-cancel" 
+          routerLink="/">
+          <i class="bi bi-x-circle"></i>
+          Annuler
+        </button>
+        <button 
+          type="button" 
+          class="btn-submit" 
+          (click)="register()">
+          <i class="bi bi-person-plus"></i>
+          Créer le compte
+        </button>
+      </div>
+    </form>
+  </div>
 </div>

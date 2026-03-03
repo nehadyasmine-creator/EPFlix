@@ -41,9 +41,8 @@
         <a routerLink="/movies" class="btn-movies">Découvrir les films</a>
       </div>
 
-      <!-- Liste des commentaires -->
       <div *ngIf="!loading && userReviews.length > 0" class="reviews-grid">
-        <div *ngFor="let review of userReviews" class="review-card">
+        <div *ngFor="let review of userReviews" class="review-card" [routerLink]="['/movies', getMovieUrl(review.movie.title)]">
           <!-- Image à gauche -->
           <div class="review-image">
             <img [src]="'http://localhost:8080/movies/' + review.movie.id + '/image'" alt="">
@@ -67,7 +66,7 @@
               <div *ngIf="editingReviewId === review.id" class="rating-edit">
                 <div class="star-selector">
                   <button *ngFor="let i of [1,2,3,4,5]" 
-                    (click)="editRate = i"
+                    (click)="$event.stopPropagation(); editRate = i"
                     [class.active]="editRate === i"
                     class="star-btn">
                     ⭐
@@ -86,15 +85,16 @@
                 <textarea 
                   [(ngModel)]="editText"
                   class="form-control"
-                  placeholder="Modifiez votre commentaire..."></textarea>
+                  placeholder="Modifiez votre commentaire..."
+                  (click)="$event.stopPropagation()"></textarea>
               </div>
 
               <!-- Boutons d'édition/sauvegarde -->
               <div *ngIf="editingReviewId === review.id" class="edit-actions-full">
-                <button class="btn btn-success" (click)="saveEdit(review)" [disabled]="updateLoading">
+                <button class="btn btn-success" (click)="$event.stopPropagation(); saveEdit(review)" [disabled]="updateLoading">
                   {{ updateLoading ? 'Sauvegarde...' : 'Enregistrer' }}
                 </button>
-                <button class="btn btn-outline-secondary" (click)="cancelEdit()">Annuler</button>
+                <button class="btn btn-outline-secondary" (click)="$event.stopPropagation(); cancelEdit()">Annuler</button>
               </div>
             </div>
 
@@ -102,10 +102,10 @@
             <div class="review-footer">
               <span class="review-date">{{ review.reviewDate | date:'dd MMMM yyyy' }}</span>
               <div class="footer-actions">
-                <button class="edit-btn" (click)="startEdit(review)" title="Modifier">
+                <button class="edit-btn" (click)="$event.stopPropagation(); startEdit(review)" title="Modifier">
                   <i class="bi bi-pencil"></i>
                 </button>
-                <button class="btn btn-outline-danger" (click)="deleteReview(review.id)" title="Supprimer">
+                <button class="btn btn-outline-danger" (click)="$event.stopPropagation(); deleteReview(review.id)" title="Supprimer">
                   <i class="bi bi-trash"></i>
                 </button>
               </div>
