@@ -1,37 +1,40 @@
-<div class="card shadow hero-card">
-  <div class="row g-0 align-items-center" [routerLink]="['/movies', getMovieUrl(movie.title)]">
+<div class="hero-movie-card" [routerLink]="['/movies', getMovieUrl(movie.title)]">
+  <div class="hero-card-image">
+    @if(movie.image) {
+      <img [src]="'http://localhost:8080/movies/' + movie.id + '/image'"
+        class="hero-image"
+        alt="{{movie.title}}" />
+    }
+    <div class="hero-card-overlay"></div>
+  </div>
+
+  <div class="hero-card-content">
+    <h2 class="hero-card-title">{{movie.title}}</h2>
     
-    <div class="col-md-4 h-100">
-      @if(movie.image) {
-           <img [src]="'http://localhost:8080/movies/' + movie.id + '/image'"
-             class="img-fluid rounded-start hero-image"
-             alt="{{movie.title}}"
-              />
-      }
+    <div class="hero-card-meta">
+      <span class="director">{{movie.director}}</span>
+      <span class="divider">•</span>
+      <span class="date">{{ movie.releaseDate | date:'yyyy' }}</span>
     </div>
 
-    <div class="col-md-8 h-100">
-      <div class="card-body d-flex flex-column h-100 pt-2">
-        
-        <h2 class="card-title fw-bold text-center mt-0 mb-3">{{movie.title}}</h2> 
+    <p class="hero-card-synopsis">{{movie.synopsis}}</p>
 
-        <p class="card-text fs-5 flex-grow-1">{{movie.synopsis}}</p>
-        
-        <div class="mt-2 text-end">
-          <div class="stars-container">
-            @for (star of [1, 2, 3, 4, 5]; track star) {
-              @if (movie.rate! >= star) {
-                <i class="bi bi-star-fill text-warning fs-4"></i>
-              } @else {
-                <i class="bi bi-star text-warning fs-4"></i>
-              }
-            }
-            <span class="ms-2 text-muted">({{movie.rate}}/5)</span>
-          </div>
-        </div>
-
+    <div class="hero-card-rating">
+      <div class="stars">
+        @for (star of [1, 2, 3, 4, 5]; track star) {
+          @if (movie.rate! >= star) {
+            <i class="bi bi-star-fill"></i>
+          } @else {
+            <i class="bi bi-star"></i>
+          }
+        }
       </div>
+      <span class="rating-value">{{movie.rate}}/5</span>
     </div>
 
+    <a [routerLink]="['/movies', getMovieUrl(movie.title)]" class="hero-card-button">
+      Voir plus
+      <i class="bi bi-arrow-right"></i>
+    </a>
   </div>
 </div>
