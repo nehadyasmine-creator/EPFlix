@@ -1,47 +1,78 @@
-<h1>Ajouter un film</h1>
+<div class="add-movie-container">
+  <div class="add-movie-header">
+    <h1>Ajouter un nouveau film</h1>
+    <p class="subtitle">Complétez les informations du film</p>
+  </div>
 
-<div class="movie-container">
-    <div class="d-flex flex-row align-items-center w-50">
-    <label class="me-2" for="title">Titre : </label>
-    <input 
-    type="text" 
-    id="title" 
-    name="title" 
-    [(ngModel)]="movie.title" 
-    class="form-control"
-    />
-    </div>
+  <div class="form-wrapper">
+    <form class="movie-form">
+      <div class="form-group">
+        <label for="title">Titre du film *</label>
+        <input 
+          type="text" 
+          id="title" 
+          name="title" 
+          [(ngModel)]="movie.title"
+          class="form-control"
+          placeholder="Entrez le titre du film"
+          required
+        />
+      </div>
 
-    <div class="d-flex flex-row align-items-center w-50">
-    <label class="me-2" for="director">Réalisateur : </label>
-    <input 
-        type="text" 
-        id="director" 
-        name="director" 
-        [(ngModel)]="movie.director"
-        class="form-control"
-    />
-    </div>
+      <div class="form-group">
+        <label for="director">Réalisateur *</label>
+        <input 
+          type="text" 
+          id="director" 
+          name="director" 
+          [(ngModel)]="movie.director"
+          class="form-control"
+          placeholder="Nom du réalisateur"
+          required
+        />
+      </div>
 
-    <div class="d-flex flex-row align-items-center w-50">
-    <label class="me-2" for="releaseDate">Date de sortie : </label>
-    <input type="date" id="releaseDate" name="releaseDate" [(ngModel)]="movie.releaseDate" class="form-control"/>
-    </div>
+      <div class="form-group">
+        <label for="releaseDate">Date de sortie *</label>
+        <input 
+          type="date" 
+          id="releaseDate" 
+          name="releaseDate" 
+          [(ngModel)]="movie.releaseDate"
+          class="form-control"
+          required
+        />
+      </div>
 
-    <div class="d-flex flex-row align-items-center w-50">
-    <label class="me-2" for="synopsis">Synopsis : </label>
-    <textarea 
-        id="synopsis" 
-        name="synopsis" 
-        [(ngModel)]="movie.synopsis" 
-        rows="5" 
-        class="form-control"
-    ></textarea>
-    </div>
+      <div class="form-group full-width">
+        <label for="synopsis">Synopsis *</label>
+        <textarea 
+          id="synopsis" 
+          name="synopsis" 
+          [(ngModel)]="movie.synopsis"
+          class="form-control"
+          rows="6"
+          placeholder="Décrivez le film..."
+          required
+        ></textarea>
+      </div>
 
-    <div class="bouton">
-        <button class="btn btn-outline-dark" routerLink="/movies">Annuler</button>
-        <button class="btn btn-dark" (click)="addMovie()">Ajouter</button>
-    </div>
+      <div class="form-actions">
+        <button 
+          type="button" 
+          class="btn-cancel" 
+          routerLink="/movies">
+          <i class="bi bi-x-circle"></i>
+          Annuler
+        </button>
+        <button 
+          type="button" 
+          class="btn-submit" 
+          (click)="addMovie()">
+          <i class="bi bi-plus-circle"></i>
+          Ajouter le film
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
-
