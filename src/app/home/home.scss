@@ -1,27 +1,48 @@
-.my-movie-swiper {
-  // Définit la couleur des flèches et des points de pagination
-  --swiper-navigation-color: #e50914; // Rouge style Netflix par exemple
-  --swiper-pagination-color: #e50914;
-  
-  // Espace pour que les flèches ne chevauchent pas trop les cartes
-  padding: 0 50px; 
+.hero-swiper-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0;
+  margin-bottom: 10px;
+}
 
-  swiper-slide {
-    display: flex;
-    justify-content: center;
-    padding: 20px 0;
+.hero-movie-swiper {
+  width: 100%;
+  --swiper-pagination-bullet-horizontal-gap: 8px;
+  --swiper-pagination-bullet-size: 10px;
+  --swiper-pagination-bottom: -3px;
+  margin-bottom: 28px;
+}
+;
+
+.hero-movie-swiper swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-section {
+  margin-bottom: 0;
+  padding: 0 20px;
+}
+
+.swiper-section h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .hero-swiper-section {
+    min-height: 85vh;
+    padding: 10px;
+  }
+
+  .swiper-section h2 {
+    font-size: 1.5rem;
+    text-align: center;
   }
 }
-
-//ajouter ombre en dessous des fleches, a ameliorer
-swiper-container::part(button-prev),
-swiper-container::part(button-next) {
-  background: transparent !important;
-  border: none !important;
-  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.7)) 
-          drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.8));
-
-  scale:1.1;
-
-}
-
