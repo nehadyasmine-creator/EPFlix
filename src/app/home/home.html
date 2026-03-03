@@ -1,3 +1,9 @@
+@if (isLoading()) {
+    <div class="d-flex justify-content-center p-5">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+} @else {
+
 <swiper-container
   navigation="true" 
   pagination="true" 
@@ -27,3 +33,7 @@
     </swiper-slide>
   }
 </swiper-container>
+
+
+
+}

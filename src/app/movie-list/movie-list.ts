@@ -5,6 +5,7 @@ import { MoviesApi } from '../services/movies-api';
 import { RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, ActivatedRoute } from '@angular/router';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-movie-list',
@@ -58,10 +59,18 @@ export class MovieList implements OnInit {
     });
   });
 
+  isLoading = signal<boolean>(true);
+
   ngOnInit(): void {
-    this.moviesApi.getMovies().subscribe(movies => this.movies.set(movies));
+    this.isLoading.set(true);
+    this.moviesApi.getMovies()
+      .pipe(finalize(() => this.isLoading.set(false))
+    )
+      .subscribe(movies => this.movies.set(movies));
     
-    this.route.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(params => {
+    this.route.queryParams
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe(params => {
       this.searchTerm.set(params['search'] || '');
     });
   }
@@ -109,4 +118,7 @@ export class MovieList implements OnInit {
   isAdmin() {
   return sessionStorage.getItem('admin_access') === 'true';
 }
+
+
+
 }
