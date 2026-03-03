@@ -34,8 +34,6 @@ export class Admin implements OnInit {
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
 
-  isLoggedInAdmin: boolean = false;
-
   private authService = inject(AuthService);
 
   users = signal<User[]>([]);
@@ -72,7 +70,6 @@ export class Admin implements OnInit {
 
     this.router.navigate(['/admin']);
   }
-  ligneChoisie: string = '';
   setContenu(key: string) {
   this.ligneChoisie = key;
   if (key === 'graphiques') {
