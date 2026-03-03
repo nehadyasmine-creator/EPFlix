@@ -116,25 +116,24 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
 
     const stepX = width / (this.data.length - 1 || 1);
 
-    // ===== COURBE COMMENTAIRES =====
+    // ===== COURBE COMMENTAIRES (ROUGE) =====
     let pathDataCommentaires = '';
     this.data.forEach((item, i) => {
       const x = i * stepX;
-      // Inverser Y car SVG va du haut vers le bas
       const y = height - (item.commentairesCumulatifs / maxCommentaires) * height;
       pathDataCommentaires += `${i === 0 ? 'M' : 'L'} ${x} ${y} `;
     });
 
     const pathCommentaires = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     pathCommentaires.setAttribute('d', pathDataCommentaires);
-    pathCommentaires.setAttribute('stroke', '#007bff');
+    pathCommentaires.setAttribute('stroke', '#dc3545');
     pathCommentaires.setAttribute('stroke-width', '3');
     pathCommentaires.setAttribute('fill', 'none');
     pathCommentaires.setAttribute('stroke-linecap', 'round');
     pathCommentaires.setAttribute('stroke-linejoin', 'round');
     g.appendChild(pathCommentaires);
 
-    // ===== COURBE NOTE MOYENNE =====
+    // ===== COURBE NOTE MOYENNE (ORANGE) =====
     let pathDataNote = '';
     this.data.forEach((item, i) => {
       const x = i * stepX;
@@ -155,13 +154,13 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
     this.data.forEach((item, i) => {
       const x = i * stepX;
       
-      // Point commentaires
+      // Point commentaires (ROUGE)
       const yC = height - (item.commentairesCumulatifs / maxCommentaires) * height;
       const circleC = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       circleC.setAttribute('cx', String(x));
       circleC.setAttribute('cy', String(yC));
       circleC.setAttribute('r', '5');
-      circleC.setAttribute('fill', '#007bff');
+      circleC.setAttribute('fill', '#dc3545');
       circleC.setAttribute('stroke', 'white');
       circleC.setAttribute('stroke-width', '2');
       circleC.setAttribute('class', 'data-point');
@@ -169,7 +168,7 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
       circleC.setAttribute('title', `${item.month}: ${item.commentairesCumulatifs} commentaire${item.commentairesCumulatifs > 1 ? 's' : ''}`);
       g.appendChild(circleC);
 
-      // Point note
+      // Point note (ORANGE)
       const yN = height - (item.noteMoyenne / maxNote) * height;
       const circleN = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       circleN.setAttribute('cx', String(x));
@@ -239,7 +238,7 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
     titleLeft.setAttribute('y', '-40');
     titleLeft.setAttribute('text-anchor', 'middle');
     titleLeft.setAttribute('font-size', '14');
-    titleLeft.setAttribute('fill', '#007bff');
+    titleLeft.setAttribute('fill', '#dc3545');
     titleLeft.setAttribute('font-weight', '600');
     titleLeft.setAttribute('transform', 'rotate(-90)');
     titleLeft.textContent = 'Commentaires';
@@ -272,13 +271,13 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
     rect.setAttribute('filter', 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))');
     legendGroup.appendChild(rect);
 
-    // Ligne commentaires
+    // Ligne commentaires (ROUGE)
     const line1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     line1.setAttribute('x1', '10');
     line1.setAttribute('y1', '20');
     line1.setAttribute('x2', '30');
     line1.setAttribute('y2', '20');
-    line1.setAttribute('stroke', '#007bff');
+    line1.setAttribute('stroke', '#dc3545');
     line1.setAttribute('stroke-width', '3');
     legendGroup.appendChild(line1);
 
@@ -291,7 +290,7 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
     text1.textContent = 'Commentaires';
     legendGroup.appendChild(text1);
 
-    // Ligne note
+    // Ligne note (ORANGE)
     const line2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     line2.setAttribute('x1', '10');
     line2.setAttribute('y1', '50');

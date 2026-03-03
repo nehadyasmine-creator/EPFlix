@@ -1,5 +1,5 @@
 import { TitleCasePipe, CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Input } from '@angular/core';
 import { RouterLink, Router } from '@angular/router';
 import { AuthService } from '../services/auth-service';
@@ -41,6 +41,7 @@ export class Navbar implements OnInit {
   constructor(private authService: AuthService) { }
 
   isAdminMode: boolean=false;
+  isDarkMode = signal(false);
 
   ngOnInit() {
     this.isLoggedIn = this.authService.isLoggedIn();
@@ -60,6 +61,26 @@ export class Navbar implements OnInit {
 
     this.updateAdminStatus();
 
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode === 'true') {
+      this.isDarkMode.set(true);
+      this.applyDarkMode(true);
+    }
+  }
+
+  toggleDarkMode() {
+    const newMode = !this.isDarkMode();
+    this.isDarkMode.set(newMode);
+    localStorage.setItem('darkMode', String(newMode));
+    this.applyDarkMode(newMode);
+  }
+
+  private applyDarkMode(enabled: boolean) {
+    if (enabled) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
   }
 
   updateAdminStatus(){

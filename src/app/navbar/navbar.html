@@ -50,9 +50,18 @@
     </div>
 
     <!-- Profile -->
-    <div class="profile-menu"
+     <div class="profile-menu"
       (mouseenter)="openDropdown()"
       (mouseleave)="closeDropdown()">
+      <!-- Bouton Dark Mode -->
+      <button 
+        type="button"
+        class="dark-mode-btn"
+        (click)="toggleDarkMode()"
+        [title]="isDarkMode() ? 'Mode clair' : 'Mode sombre'">
+        <i class="bi" [ngClass]="isDarkMode() ? 'bi-sun-fill' : 'bi-moon-fill'"></i>
+      </button>
+
       <div class="profile-icon" (click)="toggleDropdown()">
         <i class="bi bi-person-circle"></i>
       </div>
