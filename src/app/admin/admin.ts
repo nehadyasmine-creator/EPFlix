@@ -133,7 +133,7 @@ export class Admin implements OnInit {
   }
 
 clickMethod(id: number, firstname:string, lastname:string) {
-  if(confirm("Etes-vous sûr de vouloir supprimer "+firstname+" "+lastname+" ?")) {
+  if(confirm("Etes-vous sûr de vouloir supprimer le compte utilisateur de "+firstname+" "+lastname+" ?")) {
     this.deleteUser(id);
   }
 }
