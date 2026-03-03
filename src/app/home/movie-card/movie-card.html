@@ -5,6 +5,17 @@
   <div class="card-body">
     <h5 class="card-title">{{movie.title}}</h5>
     <p class="card-text">{{movie.synopsis}}</p>
-    <label class="note">Note: {{movie.rate}}</label>
+    <div class="mt-2 text-end">
+          <div class="stars-container">
+            @for (star of [1, 2, 3, 4, 5]; track star) {
+              @if (movie.rate! >= star) {
+                <i class="bi bi-star-fill text-warning fs-4"></i>
+              } @else {
+                <i class="bi bi-star text-warning fs-4"></i>
+              }
+            }
+            <span class="ms-2 text-muted">({{movie.rate}}/5)</span>
+          </div>
+        </div>
   </div>
 </div>

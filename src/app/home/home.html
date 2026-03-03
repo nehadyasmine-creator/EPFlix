@@ -1,43 +1,69 @@
-<div class="swiper-section">
-  <h2>Films populaires</h2>
-  <section class="hero-swiper-section">
+<div class="home-container">
+  <!-- Hero Section avec Carrousel -->
+  <section class="hero-carrousel-section">
+    <div class="hero-left">
+      <div class="hero-content">
+        <h1 class="hero-title">EPFlix</h1>
+        <p class="hero-subtitle">Découvrez et commentez vos films préférés</p>
+        <a routerLink="/movies" class="btn-explore">
+          Explorer les films
+          <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <swiper-container
+        navigation="true"
+        pagination="true"
+        slides-per-view="1"
+        space-between="20"
+        class="hero-movie-swiper"
+        loop="true"
+        grab-cursor="true"
+        autoplay-delay="5000"
+        autoplay-disable-on-interaction="false"
+        speed="800">
+
+        @for (movie of movies$ | async; track movie.id) {
+          <swiper-slide>
+            <app-movie-card-carousel [movie]="movie"></app-movie-card-carousel>
+          </swiper-slide>
+        }
+      </swiper-container>
+    </div>
+  </section>
+
+  <!-- Tous les films -->
+  <section class="swiper-section all-films-section">
+    <div class="section-header">
+      <h2>Tous les films</h2>
+      <p class="section-subtitle">Notre catalogue complet</p>
+    </div>
+
     <swiper-container
       navigation="true"
       pagination="true"
-      slides-per-view="1.5"
-      centered-slides="true"
-      initial-slide="1"
-      space-between="30"
-      class="hero-movie-swiper"
-      loop="true"
-      grab-cursor="true"
-      autoplay-delay="1500"
-      autoplay-disable-on-interaction="false"
-      speed="800">
+      slides-per-view="4"
+      space-between="20"
+      class="my-movie-swiper"
+      loop="true">
 
       @for (movie of movies$ | async; track movie.id) {
         <swiper-slide>
-          <app-movie-card-carousel [movie]="movie"></app-movie-card-carousel>
+          <app-movie-card [movie]="movie"></app-movie-card>
         </swiper-slide>
       }
     </swiper-container>
   </section>
-</div>
 
-<div class="swiper-section">
-  <h2>Tous les films</h2>
-  <swiper-container
-    navigation="true"
-    pagination="true"
-    slides-per-view="4"
-    space-between="20"
-    class="my-movie-swiper"
-    loop="true">
-
-    @for (movie of movies$ | async; track movie.id) {
-      <swiper-slide>
-        <app-movie-card [movie]="movie"></app-movie-card>
-      </swiper-slide>
-    }
-  </swiper-container>
+  @if (!isLoggedIn) {
+    <section class="cta-section">
+      <div class="cta-content">
+        <h2>Rejoignez la communauté</h2>
+        <p>Créez un compte et commencez à partager vos avis sur vos films préférés</p>
+        <a routerLink="/register" class="btn-cta">S'inscrire</a>
+      </div>
+    </section>
+  }
 </div>
