@@ -1,8 +1,8 @@
 @if (!isLoggedInAdmin){
-<div class="admin-header" [class.disconnected]="!isLoggedInAdmin">Veuillez renseigner le code d'accès Administrateur : 
+<div class="admin-header" [class.disconnected]="!isLoggedInAdmin">Veuillez renseigner le code d'accès Administrateur :
 
 </div>
-<div class="admin-body" >
+<div class="admin-body">
 
     <form (ngSubmit)="onLogin()" class="login-dropdown-form">
         <div class="form-group px-3">
@@ -11,9 +11,10 @@
         </div>
 
         <div class="px-3 mt-3">
-            <button class="btn btn-primary w-100" type="submit" [disabled]="loading">{{ loading ? 'Connexion...' : 'Se connecter' }}</button>
+            <button class="btn btn-primary w-100" type="submit" [disabled]="loading">{{ loading ? 'Connexion...' : 'Se
+                connecter' }}</button>
 
-<!--- ATTENTION si vous faites clic droit FORMATER ca met a la ligne le ": Se connecter" ce qui crée une erreur, faut le remettre sur sa bonne ligne a chaque fois  --->
+            <!--- ATTENTION si vous faites clic droit FORMATER ca met a la ligne le ": Se connecter" ce qui crée une erreur, faut le remettre sur sa bonne ligne a chaque fois  --->
 
         </div>
     </form>
@@ -55,16 +56,43 @@
     </div>
 
     <div class="contenu">
-        <table class="table table-bordered" >
+        <table class="table table-bordered">
             <tbody>
                 @if (ligneChoisie === ""){
                 <tr>
                     <td><br><br><br>Veuillez cliquer sur une action<br><br><br><br></td>
                 </tr>}
-                @if (ligneChoisie === "graphiques"){
-                <tr>
-                    <td>contenu graph</td>
-                </tr>}
+                @if (ligneChoisie === 'graphiques') {
+  <tr class="stats-row">
+    <td colspan="100%">
+      <div class="dashboard-container">
+        
+        <div class="chart-card full-width">
+          <div class="card-header">
+            <h3>Fréquentation des visiteurs</h3>
+            <span class="subtitle">7 derniers jours</span>
+          </div>
+          <div class="chart-wrapper">
+            <canvas id="canvasVisiteurs"></canvas>
+          </div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="card-header"><h3>Distribution des notes</h3></div>
+            <div class="chart-wrapper"><canvas id="canvasNotes"></canvas></div>
+          </div>
+
+          <div class="chart-card">
+            <div class="card-header"><h3>Répartition par genre</h3></div>
+            <div class="chart-wrapper"><canvas id="canvasGenres"></canvas></div>
+          </div>
+        </div>
+
+      </div>
+    </td>
+  </tr>
+}
                 @if (ligneChoisie === 'carrousel'){
                 <tr>
                     <td>contenu carr</td>
@@ -72,8 +100,8 @@
                 @if (ligneChoisie === "userlist"){
                 <tr>
                     <td>contenu new user</td>
-                </tr>}                
-                
+                </tr>}
+
 
             </tbody>
         </table>
