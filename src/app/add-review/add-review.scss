@@ -117,7 +117,6 @@
   white-space: nowrap;
 }
 
-/* ===== REVIEW FORM ===== */
 .review-form {
   display: grid;
   gap: 25px;
@@ -177,7 +176,6 @@
   -webkit-box-orient: vertical;
 }
 
-/* ===== FORM GROUPS ===== */
 .form-group {
   display: grid;
   gap: 12px;
@@ -192,7 +190,6 @@
   color: #dc3545;
 }
 
-/* ===== RATING SELECTOR ===== */
 .rating-selector {
   display: flex;
   gap: 10px;
@@ -234,7 +231,6 @@
   border-radius: 6px;
 }
 
-/* ===== TEXTAREA ===== */
 .form-control {
   width: 100%;
   padding: 15px;
@@ -265,7 +261,6 @@
   margin-top: -8px;
 }
 
-/* ===== FORM ACTIONS ===== */
 .form-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -319,7 +314,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* ===== EMPTY STATE ===== */
 .empty-selection {
   text-align: center;
   padding: 60px 20px;
@@ -338,7 +332,6 @@
   font-weight: 500;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .add-review-container h1 {
     font-size: 1.8rem;

@@ -3,7 +3,6 @@
     <h1>Ajouter un Commentaire</h1>
 
     <div class="add-review-content">
-      <!-- Sélection du film -->
       <div class="section">
         <h2>Choisir un film</h2>
 
@@ -25,11 +24,9 @@
         </div>
       </div>
 
-      <!-- Formulaire de commentaire -->
       <div *ngIf="selectedMovie" class="section review-form">
         <h2>Votre Commentaire</h2>
 
-        <!-- Film sélectionné -->
         <div class="selected-movie">
           <img [src]="'http://localhost:8080/movies/' + selectedMovie.id + '/image'" [alt]="selectedMovie.title">
           <div class="selected-info">
@@ -39,7 +36,6 @@
           </div>
         </div>
 
-        <!-- Notation -->
         <div class="form-group">
           <label>Votre note :</label>
           <div class="rating-selector">
@@ -55,7 +51,6 @@
           <span *ngIf="rating > 0" class="rating-display">{{ rating }}/5</span>
         </div>
 
-        <!-- Texte du commentaire -->
         <div class="form-group">
           <label>Votre commentaire :</label>
           <textarea 
@@ -65,7 +60,6 @@
           <span class="char-count">{{ reviewText.length }}/500</span>
         </div>
 
-        <!-- Boutons -->
         <div class="form-actions">
           <button class="btn-submit" 
             (click)="submitting || submitReview()" 
@@ -77,7 +71,6 @@
         </div>
       </div>
 
-      <!-- Message si aucun film sélectionné -->
       <div *ngIf="!loadingMovies && !selectedMovie" class="empty-selection">
         <i class="bi bi-film"></i>
         <p>Sélectionnez un film pour commencer</p>
