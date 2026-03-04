@@ -6,13 +6,12 @@ import { ReviewService } from '../services/review-service';
 import { Review } from '../models/reviews';
 import { ToastService } from '../services/toast';
 import { User } from '../models/users';
-import { Observable } from 'rxjs';
 import { RouterLink } from '@angular/router';
-import { ReviewChartComponent } from '../review-chart/review-chart';
 
 @Component({
   selector: 'app-myreviews',
-  imports: [CommonModule, FormsModule, RouterLink, ReviewChartComponent],
+  // ReviewChartComponent a été retiré d'ici
+  imports: [CommonModule, FormsModule, RouterLink], 
   templateUrl: './myreviews.html',
   styleUrl: './myreviews.scss',
 })
@@ -56,20 +55,14 @@ export class MyReviews implements OnInit {
       return;
     }
 
-    console.log('Utilisateur connecté:', this.currentUser);
-    console.log('Email utilisateur:', this.currentUser.email);
 
     this.reviewService.getReviews().subscribe({
       next: (allReviews: Review[]) => {
-        console.log('Tous les commentaires:', allReviews);
         
         this.userReviews = allReviews.filter(review => {
           console.log(`Comparaison email: ${review.user.email} === ${this.currentUser!.email}`);
           return review.user.email === this.currentUser!.email;
         });
-        
-        console.log('Commentaires filtrés:', this.userReviews);
-        this.toastService.show(`${this.userReviews.length} commentaires trouvés`, { classname: 'bg-info text-white' });
         
         this.applyFiltersAndSort();
         this.loading = false;
@@ -171,62 +164,6 @@ export class MyReviews implements OnInit {
     const sum = this.userReviews.reduce((acc, review) => acc + review.rate, 0);
     return Math.round((sum / this.userReviews.length) * 10) / 10;
   }
-
-  getMonthlyData() {
-    const monthlyCount: { [key: string]: number } = {};
-    const monthlyAvgRating: { [key: string]: { sum: number; count: number } } = {};
-
-    this.userReviews.forEach(review => {
-      const date = new Date(review.reviewDate);
-      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-      
-      monthlyCount[monthKey] = (monthlyCount[monthKey] || 0) + 1;
-      
-      if (!monthlyAvgRating[monthKey]) {
-        monthlyAvgRating[monthKey] = { sum: 0, count: 0 };
-      }
-      monthlyAvgRating[monthKey].sum += review.rate;
-      monthlyAvgRating[monthKey].count += 1;
-    });
-
-    const sorted = Object.keys(monthlyCount)
-      .sort()
-      .map(monthKey => ({
-        month: monthKey,
-        commentairesParMois: monthlyCount[monthKey],
-        noteMoyenne: Math.round((monthlyAvgRating[monthKey].sum / monthlyAvgRating[monthKey].count) * 10) / 10
-      }));
-
-    if (sorted.length > 0) {
-      const firstMonth = sorted[0].month;
-      const [year, month] = firstMonth.split('-');
-      const prevMonth = new Date(parseInt(year), parseInt(month) - 2, 1);
-      const prevMonthKey = `${prevMonth.getFullYear()}-${String(prevMonth.getMonth() + 1).padStart(2, '0')}`;
-      
-      sorted.unshift({
-        month: prevMonthKey,
-        commentairesParMois: 0,
-        noteMoyenne: 0
-      });
-    }
-
-    let cumul = 0;
-    let derniereNoteMoyenne = 0;
-    
-    return sorted.map(item => {
-      cumul += item.commentairesParMois;
-      if (item.noteMoyenne > 0) {
-        derniereNoteMoyenne = item.noteMoyenne;
-      }
-      
-      return {
-        ...item,
-        commentairesCumulatifs: cumul,
-        noteMoyenneStable: derniereNoteMoyenne
-      };
-    });
-  }
-
   getMovieUrl(title: string): string {
     return title.toLowerCase().replace(/\s+/g, '-');
   }

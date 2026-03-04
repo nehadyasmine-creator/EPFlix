@@ -21,11 +21,6 @@
         </div>
       </div>
 
-      <div *ngIf="!loading && userReviews.length > 1">
-        <h2 class="text-center">Évolution de mes commentaires</h2>
-        <app-review-chart [data]="getMonthlyData()"></app-review-chart>
-      </div>
-
       <div *ngIf="loading" class="loading">
         <p>Chargement des commentaires...</p>
       </div>
