@@ -119,6 +119,15 @@
   font-size: 1.1rem;
 }
 
+.navbar-link.active {
+  background: #f5f5f5; 
+  color: #dc3545;      
+}
+
+:host-context([data-theme="dark"]) .navbar-link.active {
+  background: #3a3a3a; 
+  color: #ff8a98;
+}
 /* ===== SEARCH BOX ===== */
 .search-box {
   display: flex;
@@ -169,20 +178,38 @@
   position: relative;
   display: flex;
   align-items: center;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 10px;
 }
 
+.profile-menu:hover {
+  background: #f0f0f0; 
+}
+.profile-menu.active {
+  background: #f0f0f0; 
+  transform: scale(1.1);
+}
+
+
+
 .profile-icon {
-  position: relative;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .profile-icon i {
-  font-size: 2rem;
+  font-size: 1.5rem; /* Ajusté pour une meilleure harmonie */
   color: #333;
   transition: all 0.3s ease;
 }
 
-.profile-icon:hover i {
+/* Effets sur l'icône lors du survol ou de l'état actif */
+.profile-menu:hover .profile-icon i,
+.profile-menu.active .profile-icon i {
   color: #dc3545;
   transform: scale(1.1);
 }
@@ -223,14 +250,6 @@
   }
 }
 
-.profile-menu {
-  position: relative;
-  display: flex;
-  align-items: center;
-  /* Augmenter la zone de hover */
-  padding: 10px;
-  margin: -10px;
-}
 
 .dropdown-header {
   padding: 15px 20px;
@@ -507,4 +526,42 @@
 :host-context([data-theme="dark"]) .dark-mode-btn:hover {
   background: #3a3a3a;
   color: #ff8a98;
+}
+/* ===== DARK MODE PROFILE FIX ===== */
+
+:host-context([data-theme="dark"]) .profile-menu:hover {
+  background: #3a3a3a; /* Fond plus sombre au survol */
+}
+
+:host-context([data-theme="dark"]) .profile-menu.active {
+  background: #3a3a3a;
+}
+
+:host-context([data-theme="dark"]) .profile-icon i {
+  color: #f1f1f1; /* Icône blanche en mode sombre */
+}
+
+:host-context([data-theme="dark"]) .profile-menu:hover .profile-icon i,
+:host-context([data-theme="dark"]) .profile-menu.active .profile-icon i {
+  color: #ff8a98; /* Couleur rose/rouge clair pour le contraste */
+}
+
+/* On s'assure que le dropdown suit aussi le thème sombre */
+:host-context([data-theme="dark"]) .profile-dropdown {
+  background: #252525;
+  border-color: #444;
+}
+
+:host-context([data-theme="dark"]) .dropdown-header {
+  background: #303030;
+  border-bottom: 1px solid #444;
+}
+
+:host-context([data-theme="dark"]) .dropdown-header p,
+:host-context([data-theme="dark"]) .dropdown-link {
+  color: #e0e0e0;
+}
+
+:host-context([data-theme="dark"]) .dropdown-link:hover {
+  background: #3a3a3a;
 }

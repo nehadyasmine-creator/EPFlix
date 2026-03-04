@@ -151,28 +151,6 @@ export class Admin implements OnInit {
       }
     });
   }
-
-  loadAllUsers() {
-    this.isLoadingUsers.set(true);
-    this.authService.getAllUsers()
-      .pipe(finalize(() => this.isLoadingUsers.set(false)))
-      .subscribe({
-        next: (data) => this.users.set(data),
-        error: () => this.toastService.show("Erreur de chargement", { classname: 'bg-danger text-white' })
-      });
-  }
-  deleteUser(id: number): void {
-    this.authService.deleteUser(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => 
-      this.users.update(current => current.filter(user => user.id !== id))
-    );
-  }
-
-  clickMethod(id: number, firstname:string, lastname:string) {
-    if(confirm("Etes-vous sûr de vouloir supprimer "+firstname+" "+lastname+" ?")) {
-      this.deleteUser(id);
-    }
-  }
-
   private renderGraphiqueNotes() {
     const ctx = document.getElementById('canvasNotes') as HTMLCanvasElement;
     if (!ctx) return;
@@ -212,6 +190,29 @@ export class Admin implements OnInit {
       }
     });
   }
+
+  loadAllUsers() {
+    this.isLoadingUsers.set(true);
+    this.authService.getAllUsers()
+      .pipe(finalize(() => this.isLoadingUsers.set(false)))
+      .subscribe({
+        next: (data) => this.users.set(data),
+        error: () => this.toastService.show("Erreur de chargement", { classname: 'bg-danger text-white' })
+      });
+  }
+  deleteUser(id: number): void {
+    this.authService.deleteUser(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => 
+      this.users.update(current => current.filter(user => user.id !== id))
+    );
+  }
+
+clickMethod(id: number, firstname:string, lastname:string) {
+  if(confirm("Etes-vous sûr de vouloir supprimer le compte utilisateur de "+firstname+" "+lastname+" ?")) {
+    this.deleteUser(id);
+  }
+}
+
+  
 
   private renderGraphiqueGenres() {
     const ctx = document.getElementById('canvasGenres') as HTMLCanvasElement;

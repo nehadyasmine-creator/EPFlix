@@ -87,7 +87,7 @@ export class AddReview implements OnInit {
     if (this.submitting) {
       return;
     }
-
+    
     if (!this.selectedMovie) {
       this.toastService.show('Veuillez sélectionner un film.', { classname: 'bg-danger text-white' });
       return;
@@ -109,7 +109,6 @@ export class AddReview implements OnInit {
     }
 
     this.submitting = true;
-
     const newReview: Review = {
       id: 0,
       user: this.currentUser!,

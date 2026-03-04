@@ -22,15 +22,15 @@
 
     <!-- Nav Links -->
     <div class="navbar-menu">
-      <a class="navbar-link" routerLink="/movies">
+      <a class="navbar-link" routerLink="/movies" [class.active]="isActive('/movies')">
         <i class="bi bi-film"></i>
         <span>Films</span>
       </a>
-      <a class="navbar-link" routerLink="/admin">
+      <a class="navbar-link" routerLink="/admin" [class.active]="isActive('/admin')">
         <i class="bi bi-gear"></i>
         <span>Admin</span>
       </a>
-      <a class="navbar-link" routerLink="/contact">
+      <a class="navbar-link" routerLink="/contact" [class.active]="isActive('/contact')">
         <i class="bi bi-envelope"></i>
         <span>Contact</span>
       </a>
@@ -49,11 +49,8 @@
       </button>
     </div>
 
-    <!-- Profile -->
-     <div class="profile-menu"
-      (mouseenter)="openDropdown()"
-      (mouseleave)="closeDropdown()">
-      <!-- Bouton Dark Mode -->
+
+    <!-- Bouton Dark Mode -->
       <button 
         type="button"
         class="dark-mode-btn"
@@ -61,6 +58,13 @@
         [title]="isDarkMode() ? 'Mode clair' : 'Mode sombre'">
         <i class="bi" [ngClass]="isDarkMode() ? 'bi-sun-fill' : 'bi-moon-fill'"></i>
       </button>
+
+
+    <!-- Profile -->
+     <div class="profile-menu" [class.active]="isActive('/profil')"
+      (mouseenter)="openDropdown()"
+      (mouseleave)="closeDropdown()">
+      
 
       <div class="profile-icon" (click)="toggleDropdown()">
         <i class="bi bi-person-circle"></i>
