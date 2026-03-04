@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 import { Movie } from '../../models/movies';
 import { RouterLink } from '@angular/router';
+import { DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-movie-card',
-  imports: [RouterLink],
+  imports: [RouterLink, DecimalPipe],
   templateUrl: './movie-card.html',
   styleUrl: './movie-card.scss',
 })

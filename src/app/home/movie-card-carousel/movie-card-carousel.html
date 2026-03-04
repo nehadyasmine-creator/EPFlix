@@ -29,7 +29,7 @@
           }
         }
       </div>
-      <span class="rating-value">{{movie.rate}}/5</span>
+      <span class="rating-value">{{movie.rate | number: '1.2-2' }}/5</span>
     </div>
 
     <a [routerLink]="['/movies', getMovieUrl(movie.title)]" class="hero-card-button">
