@@ -37,7 +37,6 @@ export class AddReview implements OnInit {
   private initializationCheck = new Set<string>();
 
   ngOnInit() {
-    // Utiliser une clé unique pour vérifier si c'est déjà initialisé
     const initKey = 'add-review-init';
     if (this.initializationCheck.has(initKey)) {
       return;
@@ -55,7 +54,6 @@ export class AddReview implements OnInit {
   }
 
   loadMovies() {
-    // Vérifier si les films sont déjà chargés
     if (this.movies.length > 0) {
       return;
     }
@@ -86,12 +84,10 @@ export class AddReview implements OnInit {
   }
 
   submitReview() {
-    // Protection triple contre les doublons
     if (this.submitting) {
       return;
     }
 
-    // Validation
     if (!this.selectedMovie) {
       this.toastService.show('Veuillez sélectionner un film.', { classname: 'bg-danger text-white' });
       return;
@@ -112,7 +108,6 @@ export class AddReview implements OnInit {
       return;
     }
 
-    // Mettre submitting à true AVANT l'appel API
     this.submitting = true;
 
     const newReview: Review = {
@@ -134,14 +129,12 @@ export class AddReview implements OnInit {
       reviewDate: new Date().toISOString()
     };
 
-    // Un seul appel API
     this.reviewService.addReview(newReview)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (review) => {
           this.submitting = false;
           this.toastService.show('Commentaire publié avec succès !', { classname: 'bg-success text-white' });
-          // Utiliser setTimeout pour s'assurer que la navigation se fait après le rendu
           setTimeout(() => {
             this.router.navigate(['/myreviews']);
           }, 100);

@@ -10,7 +10,6 @@
   flex-direction: column;
 }
 
-/* ===== HEADER ===== */
 .admin-header {
   display: flex;
   align-items: center;
@@ -27,7 +26,6 @@
   font-weight: 700;
 }
 
-/* ===== LOGIN FORM ===== */
 .admin-deconnexion {
   display: flex;
   align-items: center;
@@ -90,7 +88,6 @@
   cursor: not-allowed;
 }
 
-/* ===== BODY CONNECTED ===== */
 .admin-body.is-connected {
   display: flex;
   flex-direction: row;
@@ -98,7 +95,6 @@
   gap: 0;
 }
 
-/* ===== SIDEBAR ===== */
 .actions {
   flex: 0 0 280px;
   background: white;
@@ -166,7 +162,6 @@
   color: inherit;
 }
 
-/* ===== CONTENT AREA ===== */
 .contenu {
   flex: 1;
   padding: 30px;
@@ -218,7 +213,6 @@
   font-weight: 500;
 }
 
-/* ===== SCROLL CONTAINER ===== */
 .scroll-container {
   max-height: 700px;
   overflow-y: auto;
@@ -251,7 +245,6 @@
   background: #fff5f5;
 }
 
-/* ===== ACTION BUTTONS ===== */
 .actions-cell {
   display: flex;
   gap: 8px;
@@ -298,7 +291,6 @@
   transform: scale(1.2);
 }
 
-/* ===== BADGES ===== */
 .badge-read {
   display: inline-block;
   padding: 4px 10px;
@@ -319,7 +311,6 @@
   font-weight: 600;
 }
 
-/* ===== DASHBOARD/CHARTS ===== */
 .dashboard-container {
   display: flex;
   flex-direction: column;

@@ -54,10 +54,6 @@ export class Admin implements OnInit {
     this.loginError = null;
     if (this.saisieCode === this.secretCode) {
       this.toastService.show('Connexion Administrateur réussie !', { classname: 'bg-info text-white' });
-      //  setTimeout(
-      // this.loading = true,
-      //1500
-      //  )
       this.loading = true;
       sessionStorage.setItem('admin_access', 'true');
       this.isLoggedInAdmin = true;
