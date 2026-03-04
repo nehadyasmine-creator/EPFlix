@@ -53,16 +53,14 @@ export class Home implements AfterViewInit{
 }
 
 ngAfterViewInit() {
-    // On attend un court instant après le chargement du DOM
     setTimeout(() => {
       const swipers = document.querySelectorAll('swiper-container');
       swipers.forEach((swiper: any) => {
-        // Cette commande force Swiper à "lire" ses attributs et ses boutons
         if (swiper.initialize) {
           swiper.initialize();
         }
       });
-    }, 200); // 200ms suffisent pour laisser le @if rendre le HTML
+    }, 200); 
   }
 
 }
