@@ -43,6 +43,10 @@ export class Navbar implements OnInit {
   isAdminMode: boolean=false;
   isDarkMode = signal(false);
 
+  isActive(url: string): boolean {
+  return this.router.url.includes(url);
+}
+
   ngOnInit() {
     this.isLoggedIn = this.authService.isLoggedIn();
     this.currentUser = this.authService.getCurrentUser();

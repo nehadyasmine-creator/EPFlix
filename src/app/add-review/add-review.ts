@@ -86,10 +86,12 @@ export class AddReview implements OnInit {
   }
 
   submitReview() {
+    console.log("SubmitReview appelé");
     // Protection triple contre les doublons
     if (this.submitting) {
       return;
     }
+     this.submitting = true;
 
     // Validation
     if (!this.selectedMovie) {
@@ -113,7 +115,7 @@ export class AddReview implements OnInit {
     }
 
     // Mettre submitting à true AVANT l'appel API
-    this.submitting = true;
+   
 
     const newReview: Review = {
       id: 0,

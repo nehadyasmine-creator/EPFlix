@@ -175,6 +175,7 @@ clickMethod(id: number, firstname:string, lastname:string) {
   if(confirm("Etes-vous sûr de vouloir supprimer le compte utilisateur de "+firstname+" "+lastname+" ?")) {
     this.deleteUser(id);
   }
+}
 
   private renderGraphiqueNotes() {
     const ctx = document.getElementById('canvasNotes') as HTMLCanvasElement;
