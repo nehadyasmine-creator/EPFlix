@@ -8,11 +8,10 @@ import { ToastService } from '../services/toast';
 import { User } from '../models/users';
 import { Observable } from 'rxjs';
 import { RouterLink } from '@angular/router';
-import { ReviewChartComponent } from '../review-chart/review-chart';
 
 @Component({
   selector: 'app-myreviews',
-  imports: [CommonModule, FormsModule, RouterLink, ReviewChartComponent],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './myreviews.html',
   styleUrl: './myreviews.scss',
 })
