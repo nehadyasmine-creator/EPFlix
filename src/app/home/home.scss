@@ -179,20 +179,88 @@
 }
 
 :deep(.swiper-pagination-bullet) {
-  background: #dc3545;
-  opacity: 0.5;
+  background: #dc3545 !important;
+  opacity: 0.3; /* Transparence pour les points non actifs */
+  transition: all 0.3s ease;
 }
 
+/* Couleur du point actif */
 :deep(.swiper-pagination-bullet-active) {
-  background: #dc3545;
+  background: #dc3545 !important;
   opacity: 1;
+  transform: scale(1.2); /* Petit effet de grossissement sur le point actif */
+}
+/* Assure-toi que le wrapper dans le hero occupe tout l'espace */
+.hero-right .swiper-wrapper-container {
+  height: 100%;
+  width: 100%;
+  padding: 0; /* Pas de padding ici pour garder l'image plein écran */
+  
+  /* On positionne les boutons légèrement à l'intérieur */
+  .custom-nav-btn {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .prev { left: 20px; }
+  .next { right: 20px; }
 }
 
 /* ===== ALL FILMS SECTION ===== */
+
+:host {
+  --swiper-pagination-color: #dc3545 !important;
+  --swiper-pagination-bullet-inactive-color: #dc3545 !important;
+  --swiper-pagination-bullet-inactive-opacity: 0.3 !important;
+}
+
+.swiper-wrapper-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 20px; 
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.custom-nav-btn {
+  
+  background: white;
+  color: #dc3545; /* Le rouge de ton thème */
+  border: 1px solid #dc3545;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  z-index: 10;
+  
+  &:hover {
+    background: #dc3545;
+    color: white;
+    transform: scale(1.1);
+  }
+}
+
+/* Positionnement sur les côtés */
+.prev { position: absolute; left: -25px; }
+.next { position: absolute; right: -25px; }
+
+
+swiper-container {
+  width: 100%;
+  max-width: 1400px; /* Ou la largeur de ta section */
+  display: block;
+}
+
 .swiper-section {
   padding: 80px 40px;
   max-width: 1400px;
   margin: 0 auto;
+
 }
 
 .all-films-section {
@@ -354,11 +422,10 @@
     font-size: 1.5rem;
   }
 
-  :deep(.swiper-button-next),
-  :deep(.swiper-button-prev) {
-    width: 40px;
-    height: 40px;
-  }
+  :deep(.swiper-button-next), 
+:deep(.swiper-button-prev) {
+  display: none !important;
+}
 
   :deep(.swiper-button-next::after),
   :deep(.swiper-button-prev::after) {

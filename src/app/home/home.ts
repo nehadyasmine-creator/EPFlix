@@ -1,4 +1,4 @@
-import { Component, inject, CUSTOM_ELEMENTS_SCHEMA , signal} from '@angular/core';
+import { Component, inject, CUSTOM_ELEMENTS_SCHEMA , signal,  AfterViewInit} from '@angular/core';
 import { MoviesApi } from '../services/movies-api';
 import { Movie } from '../models/movies';
 import { Observable, Subscription } from 'rxjs';
@@ -20,7 +20,7 @@ register();
   styleUrl: './home.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class Home {
+export class Home implements AfterViewInit{
   private readonly moviesApi = inject(MoviesApi)
   private readonly authService = inject(AuthService)
   movies$: Observable<Movie[]> = this.moviesApi.getMovies()
@@ -50,4 +50,18 @@ export class Home {
   getSafeUrl(url: string) {
   return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 }
+
+ngAfterViewInit() {
+    // On attend un court instant après le chargement du DOM
+    setTimeout(() => {
+      const swipers = document.querySelectorAll('swiper-container');
+      swipers.forEach((swiper: any) => {
+        // Cette commande force Swiper à "lire" ses attributs et ses boutons
+        if (swiper.initialize) {
+          swiper.initialize();
+        }
+      });
+    }, 200); // 200ms suffisent pour laisser le @if rendre le HTML
+  }
+
 }

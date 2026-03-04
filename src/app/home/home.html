@@ -1,111 +1,123 @@
 @if (isLoading()) {
-  <div class="d-flex justify-content-center p-5">
-    <div class="spinner-border text-primary" role="status"></div>
-  </div>
+<div class="d-flex justify-content-center p-5">
+  <div class="spinner-border text-primary" role="status"></div>
+</div>
 } @else {
-  <div class="home-container">
-    <!-- Hero Section avec Carrousel -->
-    <section class="hero-carrousel-section">
-      <div class="hero-left">
-        <div class="hero-content">
-          <h1 class="hero-title">EPFlix</h1>
-          <p class="hero-subtitle">Découvrez et commentez vos films préférés</p>
-          <a routerLink="/movies" class="btn-explore">
-            Explorer les films
-            <i class="bi bi-arrow-right"></i>
-          </a>
-        </div>
+<div class="home-container">
+  <!-- Hero Section avec Carrousel -->
+  <section class="hero-carrousel-section">
+    <div class="hero-left">
+      <div class="hero-content">
+        <h1 class="hero-title">EPFlix</h1>
+        <p class="hero-subtitle">Découvrez et commentez vos films préférés</p>
+        <a routerLink="/movies" class="btn-explore">
+          Explorer les films
+          <i class="bi bi-arrow-right"></i>
+        </a>
       </div>
+    </div>
 
-      <div class="hero-right">
-        <swiper-container
-          navigation="true"
-          pagination="true"
-          slides-per-view="1"
-          space-between="20"
-          class="hero-movie-swiper"
-          loop="true"
-          grab-cursor="true"
-          autoplay-delay="5000"
-          autoplay-disable-on-interaction="false"
-          speed="800">
+    <div class="hero-right">
+
+      <div class="swiper-wrapper-container">
+        <button id="prev-btn-hero" class="custom-nav-btn prev">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+
+        <swiper-container update-on-window-resize="true" init="false" navigation="true" navigation-prev-el="#prev-btn-hero" navigation-next-el="#next-btn-hero"
+          pagination="true" slides-per-view="1" space-between="20" class="hero-movie-swiper" loop="true"
+          grab-cursor="true" autoplay-delay="5000" autoplay-disable-on-interaction="false" speed="800">
 
           @for (movie of movies$ | async; track movie.id) {
-            <swiper-slide>
-              <app-movie-card-carousel [movie]="movie"></app-movie-card-carousel>
-            </swiper-slide>
+          <swiper-slide>
+            <app-movie-card-carousel [movie]="movie"></app-movie-card-carousel>
+          </swiper-slide>
           }
         </swiper-container>
-      </div>
-    </section>
 
-    <!-- Tous les films -->
-    <section class="swiper-section all-films-section", style="border-bottom: 3px solid #dc3545;">
-      <div class="section-header">
-        <h2>Tous les films</h2>
-        <p class="section-subtitle">Notre catalogue complet</p>
+        <button id="next-btn-hero" class="custom-nav-btn next">
+          <i class="bi bi-chevron-right"></i>
+        </button>
       </div>
+    </div>
+  </section>
 
-      <swiper-container
-        navigation="true"
-        pagination="true"
-        slides-per-view="4"
-        space-between="20"
-        class="my-movie-swiper"
-        loop="true">
+  <!-- Tous les films -->
+  <section class="swiper-section all-films-section" style="border-bottom: 3px solid #dc3545;">
+    <div class="section-header">
+      <h2>Tous les films</h2>
+      <p class="section-subtitle">Notre catalogue complet</p>
+    </div>
+
+    <div class="swiper-wrapper-container">
+      <button id="prev-btn-films" class="custom-nav-btn prev">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+
+      <swiper-container update-on-window-resize="true" init="false" navigation="true" navigation-prev-el="#prev-btn-films" navigation-next-el="#next-btn-films"
+        pagination="true" slides-per-view="4" space-between="20" class="my-movie-swiper" loop="true">
 
         @for (movie of movies$ | async; track movie.id) {
-          <swiper-slide>
-            <app-movie-card [movie]="movie"></app-movie-card><br><br>
-          </swiper-slide>
+        <swiper-slide>
+          <app-movie-card [movie]="movie"></app-movie-card><br><br>
+        </swiper-slide>
         }
       </swiper-container>
-    </section>
+
+      <button id="next-btn-films" class="custom-nav-btn next">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </section>
 
 
 
-    <section class="swiper-section all-films-section">
-  <div class="section-header">
-    <h2>Bandes-annonces</h2>
-    <p class="section-subtitle">Découvrez un aperçu inédit de nos prochains films</p>
-  </div>
+  <section class="swiper-section all-films-section">
+    <div class="section-header">
+      <h2>Bandes-annonces</h2>
+      <p class="section-subtitle">Découvrez un aperçu inédit de nos prochains films</p>
+    </div>
 
-  <swiper-container
-    navigation="true"
-    pagination="true"
-    slides-per-view="3"
-    space-between="20"
-    class="my-movie-swiper"
-    loop="true">
+    <swiper-container navigation="true" pagination="true" slides-per-view="3" space-between="20" class="my-movie-swiper"
+      loop="true">
 
-    <swiper-slide>
-      <iframe width="100%" height="250" src="https://www.youtube.com/embed/EkNOTiJxUfA?si=f221JyQO3LP0ujXR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </swiper-slide>
+      <swiper-slide>
+        <iframe width="100%" height="250" src="https://www.youtube.com/embed/EkNOTiJxUfA?si=f221JyQO3LP0ujXR"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </swiper-slide>
 
-    <swiper-slide>
-      <iframe width="100%" height="250" src="https://www.youtube.com/embed/9wAjZkR_Qp4?si=nDvBY3tPTl4Yz4Ek" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </swiper-slide>
+      <swiper-slide>
+        <iframe width="100%" height="250" src="https://www.youtube.com/embed/9wAjZkR_Qp4?si=nDvBY3tPTl4Yz4Ek"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </swiper-slide>
 
-    <swiper-slide>
-      <iframe width="100%" height="250" src="https://www.youtube.com/embed/Ej1hvPvjr2c?si=d6aKxNtez816YW45" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </swiper-slide>
+      <swiper-slide>
+        <iframe width="100%" height="250" src="https://www.youtube.com/embed/Ej1hvPvjr2c?si=d6aKxNtez816YW45"
+          title="YouTube video player" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </swiper-slide>
 
-  </swiper-container>
-</section>
-
-
-   
+    </swiper-container>
+  </section>
 
 
 
-    @if (!isLoggedIn) {
-      <section class="cta-section">
-        <div class="cta-content">
-          <h2>Rejoignez la communauté</h2>
-          <p>Créez un compte et commencez à partager vos avis sur vos films préférés</p>
-          <a routerLink="/register" class="btn-cta">S'inscrire</a>
-        </div>
-      </section>
-    }
-  </div>
+
+
+
+  @if (!isLoggedIn) {
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2>Rejoignez la communauté</h2>
+      <p>Créez un compte et commencez à partager vos avis sur vos films préférés</p>
+      <a routerLink="/register" class="btn-cta">S'inscrire</a>
+    </div>
+  </section>
+  }
+</div>
 }
