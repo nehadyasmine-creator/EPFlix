@@ -18,15 +18,15 @@
     </a>
 
     <div class="navbar-menu">
-      <a class="navbar-link" routerLink="/movies" [class.active]="isActive('/movies')">
+      <a title="Films" class="navbar-link" routerLink="/movies" [class.active]="isActive('/movies')">
         <i class="bi bi-film"></i>
         <span>Films</span>
       </a>
-      <a class="navbar-link" routerLink="/admin" [class.active]="isActive('/admin')">
+      <a title="Admin" class="navbar-link" routerLink="/admin" [class.active]="isActive('/admin')">
         <i class="bi bi-gear"></i>
         <span>Admin</span>
       </a>
-      <a class="navbar-link" routerLink="/contact" [class.active]="isActive('/contact')">
+      <a title="Contact" class="navbar-link" routerLink="/contact" [class.active]="isActive('/contact')">
         <i class="bi bi-envelope"></i>
         <span>Contact</span>
       </a>
@@ -37,9 +37,10 @@
         type="search" 
         class="search-input" 
         placeholder="Rechercher..." 
-        [(ngModel)]="searchValue" 
+        [(ngModel)]="searchValue"
+        title="Effectuer une recherche" 
         (keyup.enter)="onSearch()" />
-      <button class="search-btn" (click)="onSearch()">
+      <button title="Rechercher" class="search-btn" (click)="onSearch()">
         <i class="bi bi-search"></i>
       </button>
     </div>
@@ -54,7 +55,8 @@
       </button>
 
 
-     <div class="profile-menu" [class.active]="isActive('/profil')"
+    <!-- Profile -->
+     <div class="profile-menu" title="Mon profil" [class.active]="isActive('/profil')"
       (mouseenter)="openDropdown()"
       (mouseleave)="closeDropdown()">
       
