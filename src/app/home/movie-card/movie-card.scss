@@ -4,3 +4,22 @@
   object-fit: cover; 
   object-position: center; 
 }
+
+.text-truncate-custom {
+  line-clamp: 3;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.4s ease;
+}
+
+.card {
+  overflow: hidden; 
+}
+
+.movie-img {
+  height: 200px;
+  object-fit: cover;
+}
