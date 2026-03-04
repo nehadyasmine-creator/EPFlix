@@ -4,7 +4,6 @@
   padding: 20px;
 }
 
-/* ===== HEADER TOP ===== */
 .header-top {
   display: flex;
   align-items: center;
@@ -46,13 +45,11 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== REVIEWS CONTENT ===== */
 .reviews-content {
   display: grid;
   gap: 30px;
 }
 
-/* ===== STATS BOX ===== */
 .stats-box {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -84,7 +81,6 @@
   font-weight: 700;
 }
 
-/* ===== LOADING & EMPTY STATE ===== */
 .loading {
   text-align: center;
   padding: 40px;
@@ -132,7 +128,6 @@
   box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
 }
 
-/* ===== REVIEWS GRID ===== */
 .reviews-grid {
   display: grid;
   gap: 20px;
@@ -195,7 +190,6 @@
   font-size: 0.95rem;
 }
 
-/* ===== RATING SECTION ===== */
 .rating-section {
   display: grid;
   gap: 10px;
@@ -253,7 +247,6 @@
   background: linear-gradient(135deg, #dc3545, #c82333);
 }
 
-/* ===== COMMENT SECTION ===== */
 .comment-section {
   display: grid;
   gap: 10px;
@@ -297,7 +290,6 @@
   box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
 }
 
-/* ===== ACTION BUTTONS ===== */
 .edit-btn {
   background: none;
   border: none;
@@ -363,7 +355,6 @@
   transform: translateY(-2px);
 }
 
-/* ===== REVIEW FOOTER ===== */
 .review-footer {
   display: flex;
   justify-content: space-between;
@@ -402,7 +393,6 @@
   transform: scale(1.1);
 }
 
-/* ===== ALERT ===== */
 .alert {
   padding: 15px;
   border-radius: 6px;
@@ -426,7 +416,6 @@
   text-decoration: underline;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .header-top {
     flex-direction: column;

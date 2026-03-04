@@ -1,23 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
 @import url(bootstrap);
-/* Assure que le body prend toute la hauteur de l'écran */
 html, body {
   height: 100%;
   margin: 0;
 }
 
-/* Transforme le body en conteneur flex vertical */
 body {
   display: flex;
   flex-direction: column;
 }
 
-/* Force le contenu principal à prendre tout l'espace disponible */
-.content-wrapper { /* Il faut englober vos pages dans une div avec cette classe */
+.content-wrapper { 
   flex: 1 0 auto;
 }
 
-/* Le footer ne grandira pas et restera en bas */
 .footer-dark {
   flex-shrink: 0;
 }
@@ -181,7 +176,6 @@ html[data-theme="dark"] .add-movie-header {
   color: var(--text-primary) !important;
 }
 
-/* ===== FOOTER DARK MODE ===== */
 html[data-theme="dark"] .footer-epflix {
   background: #171717 !important;
   border-top-color: #dc3545 !important;
@@ -221,7 +215,6 @@ html[data-theme="dark"] .copyright a {
   color: #dc3545;
 }
 
-/* ===== MOVIE LIST DARK MODE ===== */
 html[data-theme="dark"] .movie-header {
   background: linear-gradient(135deg, #c82333, #dc3545) !important;
   color: white !important;
@@ -273,7 +266,6 @@ html[data-theme="dark"] .movie-list-container .table th {
   border-color: var(--border-color) !important;
 }
 
-/* ===== CONTACT DARK MODE ===== */
 html[data-theme="dark"] .contact-container,
 html[data-theme="dark"] .contact-content,
 html[data-theme="dark"] .contact-info,
@@ -315,7 +307,6 @@ html[data-theme="dark"] .btn-reset:hover {
   border-color: #dc3545 !important;
 }
 
-/* ===== GLOBAL HARMONISATION ===== */
 html[data-theme="dark"] .bg-white,
 html[data-theme="dark"] .rounded,
 html[data-theme="dark"] .shadow-sm,
@@ -334,7 +325,6 @@ html[data-theme="dark"] hr {
   color: var(--border-color) !important;
 }
 
-/* ===== FAQ DARK MODE ===== */
 html[data-theme="dark"] .faq-item {
   background: var(--card-bg) !important;
   border-color: var(--border-color) !important;
@@ -357,7 +347,6 @@ html[data-theme="dark"] .faq-answer p {
   color: var(--text-primary) !important;
 }
 
-/* ===== REGISTER DARK MODE ===== */
 html[data-theme="dark"] .register-header {
   background: linear-gradient(135deg, #c82333, #dc3545) !important;
 }
@@ -383,7 +372,6 @@ html[data-theme="dark"] .toggle-password:hover {
   color: #dc3545;
 }
 
-/* ===== ADD MOVIE DARK MODE ===== */
 html[data-theme="dark"] .add-movie-header {
   background: linear-gradient(135deg, #c82333, #dc3545) !important;
 }
@@ -397,7 +385,6 @@ html[data-theme="dark"] .movie-form {
   background: var(--card-bg) !important;
 }
 
-/* ===== ADMIN DARK MODE ===== */
 html[data-theme="dark"] .admin-container {
   background: var(--bg-primary) !important;
 }
@@ -454,7 +441,6 @@ html[data-theme="dark"] .actions {
   border-right-color: var(--border-color) !important;
 }
 
-/* ===== SCROLLBAR DARK MODE ===== */
 html[data-theme="dark"] ::-webkit-scrollbar {
   width: 10px;
 }
@@ -472,7 +458,6 @@ html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
   background: var(--text-secondary);
 }
 
-/* ===== BUTTONS DARK MODE ===== */
 html[data-theme="dark"] .btn-primary {
   background: #dc3545 !important;
   border-color: #dc3545 !important;
@@ -507,7 +492,6 @@ html[data-theme="dark"] .edit-btn:hover {
   background: rgba(220, 53, 69, 0.1) !important;
 }
 
-/* ===== ALERTS DARK MODE ===== */
 html[data-theme="dark"] .alert {
   background: var(--card-bg) !important;
   border-color: var(--border-color) !important;
@@ -532,7 +516,6 @@ html[data-theme="dark"] .alert-success {
   color: #52e06f !important;
 }
 
-/* ===== FAQ DARK MODE ===== */
 html[data-theme="dark"] .faq-section {
   background: var(--bg-primary) !important;
 }
@@ -592,7 +575,6 @@ html[data-theme="dark"] .faq-answer p {
   color: var(--text-primary) !important;
 }
 
-/* ===== ADMIN DARK MODE COMPLET ===== */
 html[data-theme="dark"] .admin-deconnexion {
   background: var(--bg-primary) !important;
 }
@@ -759,7 +741,6 @@ html[data-theme="dark"] .deleteButton:hover {
   background: #c82333 !important;
 }
 
-/* ===== MOVIE LIST DARK MODE COMPLET ===== */
 html[data-theme="dark"] .movie-header {
   background: linear-gradient(135deg, #c82333, #dc3545) !important;
   color: white !important;
@@ -893,7 +874,6 @@ html[data-theme="dark"] .text-center {
   color: var(--text-primary) !important;
 }
 
-/* ===== ADMIN - REMONTEES ET UTILISATEURS DARK MODE ===== */
 html[data-theme="dark"] .admin-body {
   background: var(--bg-primary) !important;
 }
@@ -1067,7 +1047,6 @@ html[data-theme="dark"] .btn-icon.mark-read:hover:not(:disabled) {
   color: #52e06f !important;
 }
 
-/* ===== MOVIE LIST TABLE DARK MODE ===== */
 html[data-theme="dark"] .movie-list-container .table {
   background: #1a1a1a !important;
   border-radius: 8px;
@@ -1162,7 +1141,6 @@ html[data-theme="dark"] .movie-list-container .deleteButton:hover {
   box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3) !important;
 }
 
-/* ===== SPINNER DARK MODE ===== */
 html[data-theme="dark"] .spinner-border {
   color: #dc3545 !important;
   border-color: rgba(220, 53, 69, 0.3) !important;
@@ -1177,7 +1155,6 @@ html[data-theme="dark"] .py-4 {
   color: white !important;
 }
 
-/* ===== CONTACT PAGE DARK MODE ===== */
 html[data-theme="dark"] .contact-container {
   background: var(--bg-primary) !important;
   min-height: calc(100vh - 80px);
@@ -1322,7 +1299,6 @@ html[data-theme="dark"] .contact-success-message {
   color: #52e06f !important;
 }
 
-/* ===== UPDATE MOVIE DARK MODE ===== */
 html[data-theme="dark"] .update-movie-container {
   background: var(--bg-primary) !important;
   min-height: calc(100vh - 80px);
@@ -1393,7 +1369,6 @@ html[data-theme="dark"] .update-btn-submit:hover {
   box-shadow: 0 4px 16px rgba(220, 53, 69, 0.3) !important;
 }
 
-/* ===== MOVIE DETAIL PAGE DARK MODE ===== */
 html[data-theme="dark"] .movie-detail-container {
   background: var(--bg-primary) !important;
 }

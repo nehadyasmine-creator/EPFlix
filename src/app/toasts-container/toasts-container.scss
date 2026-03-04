@@ -15,12 +15,9 @@
 .toast {
     opacity: 1;
     transition: opacity 0.5s ease-out;
-    /* Durée de la disparition */
     display: block !important;
-    /* Force l'affichage Bootstrap */
 }
 
-/* Quand isClosing est vrai, l'opacité tombe à 0 */
 .toast.closing {
     opacity: 0;
 }

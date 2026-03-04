@@ -4,7 +4,6 @@
   padding: 20px;
 }
 
-/* ===== RETURN BUTTON ===== */
 .btn-back {
   display: inline-flex;
   align-items: center;
@@ -29,8 +28,6 @@
   font-size: 1.2rem;
 }
 
-/* ===== HEADER TOP ===== */
-/* ===== HEADER TOP ===== */
 .header-top {
   display: flex;
   align-items: center;
@@ -72,7 +69,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== MOVIE CONTENT ===== */
 .movie-content {
   display: grid;
   gap: 40px;
@@ -111,7 +107,6 @@
   gap: 20px;
 }
 
-/* ===== MOVIE META ===== */
 .movie-meta {
   display: grid;
   gap: 15px;
@@ -142,7 +137,6 @@
   font-weight: 500;
 }
 
-/* ===== MOVIE SYNOPSIS ===== */
 .movie-synopsis {
   display: grid;
   gap: 12px;
@@ -163,7 +157,6 @@
   text-align: justify;
 }
 
-/* ===== MOVIE STATS ===== */
 .movie-stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -203,7 +196,6 @@
   font-weight: 700;
 }
 
-/* ===== MOVIE REVIEWS ===== */
 .movie-reviews {
   background: white;
   border: 1px solid #e0e0e0;
@@ -309,7 +301,6 @@
   font-size: 1.1rem;
 }
 
-/* ===== ALERT ===== */
 .alert {
   background: #f8d7da;
   color: #721c24;
@@ -324,7 +315,6 @@
   font-weight: 600;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .movie-header {
     grid-template-columns: 200px 1fr;

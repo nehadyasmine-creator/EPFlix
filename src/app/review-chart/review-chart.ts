@@ -38,32 +38,24 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
     svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
     svg.setAttribute('style', 'display: block; margin: 0 auto;');
 
-    // Padding
     const padding = { top: 40, right: 60, bottom: 60, left: 80 };
     const width = 1000 - padding.left - padding.right;
     const height = 400 - padding.top - padding.bottom;
 
-    // Trouver les min/max
     const maxCommentaires = Math.max(...this.data.map(d => d.commentairesCumulatifs), 5);
     const maxNote = 5;
 
-    // Créer le groupe principal
     const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     g.setAttribute('transform', `translate(${padding.left}, ${padding.top})`);
 
-    // Grille
     this.drawGrid(g, width, height, maxCommentaires);
 
-    // Axes
     this.drawAxes(g, width, height);
 
-    // Courbes
     this.drawCurves(g, width, height, maxCommentaires, maxNote);
 
-    // Labels des axes
     this.drawAxisLabels(g, width, height, maxCommentaires);
 
-    // Légende
     this.drawLegend(g, width, height);
 
     svg.appendChild(g);
@@ -75,7 +67,6 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
     gridGroup.setAttribute('stroke', '#e0e0e0');
     gridGroup.setAttribute('stroke-width', '1');
 
-    // Lignes horizontales
     for (let i = 0; i <= 5; i++) {
       const y = (height / 5) * i;
       const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
@@ -90,7 +81,6 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
   }
 
   private drawAxes(g: SVGGElement, width: number, height: number) {
-    // Axe X
     const xAxis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     xAxis.setAttribute('x1', '0');
     xAxis.setAttribute('y1', String(height));
@@ -100,7 +90,6 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
     xAxis.setAttribute('stroke-width', '2');
     g.appendChild(xAxis);
 
-    // Axe Y
     const yAxis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     yAxis.setAttribute('x1', '0');
     yAxis.setAttribute('y1', '0');
@@ -116,7 +105,6 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
 
     const stepX = width / (this.data.length - 1 || 1);
 
-    // ===== COURBE COMMENTAIRES (ROUGE) =====
     let pathDataCommentaires = '';
     this.data.forEach((item, i) => {
       const x = i * stepX;
@@ -133,7 +121,6 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
     pathCommentaires.setAttribute('stroke-linejoin', 'round');
     g.appendChild(pathCommentaires);
 
-    // ===== COURBE NOTE MOYENNE (ORANGE) =====
     let pathDataNote = '';
     this.data.forEach((item, i) => {
       const x = i * stepX;
@@ -150,11 +137,9 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
     pathNote.setAttribute('stroke-linejoin', 'round');
     g.appendChild(pathNote);
 
-    // ===== POINTS ET TOOLTIPS =====
     this.data.forEach((item, i) => {
       const x = i * stepX;
       
-      // Point commentaires (ROUGE)
       const yC = height - (item.commentairesCumulatifs / maxCommentaires) * height;
       const circleC = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       circleC.setAttribute('cx', String(x));
@@ -168,7 +153,6 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
       circleC.setAttribute('title', `${item.month}: ${item.commentairesCumulatifs} commentaire${item.commentairesCumulatifs > 1 ? 's' : ''}`);
       g.appendChild(circleC);
 
-      // Point note (ORANGE)
       const yN = height - (item.noteMoyenne / maxNote) * height;
       const circleN = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
       circleN.setAttribute('cx', String(x));
@@ -185,7 +169,6 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
   }
 
   private drawAxisLabels(g: SVGGElement, width: number, height: number, maxCommentaires: number) {
-    // Labels X (mois)
     const stepX = width / (this.data.length - 1 || 1);
     this.data.forEach((item, i) => {
       const x = i * stepX;
@@ -200,7 +183,6 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
       g.appendChild(text);
     });
 
-    // Labels Y gauche (commentaires)
     for (let i = 0; i <= 5; i++) {
       const ratio = i / 5;
       const value = Math.round(ratio * maxCommentaires);
@@ -216,7 +198,6 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
       g.appendChild(text);
     }
 
-    // Labels Y droite (notes)
     for (let i = 0; i <= 5; i++) {
       const ratio = i / 5;
       const value = (ratio * 5).toFixed(1);
@@ -232,7 +213,6 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
       g.appendChild(text);
     }
 
-    // Titres des axes
     const titleLeft = document.createElementNS('http://www.w3.org/2000/svg', 'text');
     titleLeft.setAttribute('x', '-' + String(height / 2));
     titleLeft.setAttribute('y', '-40');
@@ -260,7 +240,6 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
     const legendGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     legendGroup.setAttribute('transform', `translate(${width - 200}, 10)`);
 
-    // Rectangle de fond
     const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
     rect.setAttribute('width', '200');
     rect.setAttribute('height', '70');
@@ -271,7 +250,6 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
     rect.setAttribute('filter', 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))');
     legendGroup.appendChild(rect);
 
-    // Ligne commentaires (ROUGE)
     const line1 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     line1.setAttribute('x1', '10');
     line1.setAttribute('y1', '20');
@@ -290,7 +268,6 @@ export class ReviewChartComponent implements AfterViewInit, OnChanges {
     text1.textContent = 'Commentaires';
     legendGroup.appendChild(text1);
 
-    // Ligne note (ORANGE)
     const line2 = document.createElementNS('http://www.w3.org/2000/svg', 'line');
     line2.setAttribute('x1', '10');
     line2.setAttribute('y1', '50');

@@ -32,7 +32,6 @@ export class Navbar implements OnInit {
   userReviews: Review[] = [];
   showReviewsTab: boolean = false;
 
-  // search box
   searchValue: string = '';
   private router = inject(Router);
 
@@ -189,12 +188,12 @@ export class Navbar implements OnInit {
   }
   adminLogOut(){
   sessionStorage.removeItem('admin_access');
-    this.updateAdminStatus(); // Force la mise à jour de la variable
+    this.updateAdminStatus(); 
     this.toastService.show('Déconnecté du mode Admin', { classname: 'bg-info text-white' });
 
     setTimeout(() => {
     window.location.reload(); 
-  }, 1700); //pour laisser le temps au message toast de s'afficher et d'etre lu
+  }, 1700); 
 }
 
 toggleDropdown() {
@@ -209,7 +208,7 @@ toggleDropdown() {
   closeDropdown() {
     this.dropdownTimeout = setTimeout(() => {
       this.showProfileDropdown = false;
-    }, 200); // délai de 200ms avant fermeture
+    }, 200); 
   }
 
   ngOnDestroy() {

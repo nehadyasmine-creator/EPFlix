@@ -1,4 +1,3 @@
-/* ===== ADMIN BANNER ===== */
 .admin-banner {
   background: linear-gradient(135deg, #dc3545, #c82333);
   color: white;
@@ -49,7 +48,6 @@
   transform: translateY(-1px);
 }
 
-/* ===== MAIN NAVBAR ===== */
 .navbar {
   background: white;
   border-bottom: 2px solid #dc3545;
@@ -70,7 +68,6 @@
   height: 80px;
 }
 
-/* ===== LOGO ===== */
 .navbar-logo {
   display: flex;
   align-items: center;
@@ -90,7 +87,6 @@
   transition: color 0.3s ease;
 }
 
-/* ===== NAV MENU ===== */
 .navbar-menu {
   display: flex;
   gap: 15px;
@@ -128,7 +124,7 @@
   background: #3a3a3a; 
   color: #ff8a98;
 }
-/* ===== SEARCH BOX ===== */
+
 .search-box {
   display: flex;
   align-items: center;
@@ -173,7 +169,6 @@
   font-size: 1.1rem;
 }
 
-/* ===== PROFILE MENU ===== */
 .profile-menu {
   position: relative;
   display: flex;
@@ -202,19 +197,17 @@
 }
 
 .profile-icon i {
-  font-size: 1.5rem; /* Ajusté pour une meilleure harmonie */
+  font-size: 1.5rem; 
   color: #333;
   transition: all 0.3s ease;
 }
 
-/* Effets sur l'icône lors du survol ou de l'état actif */
 .profile-menu:hover .profile-icon i,
 .profile-menu.active .profile-icon i {
   color: #dc3545;
   transform: scale(1.1);
 }
 
-/* ===== DROPDOWN ===== */
 .profile-dropdown {
   display: none;
   position: absolute;
@@ -313,7 +306,6 @@
   border-top: 1px solid #e0e0e0;
 }
 
-/* ===== LOGIN FORM ===== */
 .login-form {
   padding: 20px;
 }
@@ -400,7 +392,6 @@
   color: white;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .navbar-container {
     gap: 15px;
@@ -527,10 +518,9 @@
   background: #3a3a3a;
   color: #ff8a98;
 }
-/* ===== DARK MODE PROFILE FIX ===== */
 
 :host-context([data-theme="dark"]) .profile-menu:hover {
-  background: #3a3a3a; /* Fond plus sombre au survol */
+  background: #3a3a3a; 
 }
 
 :host-context([data-theme="dark"]) .profile-menu.active {
@@ -538,15 +528,14 @@
 }
 
 :host-context([data-theme="dark"]) .profile-icon i {
-  color: #f1f1f1; /* Icône blanche en mode sombre */
+  color: #f1f1f1; 
 }
 
 :host-context([data-theme="dark"]) .profile-menu:hover .profile-icon i,
 :host-context([data-theme="dark"]) .profile-menu.active .profile-icon i {
-  color: #ff8a98; /* Couleur rose/rouge clair pour le contraste */
+  color: #ff8a98; 
 }
 
-/* On s'assure que le dropdown suit aussi le thème sombre */
 :host-context([data-theme="dark"]) .profile-dropdown {
   background: #252525;
   border-color: #444;
