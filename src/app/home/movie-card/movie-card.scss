@@ -1,10 +1,8 @@
 
-
-/* Le conteneur parent qui définit la taille de la carte */
 .movie-card-wrapper {
   position: relative;
   width: 18rem;
-  height: 500px; /* TAILLE FIXE : la carte ne bougera jamais */
+  height: 500px;
   flex: 0 0 18rem;
   border-radius: 4px;
   overflow: hidden;
@@ -18,7 +16,7 @@
     transform: scale(1.05);
   }
 }
-/* L'image occupe tout le fond */
+
 .movie-img {
   width: 100%;
   height: 100%;
@@ -26,7 +24,6 @@
   transition: transform 0.4s ease;
 }
 
-/* Le dégradé qui va du milieu vers le bas */
 .movie-card-overlay {
   position: absolute;
   top: 0;
@@ -35,10 +32,15 @@
   bottom: 0;
   background: linear-gradient(180deg, rgba(0,0,0,0) 5%, rgba(0,0,0,0.95) 100%);
   z-index: 1;
-  pointer-events: none;
+  cursor:pointer;
+  
+}
+.movie-card-overlay:hover{
+  transform: translateX(3px);
+  box-shadow: 0 6px 16px rgba(220, 53, 69, 0.6);
+  cursor: pointer;
 }
 
-/* Le texte est flottant au-dessus */
 .card-body-overlay {
   position: absolute;
   bottom: 0;
@@ -47,14 +49,11 @@
   z-index: 2;
   padding: 20px;
   color: white;
-  
-  /* C'EST ICI LE SECRET : On limite la zone du texte pour qu'il ne dépasse pas du bas */
   max-height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-/* Ton système d'expansion */
 .text-truncate-custom {
   display: -webkit-box;
   -webkit-line-clamp: 6;
