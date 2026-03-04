@@ -40,7 +40,7 @@
     </section>
 
     <!-- Tous les films -->
-    <section class="swiper-section all-films-section">
+    <section class="swiper-section all-films-section", style="border-bottom: 3px solid #dc3545;">
       <div class="section-header">
         <h2>Tous les films</h2>
         <p class="section-subtitle">Notre catalogue complet</p>
@@ -56,11 +56,47 @@
 
         @for (movie of movies$ | async; track movie.id) {
           <swiper-slide>
-            <app-movie-card [movie]="movie"></app-movie-card>
+            <app-movie-card [movie]="movie"></app-movie-card><br><br>
           </swiper-slide>
         }
       </swiper-container>
     </section>
+
+
+
+    <section class="swiper-section all-films-section">
+  <div class="section-header">
+    <h2>Bandes-annonces</h2>
+    <p class="section-subtitle">Découvrez un aperçu inédit de nos prochains films</p>
+  </div>
+
+  <swiper-container
+    navigation="true"
+    pagination="true"
+    slides-per-view="3"
+    space-between="20"
+    class="my-movie-swiper"
+    loop="true">
+
+    <swiper-slide>
+      <iframe width="100%" height="250" src="https://www.youtube.com/embed/EkNOTiJxUfA?si=f221JyQO3LP0ujXR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </swiper-slide>
+
+    <swiper-slide>
+      <iframe width="100%" height="250" src="https://www.youtube.com/embed/9wAjZkR_Qp4?si=nDvBY3tPTl4Yz4Ek" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </swiper-slide>
+
+    <swiper-slide>
+      <iframe width="100%" height="250" src="https://www.youtube.com/embed/Ej1hvPvjr2c?si=d6aKxNtez816YW45" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </swiper-slide>
+
+  </swiper-container>
+</section>
+
+
+   
+
+
 
     @if (!isLoggedIn) {
       <section class="cta-section">

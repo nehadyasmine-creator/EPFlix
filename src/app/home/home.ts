@@ -9,6 +9,8 @@ import { register } from 'swiper/element/bundle';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../services/auth-service';
 
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 register();
 @Component({
@@ -25,6 +27,7 @@ export class Home {
   isLoggedIn = false;
   private authSubscriptions = new Subscription();
   isLoading =signal<boolean>(true);
+  private sanitizer = inject(DomSanitizer);
 
   ngOnInit() {
     setTimeout(() => {
@@ -43,4 +46,8 @@ export class Home {
   private syncAuthState() {
     this.isLoggedIn = this.authService.isLoggedIn() && !!this.authService.getCurrentUser();
   }
+
+  getSafeUrl(url: string) {
+  return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+}
 }

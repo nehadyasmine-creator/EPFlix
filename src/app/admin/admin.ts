@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, inject , DestroyRef} from '@angular/core';
+import { Component, OnInit, signal, inject, DestroyRef } from '@angular/core';
 import { ToastService } from '../services/toast';
 import { FormsModule } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
@@ -85,7 +85,7 @@ export class Admin implements OnInit {
       setTimeout(() => {
         this.renderGraphiqueVisiteurs();
         this.renderGraphiqueNotes();
-        this.renderGraphiqueGenres(); 
+        this.renderGraphiqueGenres();
       }, 0);
     }
   }
@@ -142,7 +142,7 @@ export class Admin implements OnInit {
         datasets: [{
           label: 'Visiteurs (7 derniers jours)',
           data: dataPoints,
-          borderColor: '#f27a63', 
+          borderColor: '#f27a63',
           backgroundColor: 'rgba(242, 122, 99, 0.1)',
           fill: true,
           tension: 0.3
@@ -161,7 +161,7 @@ export class Admin implements OnInit {
 
     if (this.chartNotes) this.chartNotes.destroy();
 
-    const labels = ['0-1', '1-2', '2-3', '3-4','4-5'];
+    const labels = ['0-1', '1-2', '2-3', '3-4', '4-5'];
     const dataFilms = labels.map((_, i) => {
       return (i * 3) + Math.floor(Math.random() * 6);
     });
@@ -189,7 +189,7 @@ export class Admin implements OnInit {
           }
         },
         plugins: {
-            legend: { display: true, position: 'bottom' }
+          legend: { display: true, position: 'bottom' }
         }
       }
     });
@@ -205,18 +205,18 @@ export class Admin implements OnInit {
       });
   }
   deleteUser(id: number): void {
-    this.authService.deleteUser(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() => 
+    this.authService.deleteUser(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(() =>
       this.users.update(current => current.filter(user => user.id !== id))
     );
   }
 
-clickMethod(id: number, firstname:string, lastname:string) {
-  if(confirm("Etes-vous sûr de vouloir supprimer le compte utilisateur de "+firstname+" "+lastname+" ?")) {
-    this.deleteUser(id);
+  clickMethod(id: number, firstname: string, lastname: string) {
+    if (confirm("Etes-vous sûr de vouloir supprimer le compte utilisateur de " + firstname + " " + lastname + " ?")) {
+      this.deleteUser(id);
+    }
   }
-}
 
-  
+
 
   private renderGraphiqueGenres() {
     const ctx = document.getElementById('canvasGenres') as HTMLCanvasElement;
@@ -228,20 +228,20 @@ clickMethod(id: number, firstname:string, lastname:string) {
       labels: ['Action', 'Comédie', 'Drame', 'Horreur', 'Sci-Fi'],
       datasets: [{
         label: 'Nombre de films',
-        data: [45, 25, 60, 15, 30], 
+        data: [45, 25, 60, 15, 30],
         backgroundColor: [
-          '#f27a63', 
-          '#4e73df', 
-          '#1cc88a', 
-          '#36b9cc', 
-          '#f6c23e'  
+          '#f27a63',
+          '#4e73df',
+          '#1cc88a',
+          '#36b9cc',
+          '#f6c23e'
         ],
         hoverOffset: 10
       }]
     };
 
     this.chartGenres = new Chart(ctx, {
-      type: 'doughnut', 
+      type: 'doughnut',
       data: dataGenres,
       options: {
         responsive: true,

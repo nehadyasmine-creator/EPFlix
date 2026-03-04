@@ -33,6 +33,47 @@
   background: linear-gradient(to bottom, transparent, #dc3545, transparent);
 }
 
+.trailer-slider {
+  display: flex;
+  overflow-x: auto;         // Permet le défilement horizontal
+  scroll-snap-type: x mandatory; // Force le "snap" sur les éléments
+  gap: 20px;                // Espace entre les vidéos
+  padding: 20px 0;
+  
+  // Masquer la barre de scroll (optionnel mais plus propre)
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.trailer-item {
+  scroll-snap-align: start; // L'élément s'aligne au début du conteneur
+  flex: 0 0 300px;          // Largeur fixe pour chaque bande-annonce
+  
+  video {
+    width: 100%;
+    border-radius: 8px;
+  }
+}
+.trailer-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Maintient le format vidéo */
+    border-radius: 12px;
+    background: #000;
+  }
+
+  h4 {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0 5px;
+  }
+}
+
 .hero-content {
   max-width: 100%;
   text-align: left;
@@ -162,6 +203,7 @@
   margin-bottom: 50px;
   text-align: center;
 }
+
 
 .section-header h2 {
   font-size: 2.5rem;
