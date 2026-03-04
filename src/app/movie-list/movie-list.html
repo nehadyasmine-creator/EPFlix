@@ -103,7 +103,7 @@
         <td>{{ movie.title }}</td>
         <td>{{ movie.releaseDate | date: "dd/MM/yyyy "}}</td>
         <td>{{ movie.director }}</td>
-        <td>{{ movie.rate }}</td>
+        <td>{{ movie.rate | number: '1.2-2' }}</td>
         <td>{{ movie.synopsis }}</td>
         @if (isAdmin()){
         <td>

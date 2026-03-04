@@ -1,6 +1,6 @@
 import { Component, inject, DestroyRef, signal, computed, OnInit } from '@angular/core';
 import { Movie } from '../models/movies';
-import { DatePipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { MoviesApi } from '../services/movies-api';
 import { RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -10,7 +10,7 @@ import { finalize } from 'rxjs/operators';
 @Component({
   selector: 'app-movie-list',
   standalone: true, // Assurez-vous d'être en standalone si nécessaire
-  imports: [DatePipe, RouterLink],
+  imports: [DatePipe, RouterLink, DecimalPipe],
   templateUrl: './movie-list.html',
   styleUrl: './movie-list.scss',
 })
