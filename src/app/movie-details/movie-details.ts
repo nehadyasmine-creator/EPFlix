@@ -32,7 +32,6 @@ export class MovieDetailComponent implements OnInit {
   loadMovie() {
     this.loading = true;
     
-    // Récupérer le nom du film depuis l'URL
     const movieName = this.route.snapshot.paramMap.get('name');
     
     if (!movieName) {
@@ -41,7 +40,6 @@ export class MovieDetailComponent implements OnInit {
       return;
     }
 
-    // Récupérer tous les films et chercher par nom
     this.moviesApi.getMovies().subscribe({
       next: (movies) => {
         const found = movies.find(m => 
@@ -67,7 +65,6 @@ export class MovieDetailComponent implements OnInit {
     
     this.reviewService.getReviews().subscribe({
       next: (allReviews) => {
-        // Attendre que le film soit chargé pour filtrer
         const checkInterval = setInterval(() => {
           if (this.movie) {
             this.reviews = allReviews.filter(r => r.movie.id === this.movie!.id);

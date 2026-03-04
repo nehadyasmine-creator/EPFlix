@@ -2,7 +2,7 @@ import { Component, inject, CUSTOM_ELEMENTS_SCHEMA , signal,  AfterViewInit} fro
 import { MoviesApi } from '../services/movies-api';
 import { Movie } from '../models/movies';
 import { Observable, Subscription } from 'rxjs';
-import { AsyncPipe, DatePipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { MovieCard } from './movie-card/movie-card';
 import { MovieCardCarousel } from './movie-card-carousel/movie-card-carousel';
 import { register } from 'swiper/element/bundle';
@@ -15,7 +15,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 register();
 @Component({
   selector: 'app-home',
-  imports: [AsyncPipe, DatePipe, MovieCard, MovieCardCarousel, RouterLink],
+  imports: [AsyncPipe, MovieCard, MovieCardCarousel, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -28,6 +28,7 @@ export class Home implements AfterViewInit{
   private authSubscriptions = new Subscription();
   isLoading =signal<boolean>(true);
   private sanitizer = inject(DomSanitizer);
+  showCookieBanner: boolean = true;
 
   ngOnInit() {
     setTimeout(() => {

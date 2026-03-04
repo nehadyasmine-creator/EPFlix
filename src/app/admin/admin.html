@@ -162,7 +162,6 @@
                                         <table class="table mb-0">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">ID</th>
                                                     <th scope="col">Prénom</th>
                                                     <th scope="col">Nom</th>
                                                     <th scope="col">Age</th>
@@ -174,7 +173,6 @@
                                             <tbody>
                                                 @for (user of users(); track user.id) {
                                                 <tr>
-                                                    <td>{{ user.id }}</td>
                                                     <td>{{ user.firstName }}</td>
                                                     <td>{{ user.lastName }}</td>
                                                     <td>{{ user.age }}</td>

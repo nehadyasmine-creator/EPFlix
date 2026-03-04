@@ -1,35 +1,28 @@
 <div class="container mt-5">
   <div class="movie-detail-container">
-    <!-- Retour -->
     <a routerLink="/movies" class="btn-back">
       <i class="bi bi-arrow-left"></i> Retour aux films
     </a>
 
-    <!-- Chargement -->
     <div *ngIf="loading" class="loading">
       <p>Chargement du film...</p>
     </div>
 
-    <!-- Film non trouvé -->
     <div *ngIf="!loading && !movie" class="alert alert-danger">
       <p>Film non trouvé.</p>
     </div>
 
-    <!-- Titre et bouton en haut -->
     <div *ngIf="!loading && movie" class="header-top">
       <h1>{{ movie.title }}</h1>
       <a class="btn btn-outline-dark" role="button" routerLink="/add-review">Ajouter un commentaire</a>
     </div>
 
-    <!-- Détail du film -->
     <div *ngIf="!loading && movie" class="movie-content">
       <div class="movie-header">
-        <!-- Image -->
         <div class="movie-image">
           <img [src]="'http://localhost:8080/movies/' + movie.id + '/image'" [alt]="movie.title">
         </div>
 
-        <!-- Infos -->
         <div class="movie-info">
           <div class="movie-meta">
             <div class="meta-item">
@@ -66,7 +59,6 @@
         </div>
       </div>
 
-      <!-- Commentaires -->
       <div class="movie-reviews">
         <h2>Commentaires ({{ reviews.length }})</h2>
 

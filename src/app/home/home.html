@@ -64,6 +64,7 @@
         }
       </swiper-container>
 
+
       <button id="next-btn-films" class="custom-nav-btn next">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -105,19 +106,41 @@
     </swiper-container>
   </section>
 
+    @if (!isLoggedIn) {
+      <section class="cta-section">
+        <div class="cta-content">
+          <h2>Rejoignez la communauté</h2>
+          <p>Créez un compte et commencez à partager vos avis sur vos films préférés</p>
+          <a routerLink="/register" class="btn-cta">S'inscrire</a>
+        </div>
+      </section>
+    }
+  </div>
+}
 
-
-
-
-
-  @if (!isLoggedIn) {
-  <section class="cta-section">
-    <div class="cta-content">
-      <h2>Rejoignez la communauté</h2>
-      <p>Créez un compte et commencez à partager vos avis sur vos films préférés</p>
-      <a routerLink="/register" class="btn-cta">S'inscrire</a>
+@if (showCookieBanner) {
+  <div class="fixed-bottom bg-danger text-white p-3 p-md-4 shadow-lg d-flex flex-column flex-md-row justify-content-between align-items-center m-3 m-md-4 rounded-5"
+       style="z-index: 1050; width: auto;">
+       
+    <div class="mb-3 mb-md-0 text-center text-md-start me-md-4">
+      <strong class="fs-5">🍪 À propos des cookies</strong><br>
+      <span class="small text-light opacity-85">
+        Nous utilisons des cookies pour améliorer votre expérience sur EPFlix. 
+      </span>
     </div>
-  </section>
-  }
-</div>
+    
+    <div class="d-flex gap-2 gap-md-3">
+      <button class="btn btn-outline-light rounded-pill px-4" 
+              (click)="showCookieBanner = false">
+        Refuser
+      </button>
+      
+      <button class="btn btn-light text-danger rounded-pill px-4 fw-bold" 
+              (click)="showCookieBanner = false">
+        Accepter
+        <i class="bi bi-check-lg ms-1"></i>
+      </button>
+    </div>
+  </div>
+
 }

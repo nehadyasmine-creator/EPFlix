@@ -1,4 +1,3 @@
-<!-- Admin Mode Banner -->
 <div *ngIf="isAdmin()" class="admin-banner">
   <div class="admin-banner-content">
     <div class="admin-banner-text">
@@ -12,15 +11,12 @@
   </div>
 </div>
 
-<!-- Main Navbar -->
 <nav class="navbar">
   <div class="navbar-container">
-    <!-- Logo -->
     <a class="navbar-logo" routerLink="/">
       <span class="logo-text">EPFlix</span>
     </a>
 
-    <!-- Nav Links -->
     <div class="navbar-menu">
       <a title="Films" class="navbar-link" routerLink="/movies" [class.active]="isActive('/movies')">
         <i class="bi bi-film"></i>
@@ -36,7 +32,6 @@
       </a>
     </div>
 
-    <!-- Search -->
     <div class="search-box">
       <input 
         type="search" 
@@ -51,7 +46,6 @@
     </div>
 
 
-    <!-- Bouton Dark Mode -->
       <button 
         type="button"
         class="dark-mode-btn"
@@ -71,9 +65,7 @@
         <i class="bi bi-person-circle"></i>
       </div>
       
-      <!-- Dropdown Menu -->
       <div class="profile-dropdown" [class.show]="showProfileDropdown">
-        <!-- Connected User -->
         <div *ngIf="isLoggedIn && currentUser">
           <div class="dropdown-header">
             <p>{{ currentUser.firstName }} {{ currentUser.lastName }}</p>
@@ -97,7 +89,6 @@
           </div>
         </div>
 
-        <!-- Not Connected -->
         <div *ngIf="!isLoggedIn">
           <form (ngSubmit)="onLogin()" class="login-form">
             <div class="form-group">

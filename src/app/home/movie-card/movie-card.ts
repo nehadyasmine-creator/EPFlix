@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { Input } from '@angular/core';
 import { Movie } from '../../models/movies';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-movie-card',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './movie-card.html',
   styleUrl: './movie-card.scss',
 })
@@ -17,7 +18,7 @@ export class MovieCard {
   }
 
   toggleExpand(event: Event) {
-    event.stopPropagation(); // Empêche de déclencher le [routerLink] de la card
+    event.stopPropagation();
     this.isExpanded = !this.isExpanded;
   }
 }

@@ -3,7 +3,6 @@
   background: #ffffff;
 }
 
-/* ===== HERO CARROUSEL SECTION ===== */
 .hero-carrousel-section {
   display: grid;
   grid-template-columns: 0.75fr 1.4fr;
@@ -301,7 +300,6 @@ swiper-container {
   font-weight: 300;
 }
 
-/* ===== CTA SECTION ===== */
 .cta-section {
   background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
   padding: 80px 40px;
@@ -344,7 +342,6 @@ swiper-container {
   color: #c82333;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 1200px) {
   .hero-carrousel-section {
     grid-template-columns: 1fr 1fr;

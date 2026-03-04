@@ -33,10 +33,8 @@ export class AddMovie {
   isToastVisible: boolean = false;
   
   addMovie(): void {
-  // 1. Vérification du Titre (Majuscule)
   const startsWithUpper = /^[A-Z]/.test(this.movie.title);
   
-  // 2. Vérification du Réalisateur (Deux mots)
   const twoWordsRegex = /^\s*[^\s]+\s+[^\s]+\s*$/;
   const isDirectorValid = twoWordsRegex.test(this.movie.director);
 

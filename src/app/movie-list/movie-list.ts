@@ -1,6 +1,6 @@
 import { Component, inject, DestroyRef, signal, computed, OnInit } from '@angular/core';
 import { Movie } from '../models/movies';
-import { DatePipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { MoviesApi } from '../services/movies-api';
 import { RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -9,8 +9,8 @@ import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-movie-list',
-  standalone: true, // Assurez-vous d'être en standalone si nécessaire
-  imports: [DatePipe, RouterLink],
+  standalone: true, 
+  imports: [DatePipe, RouterLink, DecimalPipe],
   templateUrl: './movie-list.html',
   styleUrl: './movie-list.scss',
 })
@@ -23,12 +23,10 @@ export class MovieList implements OnInit {
   movies = signal<Movie[]>([]);
   searchTerm = signal('');
   
-  // --- Nouveaux Signaux pour le Tri et le Filtrage ---
   sortKey = signal<string>('title');
   sortDirection = signal<'asc' | 'desc'>('asc');
-  minRate = signal<number>(0); // Nouveau signal pour la note
+  minRate = signal<number>(0); 
 
-  // 1. Filtrage (Recherche + Note)
   filteredMovies = computed(() => {
     const term = this.searchTerm().toLowerCase();
     const minR = this.minRate();
@@ -43,7 +41,6 @@ export class MovieList implements OnInit {
     });
   });
 
-  // 2. Tri (Basé sur le résultat filtré)
   sortedMovies = computed(() => {
     const movies = [...this.filteredMovies()]; 
     const key = this.sortKey();
@@ -80,13 +77,11 @@ export class MovieList implements OnInit {
     this.searchTerm.set(input.value);
   }
 
-  // Méthode pour le changement du curseur de note
   onRateFilterChange(event: Event) {
     const input = event.target as HTMLInputElement;
     this.minRate.set(Number(input.value));
   }
 
-  // Méthode pour le changement via la liste déroulante
   onSortChange(event: Event) {
     const selectElement = event.target as HTMLSelectElement;
     this.setSort(selectElement.value);
