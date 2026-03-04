@@ -4,7 +4,6 @@
   padding: 20px;
 }
 
-/* ===== HEADER ===== */
 .profile-container h1 {
   text-align: center;
   margin-bottom: 40px;
@@ -17,7 +16,6 @@
   box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
 }
 
-/* ===== PROFILE CARD ===== */
 .profile-card {
   background: white;
   border: 1px solid #e0e0e0;
@@ -50,7 +48,6 @@
   font-weight: 600;
 }
 
-/* ===== INFO ROW ===== */
 .info-row {
   display: flex;
   align-items: center;
@@ -115,7 +112,6 @@
   transform: scale(1.15);
 }
 
-/* ===== INFO EDIT ===== */
 .info-edit {
   display: flex;
   gap: 10px;
@@ -181,7 +177,6 @@
   box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
 }
 
-/* ===== POINTS BADGE ===== */
 .points-badge {
   display: inline-block;
   background: linear-gradient(135deg, #dc3545, #c82333);
@@ -193,7 +188,6 @@
   box-shadow: 0 2px 8px rgba(220, 53, 69, 0.2);
 }
 
-/* ===== PASSWORD SECTION ===== */
 .password-section {
   margin-top: 40px;
   padding-top: 30px;
@@ -241,7 +235,6 @@
   font-weight: 600;
 }
 
-/* ===== FORM GROUPS ===== */
 .form-group {
   display: flex;
   flex-direction: column;
@@ -294,7 +287,6 @@
   color: #dc3545;
 }
 
-/* ===== FORM ACTIONS ===== */
 .form-actions {
   display: flex;
   gap: 10px;
@@ -334,7 +326,6 @@
   box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
 }
 
-/* ===== ALERT ===== */
 .alert {
   padding: 15px;
   border-radius: 6px;
@@ -353,7 +344,6 @@
   font-weight: 600;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .profile-container h1 {
     font-size: 1.5rem;

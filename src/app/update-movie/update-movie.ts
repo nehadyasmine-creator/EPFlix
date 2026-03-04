@@ -10,7 +10,7 @@ import { ToastService } from '../services/toast';
 
 @Component({
   selector: 'app-update-movie',
-  standalone: true, // Assurez-vous que c'est bien un composant standalone si vous utilisez "imports"
+  standalone: true, 
   imports: [FormsModule, DatePipe, RouterLink],
   templateUrl: './update-movie.html',
   styleUrl: './update-movie.scss',
@@ -32,12 +32,8 @@ export class UpdateMovie implements OnInit {
   }
 
   updateMovie(): void {
-    // --- DÉBUT DES VÉRIFICATIONS (Identiques à add-movie.ts) ---
-    
-    // 1. Vérification du Titre (Majuscule)
     const startsWithUpper = /^[A-Z]/.test(this.movie.title);
 
-    // 2. Vérification du Réalisateur (Deux mots)
     const twoWordsRegex = /^\s*[^\s]+\s+[^\s]+\s*$/;
     const isDirectorValid = twoWordsRegex.test(this.movie.director);
 
@@ -71,8 +67,6 @@ export class UpdateMovie implements OnInit {
       });
       return;
     }
-
-    // --- FIN DES VÉRIFICATIONS ---
 
     this.moviesApi.updateMovie(this.movie).subscribe(() => {
       this.toastService.show('Le film a été mis à jour avec succès !', {

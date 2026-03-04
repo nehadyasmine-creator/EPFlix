@@ -87,7 +87,6 @@
   color: white;
 }
 
-/* ===== FILTERS BAR ===== */
 .d-flex.justify-content-end {
   background: white;
   border: 1px solid #e0e0e0;
@@ -140,7 +139,6 @@
   opacity: 0.25;
 }
 
-/* ===== TABLE ===== */
 .table {
   background: white;
   border-radius: 8px;
@@ -201,7 +199,6 @@
   transform: scale(1.05);
 }
 
-/* ===== ACTION BUTTONS ===== */
 .editButton {
   background: #0d6efd;
   border: none;
@@ -237,13 +234,11 @@
   font-size: 1rem;
 }
 
-/* ===== MOVIE LIST CONTAINER ===== */
 .movie-list-container {
   padding: 20px 1.5rem;
   background: #f8f9fa;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (min-width: 768px) {
   .movie-list-container {
     padding: 20px 3rem;

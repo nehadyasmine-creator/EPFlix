@@ -17,7 +17,7 @@ export class MovieCard {
   }
 
   toggleExpand(event: Event) {
-    event.stopPropagation(); // Empêche de déclencher le [routerLink] de la card
+    event.stopPropagation();
     this.isExpanded = !this.isExpanded;
   }
 }
