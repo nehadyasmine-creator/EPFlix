@@ -2,7 +2,7 @@ import { Component, inject, CUSTOM_ELEMENTS_SCHEMA , signal} from '@angular/core
 import { MoviesApi } from '../services/movies-api';
 import { Movie } from '../models/movies';
 import { Observable, Subscription } from 'rxjs';
-import { AsyncPipe, DatePipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { MovieCard } from './movie-card/movie-card';
 import { MovieCardCarousel } from './movie-card-carousel/movie-card-carousel';
 import { register } from 'swiper/element/bundle';
@@ -13,7 +13,7 @@ import { AuthService } from '../services/auth-service';
 register();
 @Component({
   selector: 'app-home',
-  imports: [AsyncPipe, DatePipe, MovieCard, MovieCardCarousel, RouterLink],
+  imports: [AsyncPipe, MovieCard, MovieCardCarousel, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -25,6 +25,7 @@ export class Home {
   isLoggedIn = false;
   private authSubscriptions = new Subscription();
   isLoading =signal<boolean>(true);
+  showCookieBanner: boolean = true;
 
   ngOnInit() {
     setTimeout(() => {
@@ -43,4 +44,5 @@ export class Home {
   private syncAuthState() {
     this.isLoggedIn = this.authService.isLoggedIn() && !!this.authService.getCurrentUser();
   }
+  
 }
